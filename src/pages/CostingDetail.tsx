@@ -1049,14 +1049,19 @@ function ResultRail({
 
         <div className="px-4 py-3 border-t border-line bg-raised/50">
           <Stat label="Total cost" value={money(result.totalCost, currency, 0)} emphasis />
-          <Stat label="Order value" value={money(result.revenue, currency, 0)} />
           <Stat
-            label="Margin" value={money(result.margin, currency, 0)} emphasis
-            tone={result.margin < 0 ? 'risk' : 'ok'}
+            label="Order value"
+            value={result.sellingPrice != null ? money(result.revenue, currency, 0) : '—'}
+          />
+          <Stat
+            label="Margin" emphasis
+            value={result.sellingPrice != null ? money(result.margin, currency, 0) : '—'}
+            tone={result.sellingPrice == null ? 'neutral' : result.margin < 0 ? 'risk' : 'ok'}
           />
           <Stat
             label="Margin %" value={result.marginPct != null ? pct(result.marginPct, 1) : '—'}
-            tone={result.margin < 0 ? 'risk' : (result.marginPct ?? 1) < 0.08 ? 'warn' : 'ok'}
+            tone={result.sellingPrice == null ? 'neutral'
+              : result.margin < 0 ? 'risk' : (result.marginPct ?? 1) < 0.08 ? 'warn' : 'ok'}
           />
         </div>
 

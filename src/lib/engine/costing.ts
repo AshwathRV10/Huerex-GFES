@@ -444,9 +444,9 @@ export function prefillCosting(
   const provenance: Record<string, string> = {}
   const remember = (id: string, entry: RateEntry | null) => {
     if (!entry) return 0
-    provenance[id] = entry.lastOrderNo
-      ? `${entry.rate} from ${entry.lastOrderNo}, used ${entry.uses}×`
-      : `${entry.rate} from the rate book`
+    const where = entry.lastOrderNo ? ` · last used on ${entry.lastOrderNo}` : ''
+    const uses = entry.uses > 1 ? ` · ${entry.uses}×` : ''
+    provenance[id] = `${entry.label}${where}${uses}`
     return entry.rate
   }
 
@@ -608,15 +608,27 @@ export function harvestRates(costing: Costing, order: Order): Omit<RateEntry, 'i
   }
   for (const line of costing.jobwork) {
     if (!line.ratePerPc || !line.process) continue
-    // Printing changes style to style, so the style is part of the key.
-    const scope = { process: line.process, vendor: line.vendor || undefined, style: order.styleCode || undefined }
-    out.push({ ...base, kind: 'jobwork', unit: 'pc', rate: line.ratePerPc, scope, label: rateLabel('jobwork', scope) })
+    // Printing changes style to style, so the exact quote is filed with the
+    // style. The vendor's usual rate for that process is filed alongside it,
+    // so a new style starts from something rather than a blank box.
+    const exact = { process: line.process, vendor: line.vendor || undefined, style: order.styleCode || undefined }
+    out.push({ ...base, kind: 'jobwork', unit: 'pc', rate: line.ratePerPc, scope: exact, label: rateLabel('jobwork', exact) })
+    if (line.vendor && order.styleCode) {
+      const general = { process: line.process, vendor: line.vendor }
+      out.push({ ...base, kind: 'jobwork', unit: 'pc', rate: line.ratePerPc, scope: general, label: rateLabel('jobwork', general) })
+    }
   }
   for (const line of costing.cmt) {
     const rate = line.basis === 'sam' ? line.samMinutes * line.costPerMinute : line.ratePerPc
     if (!rate || !line.operation) continue
-    const scope = { process: line.operation, style: order.styleCode || undefined }
-    out.push({ ...base, kind: 'cmt', unit: 'pc', rate, scope, label: rateLabel('cmt', scope) })
+    const exact = { process: line.operation, style: order.styleCode || undefined }
+    out.push({ ...base, kind: 'cmt', unit: 'pc', rate, scope: exact, label: rateLabel('cmt', exact) })
+    if (order.styleCode) {
+      // Cutting and packing barely change style to style; sewing does. Keeping
+      // the plain per-operation rate lets the first two carry across on their own.
+      const general = { process: line.operation }
+      out.push({ ...base, kind: 'cmt', unit: 'pc', rate, scope: general, label: rateLabel('cmt', general) })
+    }
   }
   for (const line of costing.overheads) {
     if (!line.amount || !line.head) continue
