@@ -1,0 +1,172 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── HUEREX design tokens ───────────────────────────────────────────────
+   "Loom" — warm paper by day, graphite by night. One confident accent.
+   Every colour is an RGB triplet so Tailwind can apply opacity.        */
+@layer base {
+  :root {
+    --c-canvas: 246 245 242;
+    --c-surface: 255 255 255;
+    --c-raised: 251 250 248;
+    --c-sunken: 240 238 234;
+    --c-line: 231 228 221;
+    --c-line-strong: 213 208 199;
+    --c-ink: 26 25 23;
+    --c-ink-2: 87 83 78;
+    --c-ink-3: 138 131 120;
+
+    --c-brand-50: 240 241 254;
+    --c-brand-100: 226 228 253;
+    --c-brand-200: 201 204 251;
+    --c-brand-300: 165 168 247;
+    --c-brand-400: 131 132 240;
+    --c-brand-500: 91 91 214;
+    --c-brand-600: 74 71 196;
+    --c-brand-700: 60 56 158;
+
+    --c-saffron: 200 124 22;
+    --c-saffron-soft: 253 243 226;
+    --c-ok: 13 138 106;
+    --c-ok-soft: 226 246 239;
+    --c-warn: 190 111 12;
+    --c-warn-soft: 253 242 222;
+    --c-risk: 198 40 40;
+    --c-risk-soft: 253 232 231;
+    --c-info: 32 96 208;
+    --c-info-soft: 229 238 253;
+
+    --c-shadow: 28 25 23;
+    color-scheme: light;
+  }
+
+  [data-theme='dark'] {
+    --c-canvas: 10 10 12;
+    --c-surface: 19 19 22;
+    --c-raised: 26 26 31;
+    --c-sunken: 14 14 17;
+    --c-line: 38 38 44;
+    --c-line-strong: 56 56 64;
+    --c-ink: 240 239 236;
+    --c-ink-2: 165 162 155;
+    --c-ink-3: 116 112 106;
+
+    --c-brand-50: 27 27 48;
+    --c-brand-100: 35 35 66;
+    --c-brand-200: 48 48 94;
+    --c-brand-300: 96 96 190;
+    --c-brand-400: 124 124 226;
+    --c-brand-500: 141 141 240;
+    --c-brand-600: 160 160 246;
+    --c-brand-700: 186 186 250;
+
+    --c-saffron: 232 168 74;
+    --c-saffron-soft: 48 36 16;
+    --c-ok: 52 199 156;
+    --c-ok-soft: 12 40 34;
+    --c-warn: 232 160 60;
+    --c-warn-soft: 46 33 12;
+    --c-risk: 248 113 113;
+    --c-risk-soft: 51 20 20;
+    --c-info: 116 160 250;
+    --c-info-soft: 17 28 51;
+
+    --c-shadow: 0 0 0;
+    color-scheme: dark;
+  }
+
+  * { @apply border-line; }
+
+  html, body, #root { height: 100%; }
+
+  body {
+    @apply bg-canvas text-ink font-sans antialiased;
+    font-feature-settings: 'cv02' 1, 'cv03' 1, 'cv04' 1, 'ss01' 1;
+    text-rendering: optimizeLegibility;
+    overscroll-behavior: none;
+  }
+
+  ::selection { background: rgb(var(--c-brand-500) / 0.22); }
+
+  /* Scrollbars — thin, unobtrusive, theme-aware */
+  * { scrollbar-width: thin; scrollbar-color: rgb(var(--c-line-strong)) transparent; }
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb {
+    background: rgb(var(--c-line-strong));
+    border-radius: 99px;
+    border: 3px solid transparent;
+    background-clip: content-box;
+  }
+  ::-webkit-scrollbar-thumb:hover { background: rgb(var(--c-ink-3)); background-clip: content-box; }
+
+  :focus-visible { @apply outline-none ring-2 ring-brand-500/60 ring-offset-1 ring-offset-canvas; }
+
+  input, select, textarea, button { font: inherit; color: inherit; }
+  input[type='number']::-webkit-outer-spin-button,
+  input[type='number']::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  input[type='number'] { -moz-appearance: textfield; }
+}
+
+@layer components {
+  /* Numbers always align. Money, quantities, percentages — all tabular. */
+  .num { font-variant-numeric: tabular-nums; font-feature-settings: 'tnum' 1; }
+
+  .card { @apply bg-surface border border-line rounded-2xl shadow-card; }
+
+  .label {
+    @apply block text-2xs font-semibold uppercase tracking-[0.07em] text-ink-3 mb-1.5;
+  }
+
+  .field {
+    @apply w-full h-9 px-3 rounded-lg bg-surface border border-line text-ink
+           placeholder:text-ink-3/70 transition
+           hover:border-line-strong
+           focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 focus:outline-none;
+  }
+  .field-sm { @apply h-8 px-2.5 text-sm rounded-md; }
+
+  .hairline { @apply border-b border-line; }
+
+  .chip {
+    @apply inline-flex items-center gap-1 h-5 px-1.5 rounded-md text-2xs font-semibold
+           whitespace-nowrap;
+  }
+
+  .grid-row-hover { @apply transition-colors hover:bg-brand-500/[0.045]; }
+
+  /* Sticky table header that survives inside a scroll container */
+  .sticky-head th {
+    @apply sticky top-0 z-10 bg-raised/95 backdrop-blur-sm;
+    box-shadow: inset 0 -1px 0 0 rgb(var(--c-line));
+  }
+
+  .skeleton {
+    @apply relative overflow-hidden bg-sunken rounded-md;
+  }
+  .skeleton::after {
+    content: '';
+    @apply absolute inset-0 -translate-x-full;
+    background-image: linear-gradient(90deg, transparent, rgb(var(--c-ink) / 0.05), transparent);
+    animation: shimmer 1.6s infinite;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  .text-balance { text-wrap: balance; }
+  .grain {
+    background-image: radial-gradient(rgb(var(--c-ink) / 0.035) 0.5px, transparent 0.5px);
+    background-size: 14px 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
