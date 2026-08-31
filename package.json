@@ -9,7 +9,7 @@
     "dev:api": "tsx watch server/index.ts",
     "dev:web": "vite",
     "build": "tsc -b && vite build",
-    "typecheck": "tsc -b --noEmit false --emitDeclarationOnly false && tsc -p tsconfig.node.json --noEmit",
+    "typecheck": "tsc -b && tsc -p tsconfig.node.json --noEmit",
     "preview": "vite preview",
     "start": "node --import tsx server/index.ts",
     "seed": "tsx server/seed.ts",
