@@ -1,0 +1,5024 @@
+{
+ "orders": [
+  {
+   "orderNo": "HR-001",
+   "buyer": "BABY SHOP - VIGASH",
+   "style": "L66-B14-12-150 \nGIRLS FULL SLEEVE",
+   "orderQty": 495.0,
+   "orderDate": "2026-06-01",
+   "exFactoryDate": "2026-08-20",
+   "sam": 8.0,
+   "bufferPct": 0.05,
+   "merchandiser": "YUGENDRAN",
+   "status": "Active",
+   "planner": "AKBAR"
+  },
+  {
+   "orderNo": "HR-002",
+   "buyer": "BABY SHOP - VIGASH",
+   "style": "L66-M14-12-094\nGIRLS FULL SLEEVE",
+   "orderQty": 499.0,
+   "orderDate": "2026-06-01",
+   "exFactoryDate": "2026-08-20",
+   "sam": 16.0,
+   "bufferPct": 0.05,
+   "merchandiser": "YUGENDRAN",
+   "status": "Active",
+   "planner": "AKBAR"
+  },
+  {
+   "orderNo": "HR-003",
+   "buyer": "BABY SHOP - VIGASH",
+   "style": "L66-M14-12-075\nGIRLS FULL SLEEVE",
+   "orderQty": 499.0,
+   "orderDate": "2026-06-01",
+   "exFactoryDate": "2026-08-20",
+   "sam": 8.0,
+   "bufferPct": 0.05,
+   "merchandiser": "YUGENDRAN",
+   "status": "Active",
+   "planner": "AKBAR"
+  },
+  {
+   "orderNo": "HR-004",
+   "buyer": "BABY SHOP - VIGASH",
+   "style": "L66-B14-12-158\nGIRLS HOODIE",
+   "orderQty": 495.0,
+   "orderDate": "2026-06-01",
+   "exFactoryDate": "2026-08-20",
+   "sam": 16.0,
+   "bufferPct": 0.05,
+   "merchandiser": "YUGENDRAN",
+   "status": "Active",
+   "planner": "AKBAR"
+  },
+  {
+   "orderNo": "HR-005-T",
+   "buyer": "BABY SHOP - VIGASH",
+   "style": "L66-K15-13-165\nGIRLS SET (PANT)",
+   "orderQty": 503.0,
+   "orderDate": "2026-06-01",
+   "exFactoryDate": "2026-08-20",
+   "sam": 8.0,
+   "bufferPct": 0.05,
+   "merchandiser": "YUGENDRAN",
+   "status": "Active",
+   "planner": "AKBAR",
+   "setGroup": "SET-005",
+   "setRole": "Primary"
+  },
+  {
+   "orderNo": "HR-005-B",
+   "buyer": "BABY SHOP - VIGASH",
+   "style": "L66-K15-13-165\nGIRLS SET (PANT)",
+   "orderQty": 503.0,
+   "orderDate": "2026-06-01",
+   "exFactoryDate": "2026-08-20",
+   "sam": 10.0,
+   "bufferPct": 0.05,
+   "merchandiser": "YUGENDRAN",
+   "status": "Active",
+   "planner": "AKBAR",
+   "setGroup": "SET-005",
+   "setRole": "Secondary"
+  },
+  {
+   "orderNo": "HR-006-A",
+   "buyer": "BABY SHOP - VENKAT",
+   "style": "L31-M16-21-002SEA\n2 PACK ROMPER",
+   "orderQty": 899.0,
+   "orderDate": "2026-06-05",
+   "exFactoryDate": "2026-08-20",
+   "sam": 7.0,
+   "bufferPct": 0.05,
+   "merchandiser": "SAMBATH",
+   "status": "Active",
+   "planner": "AKBAR",
+   "setGroup": "SET-006",
+   "setRole": "Primary"
+  },
+  {
+   "orderNo": "HR-006-B",
+   "buyer": "BABY SHOP - VENKAT",
+   "style": "L31-M16-21-002SEA\n2 PACK ROMPER - MICKEY",
+   "orderQty": 899.0,
+   "orderDate": "2026-06-05",
+   "exFactoryDate": "2026-08-20",
+   "sam": 7.0,
+   "bufferPct": 0.05,
+   "merchandiser": "SAMBATH",
+   "status": "Active",
+   "planner": "AKBAR",
+   "setGroup": "SET-006",
+   "setRole": "Secondary"
+  },
+  {
+   "orderNo": "HR-007",
+   "buyer": "BABY SHOP - VENKAT",
+   "style": "L31-M11-01-021SEA\nPOLO - POOH AOP",
+   "orderQty": 702.0,
+   "orderDate": "2026-06-05",
+   "exFactoryDate": "2026-08-20",
+   "sam": 7.0,
+   "bufferPct": 0.05,
+   "merchandiser": "SAMBATH",
+   "status": "Active",
+   "planner": "AKBAR"
+  },
+  {
+   "orderNo": "HR-008",
+   "buyer": "BABY SHOP - VENKAT",
+   "style": "L31-M11-01-022SEA\nKIDS TEE - POOH",
+   "orderQty": 702.0,
+   "orderDate": "2026-06-05",
+   "exFactoryDate": "2026-08-20",
+   "sam": 7.0,
+   "bufferPct": 0.05,
+   "merchandiser": "SAMBATH",
+   "status": "Active",
+   "planner": "AKBAR"
+  },
+  {
+   "orderNo": "HR-009",
+   "buyer": "BABY SHOP - VENKAT",
+   "style": "L31-A16-21-137SEA\nBEACH ROMPER",
+   "orderQty": 1000.0,
+   "orderDate": "2026-06-05",
+   "exFactoryDate": "2026-08-20",
+   "sam": 7.0,
+   "bufferPct": 0.05,
+   "merchandiser": "SAMBATH",
+   "status": "Active",
+   "planner": "AKBAR"
+  },
+  {
+   "orderNo": "HR-010",
+   "buyer": "BABY SHOP - VENKAT",
+   "style": "L31-A11-01-138SEA\nKIDS TEE - SEAGUL",
+   "orderQty": 702.0,
+   "orderDate": "2026-06-05",
+   "exFactoryDate": "2026-08-20",
+   "sam": 7.0,
+   "bufferPct": 0.05,
+   "merchandiser": "SAMBATH",
+   "status": "Active",
+   "planner": "AKBAR"
+  },
+  {
+   "orderNo": "HR-011",
+   "buyer": "BABY SHOP - VENKAT",
+   "style": "L31-A16-21-139SEA\nDINO ROMPER",
+   "orderQty": 899.0,
+   "orderDate": "2026-06-05",
+   "exFactoryDate": "2026-08-20",
+   "sam": 7.0,
+   "bufferPct": 0.05,
+   "merchandiser": "SAMBATH",
+   "status": "Active",
+   "planner": "AKBAR"
+  },
+  {
+   "orderNo": "HR-012",
+   "buyer": "BABY SHOP - VENKAT",
+   "style": "L31-M11-01-141SEA\nKIDS TEE - MICKEY FRIENDS",
+   "orderQty": 702.0,
+   "orderDate": "2026-06-05",
+   "exFactoryDate": "2026-08-20",
+   "sam": 7.0,
+   "bufferPct": 0.05,
+   "merchandiser": "SAMBATH",
+   "status": "Active",
+   "planner": "AKBAR"
+  },
+  {
+   "orderNo": "HR-013",
+   "buyer": "BABY SHOP - VENKAT",
+   "style": "L31-M11-01-142SEA\nKIDS TEE - STITCH",
+   "orderQty": 702.0,
+   "orderDate": "2026-06-05",
+   "exFactoryDate": "2026-08-20",
+   "sam": 7.0,
+   "bufferPct": 0.05,
+   "merchandiser": "SAMBATH",
+   "status": "Active",
+   "planner": "AKBAR"
+  },
+  {
+   "orderNo": "HR-014",
+   "buyer": "BABY SHOP - VENKAT",
+   "style": "L31-M16-21-145SEA\nPOOH AOP ROMPER",
+   "orderQty": 920.0,
+   "orderDate": "2026-06-05",
+   "exFactoryDate": "2026-08-20",
+   "sam": 7.0,
+   "bufferPct": 0.05,
+   "merchandiser": "SAMBATH",
+   "status": "Active",
+   "planner": "AKBAR"
+  }
+ ],
+ "route": [
+  {
+   "orderNo": "HR-001",
+   "stepNo": 1.0,
+   "process": "Cutting"
+  },
+  {
+   "orderNo": "HR-001",
+   "stepNo": 2.0,
+   "process": "Print"
+  },
+  {
+   "orderNo": "HR-001",
+   "stepNo": 3.0,
+   "process": "Embroidery"
+  },
+  {
+   "orderNo": "HR-001",
+   "stepNo": 4.0,
+   "process": "Sewing"
+  },
+  {
+   "orderNo": "HR-001",
+   "stepNo": 5.0,
+   "process": "Checking"
+  },
+  {
+   "orderNo": "HR-001",
+   "stepNo": 6.0,
+   "process": "Packing"
+  },
+  {
+   "orderNo": "HR-001",
+   "stepNo": 7.0,
+   "process": "Inspection"
+  },
+  {
+   "orderNo": "HR-001",
+   "stepNo": 8.0,
+   "process": "Shipment"
+  },
+  {
+   "orderNo": "HR-002",
+   "stepNo": 1.0,
+   "process": "Cutting"
+  },
+  {
+   "orderNo": "HR-002",
+   "stepNo": 2.0,
+   "process": "Embroidery"
+  },
+  {
+   "orderNo": "HR-002",
+   "stepNo": 3.0,
+   "process": "Fusing"
+  },
+  {
+   "orderNo": "HR-002",
+   "stepNo": 4.0,
+   "process": "Sewing"
+  },
+  {
+   "orderNo": "HR-002",
+   "stepNo": 5.0,
+   "process": "Checking"
+  },
+  {
+   "orderNo": "HR-002",
+   "stepNo": 6.0,
+   "process": "Packing"
+  },
+  {
+   "orderNo": "HR-002",
+   "stepNo": 7.0,
+   "process": "Inspection"
+  },
+  {
+   "orderNo": "HR-002",
+   "stepNo": 8.0,
+   "process": "Shipment"
+  },
+  {
+   "orderNo": "HR-003",
+   "stepNo": 1.0,
+   "process": "Cutting"
+  },
+  {
+   "orderNo": "HR-003",
+   "stepNo": 2.0,
+   "process": "Print"
+  },
+  {
+   "orderNo": "HR-003",
+   "stepNo": 3.0,
+   "process": "Embroidery"
+  },
+  {
+   "orderNo": "HR-003",
+   "stepNo": 4.0,
+   "process": "Sewing"
+  },
+  {
+   "orderNo": "HR-003",
+   "stepNo": 5.0,
+   "process": "Checking"
+  },
+  {
+   "orderNo": "HR-003",
+   "stepNo": 6.0,
+   "process": "Packing"
+  },
+  {
+   "orderNo": "HR-003",
+   "stepNo": 7.0,
+   "process": "Inspection"
+  },
+  {
+   "orderNo": "HR-003",
+   "stepNo": 8.0,
+   "process": "Shipment"
+  },
+  {
+   "orderNo": "HR-004",
+   "stepNo": 1.0,
+   "process": "Cutting"
+  },
+  {
+   "orderNo": "HR-004",
+   "stepNo": 2.0,
+   "process": "Print"
+  },
+  {
+   "orderNo": "HR-004",
+   "stepNo": 3.0,
+   "process": "Sewing"
+  },
+  {
+   "orderNo": "HR-004",
+   "stepNo": 4.0,
+   "process": "Checking"
+  },
+  {
+   "orderNo": "HR-004",
+   "stepNo": 5.0,
+   "process": "Packing"
+  },
+  {
+   "orderNo": "HR-004",
+   "stepNo": 6.0,
+   "process": "Inspection"
+  },
+  {
+   "orderNo": "HR-004",
+   "stepNo": 7.0,
+   "process": "Shipment"
+  },
+  {
+   "orderNo": "HR-005-T",
+   "stepNo": 1.0,
+   "process": "Cutting"
+  },
+  {
+   "orderNo": "HR-005-T",
+   "stepNo": 2.0,
+   "process": "Print"
+  },
+  {
+   "orderNo": "HR-005-T",
+   "stepNo": 3.0,
+   "process": "Embroidery"
+  },
+  {
+   "orderNo": "HR-005-T",
+   "stepNo": 4.0,
+   "process": "Sewing"
+  },
+  {
+   "orderNo": "HR-005-T",
+   "stepNo": 5.0,
+   "process": "Checking"
+  },
+  {
+   "orderNo": "HR-005-T",
+   "stepNo": 6.0,
+   "process": "Packing"
+  },
+  {
+   "orderNo": "HR-005-T",
+   "stepNo": 7.0,
+   "process": "Inspection"
+  },
+  {
+   "orderNo": "HR-005-T",
+   "stepNo": 8.0,
+   "process": "Shipment"
+  },
+  {
+   "orderNo": "HR-005-B",
+   "stepNo": 1.0,
+   "process": "Cutting"
+  },
+  {
+   "orderNo": "HR-005-B",
+   "stepNo": 2.0,
+   "process": "Print"
+  },
+  {
+   "orderNo": "HR-005-B",
+   "stepNo": 3.0,
+   "process": "Embroidery"
+  },
+  {
+   "orderNo": "HR-005-B",
+   "stepNo": 4.0,
+   "process": "Sewing"
+  },
+  {
+   "orderNo": "HR-005-B",
+   "stepNo": 5.0,
+   "process": "Checking"
+  },
+  {
+   "orderNo": "HR-005-B",
+   "stepNo": 6.0,
+   "process": "Packing"
+  },
+  {
+   "orderNo": "HR-005-B",
+   "stepNo": 7.0,
+   "process": "Inspection"
+  },
+  {
+   "orderNo": "HR-005-B",
+   "stepNo": 8.0,
+   "process": "Shipment"
+  },
+  {
+   "orderNo": "HR-006-A",
+   "stepNo": 1.0,
+   "process": "Cutting"
+  },
+  {
+   "orderNo": "HR-006-A",
+   "stepNo": 2.0,
+   "process": "Print"
+  },
+  {
+   "orderNo": "HR-006-A",
+   "stepNo": 3.0,
+   "process": "Sewing"
+  },
+  {
+   "orderNo": "HR-006-A",
+   "stepNo": 4.0,
+   "process": "Checking"
+  },
+  {
+   "orderNo": "HR-006-A",
+   "stepNo": 5.0,
+   "process": "Packing"
+  },
+  {
+   "orderNo": "HR-006-A",
+   "stepNo": 6.0,
+   "process": "Inspection"
+  },
+  {
+   "orderNo": "HR-006-A",
+   "stepNo": 7.0,
+   "process": "Shipment"
+  },
+  {
+   "orderNo": "HR-006-B",
+   "stepNo": 1.0,
+   "process": "Cutting"
+  },
+  {
+   "orderNo": "HR-006-B",
+   "stepNo": 2.0,
+   "process": "Sewing"
+  },
+  {
+   "orderNo": "HR-006-B",
+   "stepNo": 3.0,
+   "process": "Checking"
+  },
+  {
+   "orderNo": "HR-006-B",
+   "stepNo": 4.0,
+   "process": "Packing"
+  },
+  {
+   "orderNo": "HR-006-B",
+   "stepNo": 5.0,
+   "process": "Inspection"
+  },
+  {
+   "orderNo": "HR-006-B",
+   "stepNo": 6.0,
+   "process": "Shipment"
+  },
+  {
+   "orderNo": "HR-007",
+   "stepNo": 1.0,
+   "process": "Cutting"
+  },
+  {
+   "orderNo": "HR-007",
+   "stepNo": 2.0,
+   "process": "Embroidery"
+  },
+  {
+   "orderNo": "HR-007",
+   "stepNo": 3.0,
+   "process": "Fusing"
+  },
+  {
+   "orderNo": "HR-007",
+   "stepNo": 4.0,
+   "process": "Sewing"
+  },
+  {
+   "orderNo": "HR-007",
+   "stepNo": 5.0,
+   "process": "Checking"
+  },
+  {
+   "orderNo": "HR-007",
+   "stepNo": 6.0,
+   "process": "Packing"
+  },
+  {
+   "orderNo": "HR-007",
+   "stepNo": 7.0,
+   "process": "Inspection"
+  },
+  {
+   "orderNo": "HR-007",
+   "stepNo": 8.0,
+   "process": "Shipment"
+  },
+  {
+   "orderNo": "HR-008",
+   "stepNo": 1.0,
+   "process": "Cutting"
+  },
+  {
+   "orderNo": "HR-008",
+   "stepNo": 2.0,
+   "process": "Print"
+  },
+  {
+   "orderNo": "HR-008",
+   "stepNo": 3.0,
+   "process": "Embroidery"
+  },
+  {
+   "orderNo": "HR-008",
+   "stepNo": 4.0,
+   "process": "Fusing"
+  },
+  {
+   "orderNo": "HR-008",
+   "stepNo": 5.0,
+   "process": "Sewing"
+  },
+  {
+   "orderNo": "HR-008",
+   "stepNo": 6.0,
+   "process": "Checking"
+  },
+  {
+   "orderNo": "HR-008",
+   "stepNo": 7.0,
+   "process": "Packing"
+  },
+  {
+   "orderNo": "HR-008",
+   "stepNo": 8.0,
+   "process": "Inspection"
+  },
+  {
+   "orderNo": "HR-008",
+   "stepNo": 9.0,
+   "process": "Shipment"
+  },
+  {
+   "orderNo": "HR-009",
+   "stepNo": 1.0,
+   "process": "Cutting"
+  },
+  {
+   "orderNo": "HR-009",
+   "stepNo": 2.0,
+   "process": "Print"
+  },
+  {
+   "orderNo": "HR-009",
+   "stepNo": 3.0,
+   "process": "Embroidery"
+  },
+  {
+   "orderNo": "HR-009",
+   "stepNo": 4.0,
+   "process": "Fusing"
+  },
+  {
+   "orderNo": "HR-009",
+   "stepNo": 5.0,
+   "process": "Sewing"
+  },
+  {
+   "orderNo": "HR-009",
+   "stepNo": 6.0,
+   "process": "Checking"
+  },
+  {
+   "orderNo": "HR-009",
+   "stepNo": 7.0,
+   "process": "Packing"
+  },
+  {
+   "orderNo": "HR-009",
+   "stepNo": 8.0,
+   "process": "Inspection"
+  },
+  {
+   "orderNo": "HR-009",
+   "stepNo": 9.0,
+   "process": "Shipment"
+  },
+  {
+   "orderNo": "HR-010",
+   "stepNo": 1.0,
+   "process": "Cutting"
+  },
+  {
+   "orderNo": "HR-010",
+   "stepNo": 2.0,
+   "process": "Print"
+  },
+  {
+   "orderNo": "HR-010",
+   "stepNo": 3.0,
+   "process": "Embroidery"
+  },
+  {
+   "orderNo": "HR-010",
+   "stepNo": 4.0,
+   "process": "Fusing"
+  },
+  {
+   "orderNo": "HR-010",
+   "stepNo": 5.0,
+   "process": "Sewing"
+  },
+  {
+   "orderNo": "HR-010",
+   "stepNo": 6.0,
+   "process": "Checking"
+  },
+  {
+   "orderNo": "HR-010",
+   "stepNo": 7.0,
+   "process": "Packing"
+  },
+  {
+   "orderNo": "HR-010",
+   "stepNo": 8.0,
+   "process": "Inspection"
+  },
+  {
+   "orderNo": "HR-010",
+   "stepNo": 9.0,
+   "process": "Shipment"
+  },
+  {
+   "orderNo": "HR-011",
+   "stepNo": 1.0,
+   "process": "Cutting"
+  },
+  {
+   "orderNo": "HR-011",
+   "stepNo": 2.0,
+   "process": "Print"
+  },
+  {
+   "orderNo": "HR-011",
+   "stepNo": 3.0,
+   "process": "Embroidery"
+  },
+  {
+   "orderNo": "HR-011",
+   "stepNo": 4.0,
+   "process": "Fusing"
+  },
+  {
+   "orderNo": "HR-011",
+   "stepNo": 5.0,
+   "process": "Sewing"
+  },
+  {
+   "orderNo": "HR-011",
+   "stepNo": 6.0,
+   "process": "Checking"
+  },
+  {
+   "orderNo": "HR-011",
+   "stepNo": 7.0,
+   "process": "Packing"
+  },
+  {
+   "orderNo": "HR-011",
+   "stepNo": 8.0,
+   "process": "Inspection"
+  },
+  {
+   "orderNo": "HR-011",
+   "stepNo": 9.0,
+   "process": "Shipment"
+  },
+  {
+   "orderNo": "HR-012",
+   "stepNo": 1.0,
+   "process": "Cutting"
+  },
+  {
+   "orderNo": "HR-012",
+   "stepNo": 2.0,
+   "process": "Print"
+  },
+  {
+   "orderNo": "HR-012",
+   "stepNo": 3.0,
+   "process": "Embroidery"
+  },
+  {
+   "orderNo": "HR-012",
+   "stepNo": 4.0,
+   "process": "Fusing"
+  },
+  {
+   "orderNo": "HR-012",
+   "stepNo": 5.0,
+   "process": "Sewing"
+  },
+  {
+   "orderNo": "HR-012",
+   "stepNo": 6.0,
+   "process": "Checking"
+  },
+  {
+   "orderNo": "HR-012",
+   "stepNo": 7.0,
+   "process": "Packing"
+  },
+  {
+   "orderNo": "HR-012",
+   "stepNo": 8.0,
+   "process": "Inspection"
+  },
+  {
+   "orderNo": "HR-012",
+   "stepNo": 9.0,
+   "process": "Shipment"
+  },
+  {
+   "orderNo": "HR-013",
+   "stepNo": 1.0,
+   "process": "Cutting"
+  },
+  {
+   "orderNo": "HR-013",
+   "stepNo": 2.0,
+   "process": "Print"
+  },
+  {
+   "orderNo": "HR-013",
+   "stepNo": 3.0,
+   "process": "Embroidery"
+  },
+  {
+   "orderNo": "HR-013",
+   "stepNo": 4.0,
+   "process": "Fusing"
+  },
+  {
+   "orderNo": "HR-013",
+   "stepNo": 5.0,
+   "process": "Sewing"
+  },
+  {
+   "orderNo": "HR-013",
+   "stepNo": 6.0,
+   "process": "Checking"
+  },
+  {
+   "orderNo": "HR-013",
+   "stepNo": 7.0,
+   "process": "Packing"
+  },
+  {
+   "orderNo": "HR-013",
+   "stepNo": 8.0,
+   "process": "Inspection"
+  },
+  {
+   "orderNo": "HR-013",
+   "stepNo": 9.0,
+   "process": "Shipment"
+  },
+  {
+   "orderNo": "HR-014",
+   "stepNo": 1.0,
+   "process": "Cutting"
+  },
+  {
+   "orderNo": "HR-014",
+   "stepNo": 2.0,
+   "process": "Sewing"
+  },
+  {
+   "orderNo": "HR-014",
+   "stepNo": 3.0,
+   "process": "Checking"
+  },
+  {
+   "orderNo": "HR-014",
+   "stepNo": 4.0,
+   "process": "Packing"
+  },
+  {
+   "orderNo": "HR-014",
+   "stepNo": 5.0,
+   "process": "Inspection"
+  },
+  {
+   "orderNo": "HR-014",
+   "stepNo": 6.0,
+   "process": "Shipment"
+  }
+ ],
+ "matrix": [
+  {
+   "orderNo": "HR-001",
+   "colour": "PINK",
+   "size": "6-7 Y",
+   "orderQty": 60.0,
+   "recutDecision": "Over Cut Approved"
+  },
+  {
+   "orderNo": "HR-001",
+   "colour": "PINK",
+   "size": "7-8 Y",
+   "orderQty": 72.0
+  },
+  {
+   "orderNo": "HR-001",
+   "colour": "PINK",
+   "size": "8-9 Y",
+   "orderQty": 69.0,
+   "recutDecision": "Over Cut Approved"
+  },
+  {
+   "orderNo": "HR-001",
+   "colour": "PINK",
+   "size": "9-10 Y",
+   "orderQty": 75.0
+  },
+  {
+   "orderNo": "HR-001",
+   "colour": "PINK",
+   "size": "10-11 Y",
+   "orderQty": 60.0
+  },
+  {
+   "orderNo": "HR-001",
+   "colour": "PINK",
+   "size": "11-12 Y",
+   "orderQty": 60.0,
+   "recutDecision": "Over Cut Approved"
+  },
+  {
+   "orderNo": "HR-001",
+   "colour": "PINK",
+   "size": "12-13 Y",
+   "orderQty": 45.0
+  },
+  {
+   "orderNo": "HR-001",
+   "colour": "PINK",
+   "size": "13-14 Y",
+   "orderQty": 49.0,
+   "recutDecision": "Over Cut Approved"
+  },
+  {
+   "orderNo": "HR-001",
+   "colour": "PINK",
+   "size": "14-15 Y",
+   "orderQty": 2.0,
+   "recutDecision": "Over Cut Approved"
+  },
+  {
+   "orderNo": "HR-001",
+   "colour": "PINK",
+   "size": "15-16 Y",
+   "orderQty": 3.0,
+   "recutDecision": "Over Cut Approved"
+  },
+  {
+   "orderNo": "HR-002",
+   "colour": "OFF-WHITE",
+   "size": "6-7 Y",
+   "orderQty": 59.0
+  },
+  {
+   "orderNo": "HR-002",
+   "colour": "OFF-WHITE",
+   "size": "7-8 Y",
+   "orderQty": 76.0,
+   "recutDecision": "Ship Short Approved"
+  },
+  {
+   "orderNo": "HR-002",
+   "colour": "OFF-WHITE",
+   "size": "8-9 Y",
+   "orderQty": 70.0,
+   "recutDecision": "Over Cut Approved"
+  },
+  {
+   "orderNo": "HR-002",
+   "colour": "OFF-WHITE",
+   "size": "9-10 Y",
+   "orderQty": 76.0,
+   "recutDecision": "Over Cut Approved"
+  },
+  {
+   "orderNo": "HR-002",
+   "colour": "OFF-WHITE",
+   "size": "10-11 Y",
+   "orderQty": 61.0,
+   "recutDecision": "Ship Short Approved"
+  },
+  {
+   "orderNo": "HR-002",
+   "colour": "OFF-WHITE",
+   "size": "11-12 Y",
+   "orderQty": 60.0,
+   "recutDecision": "Ship Short Approved"
+  },
+  {
+   "orderNo": "HR-002",
+   "colour": "OFF-WHITE",
+   "size": "12-13 Y",
+   "orderQty": 48.0,
+   "recutDecision": "Over Cut Approved"
+  },
+  {
+   "orderNo": "HR-002",
+   "colour": "OFF-WHITE",
+   "size": "13-14 Y",
+   "orderQty": 45.0,
+   "recutDecision": "Over Cut Approved"
+  },
+  {
+   "orderNo": "HR-002",
+   "colour": "OFF-WHITE",
+   "size": "14-15 Y",
+   "orderQty": 1.0,
+   "recutDecision": "Over Cut Approved"
+  },
+  {
+   "orderNo": "HR-002",
+   "colour": "OFF-WHITE",
+   "size": "15-16 Y",
+   "orderQty": 3.0,
+   "recutDecision": "Over Cut Approved"
+  },
+  {
+   "orderNo": "HR-003",
+   "colour": "LIME",
+   "size": "6-7 Y",
+   "orderQty": 59.0,
+   "recutDecision": "Over Cut Approved"
+  },
+  {
+   "orderNo": "HR-003",
+   "colour": "LIME",
+   "size": "7-8 Y",
+   "orderQty": 76.0
+  },
+  {
+   "orderNo": "HR-003",
+   "colour": "LIME",
+   "size": "8-9 Y",
+   "orderQty": 70.0
+  },
+  {
+   "orderNo": "HR-003",
+   "colour": "LIME",
+   "size": "9-10 Y",
+   "orderQty": 76.0,
+   "recutDecision": "Over Cut Approved"
+  },
+  {
+   "orderNo": "HR-003",
+   "colour": "LIME",
+   "size": "10-11 Y",
+   "orderQty": 61.0,
+   "recutDecision": "Ship Short Approved"
+  },
+  {
+   "orderNo": "HR-003",
+   "colour": "LIME",
+   "size": "11-12 Y",
+   "orderQty": 60.0
+  },
+  {
+   "orderNo": "HR-003",
+   "colour": "LIME",
+   "size": "12-13 Y",
+   "orderQty": 48.0,
+   "recutDecision": "Over Cut Approved"
+  },
+  {
+   "orderNo": "HR-003",
+   "colour": "LIME",
+   "size": "13-14 Y",
+   "orderQty": 45.0,
+   "recutDecision": "Over Cut Approved"
+  },
+  {
+   "orderNo": "HR-003",
+   "colour": "LIME",
+   "size": "14-15 Y",
+   "orderQty": 1.0,
+   "recutDecision": "Over Cut Approved"
+  },
+  {
+   "orderNo": "HR-003",
+   "colour": "LIME",
+   "size": "15-16 Y",
+   "orderQty": 3.0,
+   "recutDecision": "Over Cut Approved"
+  },
+  {
+   "orderNo": "HR-004",
+   "colour": "PEACH ORANGE",
+   "size": "6-7 Y",
+   "orderQty": 60.0,
+   "recutDecision": "Over Cut Approved"
+  },
+  {
+   "orderNo": "HR-004",
+   "colour": "PEACH ORANGE",
+   "size": "7-8 Y",
+   "orderQty": 72.0
+  },
+  {
+   "orderNo": "HR-004",
+   "colour": "PEACH ORANGE",
+   "size": "8-9 Y",
+   "orderQty": 69.0,
+   "recutDecision": "Over Cut Approved"
+  },
+  {
+   "orderNo": "HR-004",
+   "colour": "PEACH ORANGE",
+   "size": "9-10 Y",
+   "orderQty": 75.0,
+   "recutDecision": "Over Cut Approved"
+  },
+  {
+   "orderNo": "HR-004",
+   "colour": "PEACH ORANGE",
+   "size": "10-11 Y",
+   "orderQty": 60.0,
+   "recutDecision": "Ship Short Approved"
+  },
+  {
+   "orderNo": "HR-004",
+   "colour": "PEACH ORANGE",
+   "size": "11-12 Y",
+   "orderQty": 60.0,
+   "recutDecision": "Over Cut Approved"
+  },
+  {
+   "orderNo": "HR-004",
+   "colour": "PEACH ORANGE",
+   "size": "12-13 Y",
+   "orderQty": 45.0,
+   "recutDecision": "Over Cut Approved"
+  },
+  {
+   "orderNo": "HR-004",
+   "colour": "PEACH ORANGE",
+   "size": "13-14 Y",
+   "orderQty": 49.0,
+   "recutDecision": "Over Cut Approved"
+  },
+  {
+   "orderNo": "HR-004",
+   "colour": "PEACH ORANGE",
+   "size": "14-15 Y",
+   "orderQty": 2.0,
+   "recutDecision": "Over Cut Approved"
+  },
+  {
+   "orderNo": "HR-004",
+   "colour": "PEACH ORANGE",
+   "size": "15-16 Y",
+   "orderQty": 3.0,
+   "recutDecision": "Over Cut Approved"
+  },
+  {
+   "orderNo": "HR-005-T",
+   "colour": "PINK",
+   "size": "6-7 Y",
+   "orderQty": 80.0,
+   "recutDecision": "Ship Short Approved"
+  },
+  {
+   "orderNo": "HR-005-T",
+   "colour": "PINK",
+   "size": "7-8 Y",
+   "orderQty": 85.0,
+   "recutDecision": "Over Cut Approved"
+  },
+  {
+   "orderNo": "HR-005-T",
+   "colour": "PINK",
+   "size": "8-9 Y",
+   "orderQty": 76.0,
+   "recutDecision": "Over Cut Approved"
+  },
+  {
+   "orderNo": "HR-005-T",
+   "colour": "PINK",
+   "size": "9-10 Y",
+   "orderQty": 76.0,
+   "recutDecision": "Over Cut Approved"
+  },
+  {
+   "orderNo": "HR-005-T",
+   "colour": "PINK",
+   "size": "10-11 Y",
+   "orderQty": 51.0
+  },
+  {
+   "orderNo": "HR-005-T",
+   "colour": "PINK",
+   "size": "11-12 Y",
+   "orderQty": 54.0,
+   "recutDecision": "Ship Short Approved"
+  },
+  {
+   "orderNo": "HR-005-T",
+   "colour": "PINK",
+   "size": "12-13 Y",
+   "orderQty": 38.0
+  },
+  {
+   "orderNo": "HR-005-T",
+   "colour": "PINK",
+   "size": "13-14 Y",
+   "orderQty": 31.0
+  },
+  {
+   "orderNo": "HR-005-T",
+   "colour": "PINK",
+   "size": "14-15 Y",
+   "orderQty": 4.0,
+   "recutDecision": "Over Cut Approved"
+  },
+  {
+   "orderNo": "HR-005-T",
+   "colour": "PINK",
+   "size": "15-16 Y",
+   "orderQty": 8.0,
+   "recutDecision": "Over Cut Approved"
+  },
+  {
+   "orderNo": "HR-005-B",
+   "colour": "PINK",
+   "size": "6-7 Y",
+   "orderQty": 80.0,
+   "recutDecision": "Ship Short Approved"
+  },
+  {
+   "orderNo": "HR-005-B",
+   "colour": "PINK",
+   "size": "7-8 Y",
+   "orderQty": 85.0,
+   "recutDecision": "Over Cut Approved"
+  },
+  {
+   "orderNo": "HR-005-B",
+   "colour": "PINK",
+   "size": "8-9 Y",
+   "orderQty": 76.0,
+   "recutDecision": "Over Cut Approved"
+  },
+  {
+   "orderNo": "HR-005-B",
+   "colour": "PINK",
+   "size": "9-10 Y",
+   "orderQty": 76.0,
+   "recutDecision": "Over Cut Approved"
+  },
+  {
+   "orderNo": "HR-005-B",
+   "colour": "PINK",
+   "size": "10-11 Y",
+   "orderQty": 51.0
+  },
+  {
+   "orderNo": "HR-005-B",
+   "colour": "PINK",
+   "size": "11-12 Y",
+   "orderQty": 54.0,
+   "recutDecision": "Ship Short Approved"
+  },
+  {
+   "orderNo": "HR-005-B",
+   "colour": "PINK",
+   "size": "12-13 Y",
+   "orderQty": 38.0
+  },
+  {
+   "orderNo": "HR-005-B",
+   "colour": "PINK",
+   "size": "13-14 Y",
+   "orderQty": 31.0
+  },
+  {
+   "orderNo": "HR-005-B",
+   "colour": "PINK",
+   "size": "14-15 Y",
+   "orderQty": 4.0,
+   "recutDecision": "Over Cut Approved"
+  },
+  {
+   "orderNo": "HR-005-B",
+   "colour": "PINK",
+   "size": "15-16 Y",
+   "orderQty": 8.0,
+   "recutDecision": "Over Cut Approved"
+  },
+  {
+   "orderNo": "HR-006-A",
+   "colour": "CHERRY RED/OFF-WHITE",
+   "size": "0-3 M",
+   "orderQty": 85.0
+  },
+  {
+   "orderNo": "HR-006-A",
+   "colour": "CHERRY RED/OFF-WHITE",
+   "size": "3-6 M",
+   "orderQty": 154.0
+  },
+  {
+   "orderNo": "HR-006-A",
+   "colour": "CHERRY RED/OFF-WHITE",
+   "size": "6-9 M",
+   "orderQty": 207.0
+  },
+  {
+   "orderNo": "HR-006-A",
+   "colour": "CHERRY RED/OFF-WHITE",
+   "size": "9-12 M",
+   "orderQty": 193.0
+  },
+  {
+   "orderNo": "HR-006-A",
+   "colour": "CHERRY RED/OFF-WHITE",
+   "size": "12-18 M",
+   "orderQty": 133.0
+  },
+  {
+   "orderNo": "HR-006-A",
+   "colour": "CHERRY RED/OFF-WHITE",
+   "size": "18-24 M",
+   "orderQty": 87.0
+  },
+  {
+   "orderNo": "HR-006-A",
+   "colour": "CHERRY RED/OFF-WHITE",
+   "size": "24-36 M",
+   "orderQty": 40.0
+  },
+  {
+   "orderNo": "HR-006-B",
+   "colour": "CHERRY RED/OFF-WHITE",
+   "size": "0-3 M",
+   "orderQty": 85.0
+  },
+  {
+   "orderNo": "HR-006-B",
+   "colour": "CHERRY RED/OFF-WHITE",
+   "size": "3-6 M",
+   "orderQty": 154.0
+  },
+  {
+   "orderNo": "HR-006-B",
+   "colour": "CHERRY RED/OFF-WHITE",
+   "size": "6-9 M",
+   "orderQty": 207.0
+  },
+  {
+   "orderNo": "HR-006-B",
+   "colour": "CHERRY RED/OFF-WHITE",
+   "size": "9-12 M",
+   "orderQty": 193.0
+  },
+  {
+   "orderNo": "HR-006-B",
+   "colour": "CHERRY RED/OFF-WHITE",
+   "size": "12-18 M",
+   "orderQty": 133.0
+  },
+  {
+   "orderNo": "HR-006-B",
+   "colour": "CHERRY RED/OFF-WHITE",
+   "size": "18-24 M",
+   "orderQty": 87.0
+  },
+  {
+   "orderNo": "HR-006-B",
+   "colour": "CHERRY RED/OFF-WHITE",
+   "size": "24-36 M",
+   "orderQty": 40.0
+  },
+  {
+   "orderNo": "HR-007",
+   "colour": "OFF-WHITE",
+   "size": "0-3 M",
+   "orderQty": 48.0
+  },
+  {
+   "orderNo": "HR-007",
+   "colour": "OFF-WHITE",
+   "size": "3-6 M",
+   "orderQty": 91.0
+  },
+  {
+   "orderNo": "HR-007",
+   "colour": "OFF-WHITE",
+   "size": "6-9 M",
+   "orderQty": 116.0
+  },
+  {
+   "orderNo": "HR-007",
+   "colour": "OFF-WHITE",
+   "size": "9-12 M",
+   "orderQty": 137.0
+  },
+  {
+   "orderNo": "HR-007",
+   "colour": "OFF-WHITE",
+   "size": "12-18 M",
+   "orderQty": 151.0
+  },
+  {
+   "orderNo": "HR-007",
+   "colour": "OFF-WHITE",
+   "size": "18-24 M",
+   "orderQty": 123.0
+  },
+  {
+   "orderNo": "HR-007",
+   "colour": "OFF-WHITE",
+   "size": "24-36 M",
+   "orderQty": 36.0
+  },
+  {
+   "orderNo": "HR-008",
+   "colour": "OFF-WHITE",
+   "size": "0-3 M",
+   "orderQty": 48.0,
+   "recutDecision": "Over Cut Approved"
+  },
+  {
+   "orderNo": "HR-008",
+   "colour": "OFF-WHITE",
+   "size": "3-6 M",
+   "orderQty": 91.0,
+   "recutDecision": "Ship Short Approved"
+  },
+  {
+   "orderNo": "HR-008",
+   "colour": "OFF-WHITE",
+   "size": "6-9 M",
+   "orderQty": 116.0,
+   "recutDecision": "Ship Short Approved"
+  },
+  {
+   "orderNo": "HR-008",
+   "colour": "OFF-WHITE",
+   "size": "9-12 M",
+   "orderQty": 137.0,
+   "recutDecision": "Ship Short Approved"
+  },
+  {
+   "orderNo": "HR-008",
+   "colour": "OFF-WHITE",
+   "size": "12-18 M",
+   "orderQty": 151.0,
+   "recutDecision": "Ship Short Approved"
+  },
+  {
+   "orderNo": "HR-008",
+   "colour": "OFF-WHITE",
+   "size": "18-24 M",
+   "orderQty": 123.0
+  },
+  {
+   "orderNo": "HR-008",
+   "colour": "OFF-WHITE",
+   "size": "24-36 M",
+   "orderQty": 36.0
+  },
+  {
+   "orderNo": "HR-009",
+   "colour": "OFF-WHITE",
+   "size": "0-3 M",
+   "orderQty": 94.0
+  },
+  {
+   "orderNo": "HR-009",
+   "colour": "OFF-WHITE",
+   "size": "3-6 M",
+   "orderQty": 172.0
+  },
+  {
+   "orderNo": "HR-009",
+   "colour": "OFF-WHITE",
+   "size": "6-9 M",
+   "orderQty": 230.0
+  },
+  {
+   "orderNo": "HR-009",
+   "colour": "OFF-WHITE",
+   "size": "9-12 M",
+   "orderQty": 215.0
+  },
+  {
+   "orderNo": "HR-009",
+   "colour": "OFF-WHITE",
+   "size": "12-18 M",
+   "orderQty": 148.0
+  },
+  {
+   "orderNo": "HR-009",
+   "colour": "OFF-WHITE",
+   "size": "18-24 M",
+   "orderQty": 96.0
+  },
+  {
+   "orderNo": "HR-009",
+   "colour": "OFF-WHITE",
+   "size": "24-36 M",
+   "orderQty": 45.0
+  },
+  {
+   "orderNo": "HR-010",
+   "colour": "TEAL",
+   "size": "0-3 M",
+   "orderQty": 48.0
+  },
+  {
+   "orderNo": "HR-010",
+   "colour": "TEAL",
+   "size": "3-6 M",
+   "orderQty": 91.0
+  },
+  {
+   "orderNo": "HR-010",
+   "colour": "TEAL",
+   "size": "6-9 M",
+   "orderQty": 116.0
+  },
+  {
+   "orderNo": "HR-010",
+   "colour": "TEAL",
+   "size": "9-12 M",
+   "orderQty": 137.0
+  },
+  {
+   "orderNo": "HR-010",
+   "colour": "TEAL",
+   "size": "12-18 M",
+   "orderQty": 151.0
+  },
+  {
+   "orderNo": "HR-010",
+   "colour": "TEAL",
+   "size": "18-24 M",
+   "orderQty": 123.0
+  },
+  {
+   "orderNo": "HR-010",
+   "colour": "TEAL",
+   "size": "24-36 M",
+   "orderQty": 36.0
+  },
+  {
+   "orderNo": "HR-011",
+   "colour": "MINT GREEN",
+   "size": "0-3 M",
+   "orderQty": 85.0
+  },
+  {
+   "orderNo": "HR-011",
+   "colour": "MINT GREEN",
+   "size": "3-6 M",
+   "orderQty": 154.0
+  },
+  {
+   "orderNo": "HR-011",
+   "colour": "MINT GREEN",
+   "size": "6-9 M",
+   "orderQty": 207.0
+  },
+  {
+   "orderNo": "HR-011",
+   "colour": "MINT GREEN",
+   "size": "9-12 M",
+   "orderQty": 193.0
+  },
+  {
+   "orderNo": "HR-011",
+   "colour": "MINT GREEN",
+   "size": "12-18 M",
+   "orderQty": 133.0
+  },
+  {
+   "orderNo": "HR-011",
+   "colour": "MINT GREEN",
+   "size": "18-24 M",
+   "orderQty": 87.0
+  },
+  {
+   "orderNo": "HR-011",
+   "colour": "MINT GREEN",
+   "size": "24-36 M",
+   "orderQty": 40.0
+  },
+  {
+   "orderNo": "HR-012",
+   "colour": "WHITE",
+   "size": "0-3 M",
+   "orderQty": 48.0,
+   "recutDecision": "Over Cut Approved"
+  },
+  {
+   "orderNo": "HR-012",
+   "colour": "WHITE",
+   "size": "3-6 M",
+   "orderQty": 91.0,
+   "recutDecision": "Ship Short Approved"
+  },
+  {
+   "orderNo": "HR-012",
+   "colour": "WHITE",
+   "size": "6-9 M",
+   "orderQty": 116.0,
+   "recutDecision": "Ship Short Approved"
+  },
+  {
+   "orderNo": "HR-012",
+   "colour": "WHITE",
+   "size": "9-12 M",
+   "orderQty": 137.0,
+   "recutDecision": "Ship Short Approved"
+  },
+  {
+   "orderNo": "HR-012",
+   "colour": "WHITE",
+   "size": "12-18 M",
+   "orderQty": 151.0,
+   "recutDecision": "Ship Short Approved"
+  },
+  {
+   "orderNo": "HR-012",
+   "colour": "WHITE",
+   "size": "18-24 M",
+   "orderQty": 123.0
+  },
+  {
+   "orderNo": "HR-012",
+   "colour": "WHITE",
+   "size": "24-36 M",
+   "orderQty": 36.0
+  },
+  {
+   "orderNo": "HR-013",
+   "colour": "BLUE",
+   "size": "0-3 M",
+   "orderQty": 48.0
+  },
+  {
+   "orderNo": "HR-013",
+   "colour": "BLUE",
+   "size": "3-6 M",
+   "orderQty": 91.0
+  },
+  {
+   "orderNo": "HR-013",
+   "colour": "BLUE",
+   "size": "6-9 M",
+   "orderQty": 116.0
+  },
+  {
+   "orderNo": "HR-013",
+   "colour": "BLUE",
+   "size": "9-12 M",
+   "orderQty": 137.0
+  },
+  {
+   "orderNo": "HR-013",
+   "colour": "BLUE",
+   "size": "12-18 M",
+   "orderQty": 151.0
+  },
+  {
+   "orderNo": "HR-013",
+   "colour": "BLUE",
+   "size": "18-24 M",
+   "orderQty": 123.0
+  },
+  {
+   "orderNo": "HR-013",
+   "colour": "BLUE",
+   "size": "24-36 M",
+   "orderQty": 36.0
+  },
+  {
+   "orderNo": "HR-014",
+   "colour": "OFF-WHITE",
+   "size": "0-3 M",
+   "orderQty": 87.0
+  },
+  {
+   "orderNo": "HR-014",
+   "colour": "OFF-WHITE",
+   "size": "3-6 M",
+   "orderQty": 158.0
+  },
+  {
+   "orderNo": "HR-014",
+   "colour": "OFF-WHITE",
+   "size": "6-9 M",
+   "orderQty": 212.0
+  },
+  {
+   "orderNo": "HR-014",
+   "colour": "OFF-WHITE",
+   "size": "9-12 M",
+   "orderQty": 197.0
+  },
+  {
+   "orderNo": "HR-014",
+   "colour": "OFF-WHITE",
+   "size": "12-18 M",
+   "orderQty": 136.0
+  },
+  {
+   "orderNo": "HR-014",
+   "colour": "OFF-WHITE",
+   "size": "18-24 M",
+   "orderQty": 89.0
+  },
+  {
+   "orderNo": "HR-014",
+   "colour": "OFF-WHITE",
+   "size": "24-36 M",
+   "orderQty": 41.0
+  }
+ ],
+ "fabric": [
+  {
+   "date": "2026-07-04",
+   "orderNo": "HR-001",
+   "colour": "PINK",
+   "fabricType": "3T FLEECE",
+   "receivedKg": 128.7,
+   "issuedKg": 128.7
+  },
+  {
+   "date": "2026-07-04",
+   "orderNo": "HR-002",
+   "colour": "OFF-WHITE",
+   "fabricType": "3T FLEECE",
+   "receivedKg": 132.6,
+   "issuedKg": 132.6
+  },
+  {
+   "date": "2026-07-04",
+   "orderNo": "HR-003",
+   "colour": "LIME",
+   "fabricType": "3T FLEECE",
+   "receivedKg": 131.7,
+   "issuedKg": 131.7
+  },
+  {
+   "date": "2026-07-08",
+   "orderNo": "HR-004",
+   "colour": "PEACH ORANGE",
+   "fabricType": "3T FLEECE",
+   "receivedKg": 168.3,
+   "issuedKg": 168.3
+  },
+  {
+   "date": "2026-07-04",
+   "orderNo": "HR-005-T",
+   "colour": "PINK",
+   "fabricType": "3T FLEECE",
+   "receivedKg": 130.5,
+   "issuedKg": 130.5
+  },
+  {
+   "date": "2026-07-04",
+   "orderNo": "HR-005-B",
+   "colour": "PINK",
+   "fabricType": "3T FLEECE",
+   "receivedKg": 202.0,
+   "issuedKg": 202.0
+  },
+  {
+   "date": "2026-07-21",
+   "orderNo": "HR-010",
+   "colour": "TEAL",
+   "fabricType": "Single Jersey",
+   "receivedKg": 41.2
+  },
+  {
+   "date": "2026-07-21",
+   "orderNo": "HR-006-A",
+   "colour": "CHERRY RED/OFF-WHITE",
+   "fabricType": "Interlock",
+   "receivedKg": 103.0
+  },
+  {
+   "date": "2026-07-22",
+   "orderNo": "HR-006-B",
+   "colour": "CHERRY RED/OFF-WHITE",
+   "fabricType": "Interlock"
+  },
+  {
+   "date": "2026-07-22",
+   "orderNo": "HR-008",
+   "colour": "OFF-WHITE",
+   "fabricType": "Slub Jersey",
+   "receivedKg": 53.0,
+   "issuedKg": 50.6
+  },
+  {
+   "date": "2026-07-22",
+   "orderNo": "HR-012",
+   "colour": "OFF-WHITE",
+   "fabricType": "Single Jersey",
+   "receivedKg": 47.0
+  },
+  {
+   "date": "2026-07-24",
+   "orderNo": "HR-013",
+   "colour": "BLUE",
+   "fabricType": "Single Jersey",
+   "receivedKg": 49.4
+  },
+  {
+   "date": "2026-07-24",
+   "orderNo": "HR-013",
+   "colour": "BLUE",
+   "fabricType": "1x1 Rib",
+   "receivedKg": 4.4
+  },
+  {
+   "date": "2026-07-23",
+   "orderNo": "HR-011",
+   "colour": "MINT GREEN",
+   "fabricType": "Interlock",
+   "receivedKg": 100.4
+  },
+  {
+   "date": "2026-07-23",
+   "orderNo": "HR-011",
+   "colour": "MINT GREEN",
+   "fabricType": "1x1 Rib"
+  },
+  {
+   "orderNo": "HR-007"
+  },
+  {
+   "orderNo": "HR-009"
+  },
+  {
+   "orderNo": "HR-014"
+  }
+ ],
+ "trims": [],
+ "jobwork": [
+  {
+   "date": "2026-07-27",
+   "orderNo": "HR-002",
+   "colour": "OFF-WHITE",
+   "size": "6-7 Y",
+   "process": "Embroidery",
+   "vendor": "GAIN UP EMBROIDERY",
+   "direction": "OUT",
+   "qty": 62.0,
+   "remarks": "DC: 152"
+  },
+  {
+   "date": "2026-07-27",
+   "orderNo": "HR-002",
+   "colour": "OFF-WHITE",
+   "size": "7-8 Y",
+   "process": "Embroidery",
+   "vendor": "GAIN UP EMBROIDERY",
+   "direction": "OUT",
+   "qty": 79.0,
+   "remarks": "\""
+  },
+  {
+   "date": "2026-07-27",
+   "orderNo": "HR-002",
+   "colour": "OFF-WHITE",
+   "size": "8-9 Y",
+   "process": "Embroidery",
+   "vendor": "GAIN UP EMBROIDERY",
+   "direction": "OUT",
+   "qty": 75.0,
+   "remarks": "\""
+  },
+  {
+   "date": "2026-07-27",
+   "orderNo": "HR-002",
+   "colour": "OFF-WHITE",
+   "size": "9-10 Y",
+   "process": "Embroidery",
+   "vendor": "GAIN UP EMBROIDERY",
+   "direction": "OUT",
+   "qty": 81.0,
+   "remarks": "\""
+  },
+  {
+   "date": "2026-07-27",
+   "orderNo": "HR-002",
+   "colour": "OFF-WHITE",
+   "size": "10-11 Y",
+   "process": "Embroidery",
+   "vendor": "GAIN UP EMBROIDERY",
+   "direction": "OUT",
+   "qty": 62.0,
+   "remarks": "\""
+  },
+  {
+   "date": "2026-07-27",
+   "orderNo": "HR-002",
+   "colour": "OFF-WHITE",
+   "size": "11-12 Y",
+   "process": "Embroidery",
+   "vendor": "GAIN UP EMBROIDERY",
+   "direction": "OUT",
+   "qty": 62.0,
+   "remarks": "\""
+  },
+  {
+   "date": "2026-07-27",
+   "orderNo": "HR-002",
+   "colour": "OFF-WHITE",
+   "size": "12-13 Y",
+   "process": "Embroidery",
+   "vendor": "GAIN UP EMBROIDERY",
+   "direction": "OUT",
+   "qty": 51.0,
+   "remarks": "\""
+  },
+  {
+   "date": "2026-07-27",
+   "orderNo": "HR-002",
+   "colour": "OFF-WHITE",
+   "size": "13-14 Y",
+   "process": "Embroidery",
+   "vendor": "GAIN UP EMBROIDERY",
+   "direction": "OUT",
+   "qty": 51.0,
+   "remarks": "\""
+  },
+  {
+   "date": "2026-07-29",
+   "orderNo": "HR-002",
+   "colour": "OFF-WHITE",
+   "size": "14-15 Y",
+   "process": "Embroidery",
+   "vendor": "GAIN UP EMBROIDERY",
+   "direction": "OUT",
+   "qty": 3.0,
+   "remarks": "DC : 158"
+  },
+  {
+   "date": "2026-07-29",
+   "orderNo": "HR-002",
+   "colour": "OFF-WHITE",
+   "size": "15-16 Y",
+   "process": "Embroidery",
+   "vendor": "GAIN UP EMBROIDERY",
+   "direction": "OUT",
+   "qty": 5.0,
+   "remarks": "\""
+  },
+  {
+   "date": "2026-07-27",
+   "orderNo": "HR-005-T",
+   "colour": "PINK",
+   "size": "6-7 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "OUT",
+   "qty": 82.0,
+   "remarks": "DC: 156"
+  },
+  {
+   "date": "2026-07-27",
+   "orderNo": "HR-005-T",
+   "colour": "PINK",
+   "size": "7-8 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "OUT",
+   "qty": 91.0
+  },
+  {
+   "date": "2026-07-27",
+   "orderNo": "HR-005-T",
+   "colour": "PINK",
+   "size": "8-9 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "OUT",
+   "qty": 83.0
+  },
+  {
+   "date": "2026-07-27",
+   "orderNo": "HR-005-T",
+   "colour": "PINK",
+   "size": "9-10 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "OUT",
+   "qty": 82.0
+  },
+  {
+   "date": "2026-07-27",
+   "orderNo": "HR-005-T",
+   "colour": "PINK",
+   "size": "10-11 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "OUT",
+   "qty": 54.0
+  },
+  {
+   "date": "2026-07-27",
+   "orderNo": "HR-005-T",
+   "colour": "PINK",
+   "size": "11-12 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "OUT",
+   "qty": 56.0
+  },
+  {
+   "date": "2026-07-27",
+   "orderNo": "HR-005-T",
+   "colour": "PINK",
+   "size": "12-13 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "OUT",
+   "qty": 40.0
+  },
+  {
+   "date": "2026-07-27",
+   "orderNo": "HR-005-T",
+   "colour": "PINK",
+   "size": "13-14 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "OUT",
+   "qty": 33.0
+  },
+  {
+   "date": "2026-07-27",
+   "orderNo": "HR-005-T",
+   "colour": "PINK",
+   "size": "14-15 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "OUT",
+   "qty": 6.0
+  },
+  {
+   "date": "2026-07-27",
+   "orderNo": "HR-005-T",
+   "colour": "PINK",
+   "size": "15-16 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "OUT",
+   "qty": 10.0
+  },
+  {
+   "date": "2026-07-29",
+   "orderNo": "HR-005-B",
+   "colour": "PINK",
+   "size": "6-7 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "OUT",
+   "qty": 82.0,
+   "remarks": "DC : 157"
+  },
+  {
+   "date": "2026-07-29",
+   "orderNo": "HR-005-B",
+   "colour": "PINK",
+   "size": "7-8 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "OUT",
+   "qty": 91.0
+  },
+  {
+   "date": "2026-07-29",
+   "orderNo": "HR-005-B",
+   "colour": "PINK",
+   "size": "8-9 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "OUT",
+   "qty": 83.0
+  },
+  {
+   "date": "2026-07-29",
+   "orderNo": "HR-005-B",
+   "colour": "PINK",
+   "size": "9-10 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "OUT",
+   "qty": 82.0
+  },
+  {
+   "date": "2026-07-29",
+   "orderNo": "HR-005-B",
+   "colour": "PINK",
+   "size": "10-11 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "OUT",
+   "qty": 54.0
+  },
+  {
+   "date": "2026-07-29",
+   "orderNo": "HR-005-B",
+   "colour": "PINK",
+   "size": "11-12 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "OUT",
+   "qty": 56.0
+  },
+  {
+   "date": "2026-07-29",
+   "orderNo": "HR-005-B",
+   "colour": "PINK",
+   "size": "12-13 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "OUT",
+   "qty": 40.0
+  },
+  {
+   "date": "2026-07-29",
+   "orderNo": "HR-005-B",
+   "colour": "PINK",
+   "size": "13-14 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "OUT",
+   "qty": 33.0
+  },
+  {
+   "date": "2026-07-29",
+   "orderNo": "HR-005-B",
+   "colour": "PINK",
+   "size": "14-15 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "OUT",
+   "qty": 6.0
+  },
+  {
+   "date": "2026-07-29",
+   "orderNo": "HR-005-B",
+   "colour": "PINK",
+   "size": "15-16 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "OUT",
+   "qty": 10.0
+  },
+  {
+   "date": "2026-07-31",
+   "orderNo": "HR-003",
+   "colour": "LIME",
+   "size": "6-7 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "OUT",
+   "qty": 64.0,
+   "remarks": "DC : 165"
+  },
+  {
+   "date": "2026-07-31",
+   "orderNo": "HR-003",
+   "colour": "LIME",
+   "size": "7-8 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "OUT",
+   "qty": 80.0
+  },
+  {
+   "date": "2026-07-31",
+   "orderNo": "HR-003",
+   "colour": "LIME",
+   "size": "8-9 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "OUT",
+   "qty": 74.0
+  },
+  {
+   "date": "2026-07-31",
+   "orderNo": "HR-003",
+   "colour": "LIME",
+   "size": "9-10 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "OUT",
+   "qty": 81.0
+  },
+  {
+   "date": "2026-07-31",
+   "orderNo": "HR-003",
+   "colour": "LIME",
+   "size": "10-11 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "OUT",
+   "qty": 63.0
+  },
+  {
+   "date": "2026-07-31",
+   "orderNo": "HR-003",
+   "colour": "LIME",
+   "size": "11-12 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "OUT",
+   "qty": 63.0
+  },
+  {
+   "date": "2026-07-31",
+   "orderNo": "HR-003",
+   "colour": "LIME",
+   "size": "12-13 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "OUT",
+   "qty": 57.0
+  },
+  {
+   "date": "2026-07-31",
+   "orderNo": "HR-003",
+   "colour": "LIME",
+   "size": "13-14 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "OUT",
+   "qty": 48.0
+  },
+  {
+   "date": "2026-07-31",
+   "orderNo": "HR-003",
+   "colour": "LIME",
+   "size": "14-15 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "OUT",
+   "qty": 4.0
+  },
+  {
+   "date": "2026-07-31",
+   "orderNo": "HR-003",
+   "colour": "LIME",
+   "size": "15-16 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "OUT",
+   "qty": 6.0
+  },
+  {
+   "date": "2026-08-01",
+   "orderNo": "HR-004",
+   "colour": "PEACH ORANGE",
+   "size": "6-7 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "OUT",
+   "qty": 64.0,
+   "remarks": "DC : FRONT - 166 "
+  },
+  {
+   "date": "2026-08-01",
+   "orderNo": "HR-004",
+   "colour": "PEACH ORANGE",
+   "size": "7-8 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "OUT",
+   "qty": 76.0,
+   "remarks": "DC : BACK - 167"
+  },
+  {
+   "date": "2026-08-01",
+   "orderNo": "HR-004",
+   "colour": "PEACH ORANGE",
+   "size": "8-9 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "OUT",
+   "qty": 73.0
+  },
+  {
+   "date": "2026-08-01",
+   "orderNo": "HR-004",
+   "colour": "PEACH ORANGE",
+   "size": "9-10 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "OUT",
+   "qty": 80.0
+  },
+  {
+   "date": "2026-08-01",
+   "orderNo": "HR-004",
+   "colour": "PEACH ORANGE",
+   "size": "10-11 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "OUT",
+   "qty": 62.0
+  },
+  {
+   "date": "2026-08-01",
+   "orderNo": "HR-004",
+   "colour": "PEACH ORANGE",
+   "size": "11-12 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "OUT",
+   "qty": 64.0
+  },
+  {
+   "date": "2026-08-01",
+   "orderNo": "HR-004",
+   "colour": "PEACH ORANGE",
+   "size": "12-13 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "OUT",
+   "qty": 48.0
+  },
+  {
+   "date": "2026-08-01",
+   "orderNo": "HR-004",
+   "colour": "PEACH ORANGE",
+   "size": "13-14 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "OUT",
+   "qty": 52.0
+  },
+  {
+   "date": "2026-08-01",
+   "orderNo": "HR-004",
+   "colour": "PEACH ORANGE",
+   "size": "14-15 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "OUT",
+   "qty": 4.0
+  },
+  {
+   "date": "2026-08-01",
+   "orderNo": "HR-004",
+   "colour": "PEACH ORANGE",
+   "size": "15-16 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "OUT",
+   "qty": 5.0
+  },
+  {
+   "date": "2026-07-30",
+   "orderNo": "HR-001",
+   "colour": "PINK",
+   "size": "6-7 Y",
+   "process": "Print",
+   "vendor": "VINAYAGA PRINTING",
+   "direction": "OUT",
+   "qty": 64.0,
+   "remarks": "DC : 160"
+  },
+  {
+   "date": "2026-07-30",
+   "orderNo": "HR-001",
+   "colour": "PINK",
+   "size": "7-8 Y",
+   "process": "Print",
+   "vendor": "VINAYAGA PRINTING",
+   "direction": "OUT",
+   "qty": 76.0
+  },
+  {
+   "date": "2026-07-30",
+   "orderNo": "HR-001",
+   "colour": "PINK",
+   "size": "8-9 Y",
+   "process": "Print",
+   "vendor": "VINAYAGA PRINTING",
+   "direction": "OUT",
+   "qty": 73.0
+  },
+  {
+   "date": "2026-07-30",
+   "orderNo": "HR-001",
+   "colour": "PINK",
+   "size": "9-10 Y",
+   "process": "Print",
+   "vendor": "VINAYAGA PRINTING",
+   "direction": "OUT",
+   "qty": 79.0
+  },
+  {
+   "date": "2026-07-30",
+   "orderNo": "HR-001",
+   "colour": "PINK",
+   "size": "10-11 Y",
+   "process": "Print",
+   "vendor": "VINAYAGA PRINTING",
+   "direction": "OUT",
+   "qty": 63.0
+  },
+  {
+   "date": "2026-07-30",
+   "orderNo": "HR-001",
+   "colour": "PINK",
+   "size": "11-12 Y",
+   "process": "Print",
+   "vendor": "VINAYAGA PRINTING",
+   "direction": "OUT",
+   "qty": 64.0
+  },
+  {
+   "date": "2026-07-30",
+   "orderNo": "HR-001",
+   "colour": "PINK",
+   "size": "12-13 Y",
+   "process": "Print",
+   "vendor": "VINAYAGA PRINTING",
+   "direction": "OUT",
+   "qty": 47.0
+  },
+  {
+   "date": "2026-07-30",
+   "orderNo": "HR-001",
+   "colour": "PINK",
+   "size": "13-14 Y",
+   "process": "Print",
+   "vendor": "VINAYAGA PRINTING",
+   "direction": "OUT",
+   "qty": 52.0
+  },
+  {
+   "date": "2026-07-30",
+   "orderNo": "HR-001",
+   "colour": "PINK",
+   "size": "14-15 Y",
+   "process": "Print",
+   "vendor": "VINAYAGA PRINTING",
+   "direction": "OUT",
+   "qty": 4.0
+  },
+  {
+   "date": "2026-07-30",
+   "orderNo": "HR-001",
+   "colour": "PINK",
+   "size": "15-16 Y",
+   "process": "Print",
+   "vendor": "VINAYAGA PRINTING",
+   "direction": "OUT",
+   "qty": 6.0
+  },
+  {
+   "date": "2026-08-02",
+   "orderNo": "HR-002",
+   "colour": "OFF-WHITE",
+   "size": "6-7 Y",
+   "process": "Embroidery",
+   "vendor": "GAIN UP EMBROIDERY",
+   "direction": "IN",
+   "qty": 62.0
+  },
+  {
+   "date": "2026-08-02",
+   "orderNo": "HR-002",
+   "colour": "OFF-WHITE",
+   "size": "7-8 Y",
+   "process": "Embroidery",
+   "vendor": "GAIN UP EMBROIDERY",
+   "direction": "IN",
+   "qty": 79.0
+  },
+  {
+   "date": "2026-08-02",
+   "orderNo": "HR-002",
+   "colour": "OFF-WHITE",
+   "size": "8-9 Y",
+   "process": "Embroidery",
+   "vendor": "GAIN UP EMBROIDERY",
+   "direction": "IN",
+   "qty": 75.0
+  },
+  {
+   "date": "2026-08-02",
+   "orderNo": "HR-002",
+   "colour": "OFF-WHITE",
+   "size": "9-10 Y",
+   "process": "Embroidery",
+   "vendor": "GAIN UP EMBROIDERY",
+   "direction": "IN",
+   "qty": 81.0
+  },
+  {
+   "date": "2026-08-02",
+   "orderNo": "HR-002",
+   "colour": "OFF-WHITE",
+   "size": "10-11 Y",
+   "process": "Embroidery",
+   "vendor": "GAIN UP EMBROIDERY",
+   "direction": "IN",
+   "qty": 62.0
+  },
+  {
+   "date": "2026-08-02",
+   "orderNo": "HR-002",
+   "colour": "OFF-WHITE",
+   "size": "11-12 Y",
+   "process": "Embroidery",
+   "vendor": "GAIN UP EMBROIDERY",
+   "direction": "IN",
+   "qty": 62.0
+  },
+  {
+   "date": "2026-08-02",
+   "orderNo": "HR-002",
+   "colour": "OFF-WHITE",
+   "size": "12-13 Y",
+   "process": "Embroidery",
+   "vendor": "GAIN UP EMBROIDERY",
+   "direction": "IN",
+   "qty": 51.0
+  },
+  {
+   "date": "2026-08-02",
+   "orderNo": "HR-002",
+   "colour": "OFF-WHITE",
+   "size": "13-14 Y",
+   "process": "Embroidery",
+   "vendor": "GAIN UP EMBROIDERY",
+   "direction": "IN",
+   "qty": 51.0
+  },
+  {
+   "date": "2026-08-02",
+   "orderNo": "HR-002",
+   "colour": "OFF-WHITE",
+   "size": "14-15 Y",
+   "process": "Embroidery",
+   "vendor": "GAIN UP EMBROIDERY",
+   "direction": "IN",
+   "qty": 3.0
+  },
+  {
+   "date": "2026-08-02",
+   "orderNo": "HR-002",
+   "colour": "OFF-WHITE",
+   "size": "15-16 Y",
+   "process": "Embroidery",
+   "vendor": "GAIN UP EMBROIDERY",
+   "direction": "IN",
+   "qty": 5.0
+  },
+  {
+   "date": "2026-08-06",
+   "orderNo": "HR-005-T",
+   "colour": "PINK",
+   "size": "6-7 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "IN",
+   "qty": 82.0
+  },
+  {
+   "date": "2026-08-06",
+   "orderNo": "HR-005-T",
+   "colour": "PINK",
+   "size": "7-8 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "IN",
+   "qty": 91.0
+  },
+  {
+   "date": "2026-08-06",
+   "orderNo": "HR-005-T",
+   "colour": "PINK",
+   "size": "8-9 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "IN",
+   "qty": 83.0
+  },
+  {
+   "date": "2026-08-06",
+   "orderNo": "HR-005-T",
+   "colour": "PINK",
+   "size": "9-10 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "IN",
+   "qty": 82.0
+  },
+  {
+   "date": "2026-08-06",
+   "orderNo": "HR-005-T",
+   "colour": "PINK",
+   "size": "10-11 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "IN",
+   "qty": 54.0
+  },
+  {
+   "date": "2026-08-06",
+   "orderNo": "HR-005-T",
+   "colour": "PINK",
+   "size": "11-12 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "IN",
+   "qty": 56.0
+  },
+  {
+   "date": "2026-08-06",
+   "orderNo": "HR-005-T",
+   "colour": "PINK",
+   "size": "12-13 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "IN",
+   "qty": 40.0
+  },
+  {
+   "date": "2026-08-06",
+   "orderNo": "HR-005-T",
+   "colour": "PINK",
+   "size": "13-14 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "IN",
+   "qty": 33.0
+  },
+  {
+   "date": "2026-08-06",
+   "orderNo": "HR-005-T",
+   "colour": "PINK",
+   "size": "14-15 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "IN",
+   "qty": 6.0
+  },
+  {
+   "date": "2026-08-06",
+   "orderNo": "HR-005-T",
+   "colour": "PINK",
+   "size": "15-16 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "IN",
+   "qty": 10.0
+  },
+  {
+   "date": "2026-08-06",
+   "orderNo": "HR-005-B",
+   "colour": "PINK",
+   "size": "6-7 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "IN",
+   "qty": 82.0
+  },
+  {
+   "date": "2026-08-06",
+   "orderNo": "HR-005-B",
+   "colour": "PINK",
+   "size": "7-8 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "IN",
+   "qty": 91.0
+  },
+  {
+   "date": "2026-08-06",
+   "orderNo": "HR-005-B",
+   "colour": "PINK",
+   "size": "8-9 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "IN",
+   "qty": 83.0
+  },
+  {
+   "date": "2026-08-06",
+   "orderNo": "HR-005-B",
+   "colour": "PINK",
+   "size": "9-10 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "IN",
+   "qty": 82.0
+  },
+  {
+   "date": "2026-08-06",
+   "orderNo": "HR-005-B",
+   "colour": "PINK",
+   "size": "10-11 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "IN",
+   "qty": 54.0
+  },
+  {
+   "date": "2026-08-06",
+   "orderNo": "HR-005-B",
+   "colour": "PINK",
+   "size": "11-12 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "IN",
+   "qty": 56.0
+  },
+  {
+   "date": "2026-08-06",
+   "orderNo": "HR-005-B",
+   "colour": "PINK",
+   "size": "12-13 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "IN",
+   "qty": 40.0
+  },
+  {
+   "date": "2026-08-06",
+   "orderNo": "HR-005-B",
+   "colour": "PINK",
+   "size": "13-14 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "IN",
+   "qty": 33.0
+  },
+  {
+   "date": "2026-08-06",
+   "orderNo": "HR-005-B",
+   "colour": "PINK",
+   "size": "14-15 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "IN",
+   "qty": 6.0
+  },
+  {
+   "date": "2026-08-06",
+   "orderNo": "HR-005-B",
+   "colour": "PINK",
+   "size": "15-16 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "IN",
+   "qty": 10.0
+  },
+  {
+   "date": "2026-08-06",
+   "orderNo": "HR-005-T",
+   "colour": "PINK",
+   "size": "6-7 Y",
+   "process": "Embroidery",
+   "vendor": "CRYSTAL STONE WORK",
+   "direction": "OUT",
+   "qty": 82.0
+  },
+  {
+   "date": "2026-08-06",
+   "orderNo": "HR-005-T",
+   "colour": "PINK",
+   "size": "7-8 Y",
+   "process": "Embroidery",
+   "vendor": "CRYSTAL STONE WORK",
+   "direction": "OUT",
+   "qty": 91.0
+  },
+  {
+   "date": "2026-08-06",
+   "orderNo": "HR-005-T",
+   "colour": "PINK",
+   "size": "8-9 Y",
+   "process": "Embroidery",
+   "vendor": "CRYSTAL STONE WORK",
+   "direction": "OUT",
+   "qty": 83.0
+  },
+  {
+   "date": "2026-08-06",
+   "orderNo": "HR-005-T",
+   "colour": "PINK",
+   "size": "9-10 Y",
+   "process": "Embroidery",
+   "vendor": "CRYSTAL STONE WORK",
+   "direction": "OUT",
+   "qty": 82.0
+  },
+  {
+   "date": "2026-08-06",
+   "orderNo": "HR-005-T",
+   "colour": "PINK",
+   "size": "10-11 Y",
+   "process": "Embroidery",
+   "vendor": "CRYSTAL STONE WORK",
+   "direction": "OUT",
+   "qty": 54.0
+  },
+  {
+   "date": "2026-08-06",
+   "orderNo": "HR-005-T",
+   "colour": "PINK",
+   "size": "11-12 Y",
+   "process": "Embroidery",
+   "vendor": "CRYSTAL STONE WORK",
+   "direction": "OUT",
+   "qty": 56.0
+  },
+  {
+   "date": "2026-08-06",
+   "orderNo": "HR-005-T",
+   "colour": "PINK",
+   "size": "12-13 Y",
+   "process": "Embroidery",
+   "vendor": "CRYSTAL STONE WORK",
+   "direction": "OUT",
+   "qty": 40.0
+  },
+  {
+   "date": "2026-08-06",
+   "orderNo": "HR-005-T",
+   "colour": "PINK",
+   "size": "13-14 Y",
+   "process": "Embroidery",
+   "vendor": "CRYSTAL STONE WORK",
+   "direction": "OUT",
+   "qty": 33.0
+  },
+  {
+   "date": "2026-08-06",
+   "orderNo": "HR-005-T",
+   "colour": "PINK",
+   "size": "14-15 Y",
+   "process": "Embroidery",
+   "vendor": "CRYSTAL STONE WORK",
+   "direction": "OUT",
+   "qty": 6.0
+  },
+  {
+   "date": "2026-08-06",
+   "orderNo": "HR-005-T",
+   "colour": "PINK",
+   "size": "15-16 Y",
+   "process": "Embroidery",
+   "vendor": "CRYSTAL STONE WORK",
+   "direction": "OUT",
+   "qty": 10.0
+  },
+  {
+   "date": "2026-08-06",
+   "orderNo": "HR-005-B",
+   "colour": "PINK",
+   "size": "6-7 Y",
+   "process": "Embroidery",
+   "vendor": "CRYSTAL STONE WORK",
+   "direction": "OUT",
+   "qty": 82.0
+  },
+  {
+   "date": "2026-08-06",
+   "orderNo": "HR-005-B",
+   "colour": "PINK",
+   "size": "7-8 Y",
+   "process": "Embroidery",
+   "vendor": "CRYSTAL STONE WORK",
+   "direction": "OUT",
+   "qty": 91.0
+  },
+  {
+   "date": "2026-08-06",
+   "orderNo": "HR-005-B",
+   "colour": "PINK",
+   "size": "8-9 Y",
+   "process": "Embroidery",
+   "vendor": "CRYSTAL STONE WORK",
+   "direction": "OUT",
+   "qty": 83.0
+  },
+  {
+   "date": "2026-08-06",
+   "orderNo": "HR-005-B",
+   "colour": "PINK",
+   "size": "9-10 Y",
+   "process": "Embroidery",
+   "vendor": "CRYSTAL STONE WORK",
+   "direction": "OUT",
+   "qty": 82.0
+  },
+  {
+   "date": "2026-08-06",
+   "orderNo": "HR-005-B",
+   "colour": "PINK",
+   "size": "10-11 Y",
+   "process": "Embroidery",
+   "vendor": "CRYSTAL STONE WORK",
+   "direction": "OUT",
+   "qty": 54.0
+  },
+  {
+   "date": "2026-08-06",
+   "orderNo": "HR-005-B",
+   "colour": "PINK",
+   "size": "11-12 Y",
+   "process": "Embroidery",
+   "vendor": "CRYSTAL STONE WORK",
+   "direction": "OUT",
+   "qty": 56.0
+  },
+  {
+   "date": "2026-08-06",
+   "orderNo": "HR-005-B",
+   "colour": "PINK",
+   "size": "12-13 Y",
+   "process": "Embroidery",
+   "vendor": "CRYSTAL STONE WORK",
+   "direction": "OUT",
+   "qty": 40.0
+  },
+  {
+   "date": "2026-08-06",
+   "orderNo": "HR-005-B",
+   "colour": "PINK",
+   "size": "13-14 Y",
+   "process": "Embroidery",
+   "vendor": "CRYSTAL STONE WORK",
+   "direction": "OUT",
+   "qty": 33.0
+  },
+  {
+   "date": "2026-08-06",
+   "orderNo": "HR-005-B",
+   "colour": "PINK",
+   "size": "14-15 Y",
+   "process": "Embroidery",
+   "vendor": "CRYSTAL STONE WORK",
+   "direction": "OUT",
+   "qty": 6.0
+  },
+  {
+   "date": "2026-08-06",
+   "orderNo": "HR-005-B",
+   "colour": "PINK",
+   "size": "15-16 Y",
+   "process": "Embroidery",
+   "vendor": "CRYSTAL STONE WORK",
+   "direction": "OUT",
+   "qty": 10.0
+  },
+  {
+   "date": "2026-08-07",
+   "orderNo": "HR-001",
+   "colour": "PINK",
+   "size": "6-7 Y",
+   "process": "Print",
+   "vendor": "VINAYAGA PRINTING",
+   "direction": "IN",
+   "qty": 64.0
+  },
+  {
+   "date": "2026-08-07",
+   "orderNo": "HR-001",
+   "colour": "PINK",
+   "size": "7-8 Y",
+   "process": "Print",
+   "vendor": "VINAYAGA PRINTING",
+   "direction": "IN",
+   "qty": 76.0
+  },
+  {
+   "date": "2026-08-07",
+   "orderNo": "HR-001",
+   "colour": "PINK",
+   "size": "8-9 Y",
+   "process": "Print",
+   "vendor": "VINAYAGA PRINTING",
+   "direction": "IN",
+   "qty": 73.0
+  },
+  {
+   "date": "2026-08-07",
+   "orderNo": "HR-001",
+   "colour": "PINK",
+   "size": "9-10 Y",
+   "process": "Print",
+   "vendor": "VINAYAGA PRINTING",
+   "direction": "IN",
+   "qty": 79.0
+  },
+  {
+   "date": "2026-08-07",
+   "orderNo": "HR-001",
+   "colour": "PINK",
+   "size": "10-11 Y",
+   "process": "Print",
+   "vendor": "VINAYAGA PRINTING",
+   "direction": "IN",
+   "qty": 63.0
+  },
+  {
+   "date": "2026-08-07",
+   "orderNo": "HR-001",
+   "colour": "PINK",
+   "size": "11-12 Y",
+   "process": "Print",
+   "vendor": "VINAYAGA PRINTING",
+   "direction": "IN",
+   "qty": 64.0
+  },
+  {
+   "date": "2026-08-07",
+   "orderNo": "HR-001",
+   "colour": "PINK",
+   "size": "12-13 Y",
+   "process": "Print",
+   "vendor": "VINAYAGA PRINTING",
+   "direction": "IN",
+   "qty": 47.0
+  },
+  {
+   "date": "2026-08-07",
+   "orderNo": "HR-001",
+   "colour": "PINK",
+   "size": "13-14 Y",
+   "process": "Print",
+   "vendor": "VINAYAGA PRINTING",
+   "direction": "IN",
+   "qty": 52.0
+  },
+  {
+   "date": "2026-08-07",
+   "orderNo": "HR-001",
+   "colour": "PINK",
+   "size": "14-15 Y",
+   "process": "Print",
+   "vendor": "VINAYAGA PRINTING",
+   "direction": "IN",
+   "qty": 4.0
+  },
+  {
+   "date": "2026-08-07",
+   "orderNo": "HR-001",
+   "colour": "PINK",
+   "size": "15-16 Y",
+   "process": "Print",
+   "vendor": "VINAYAGA PRINTING",
+   "direction": "IN",
+   "qty": 6.0
+  },
+  {
+   "date": "2026-08-07",
+   "orderNo": "HR-001",
+   "colour": "PINK",
+   "size": "6-7 Y",
+   "process": "Embroidery",
+   "vendor": "BAKYA HAND EMBRO",
+   "direction": "OUT",
+   "qty": 64.0
+  },
+  {
+   "date": "2026-08-07",
+   "orderNo": "HR-001",
+   "colour": "PINK",
+   "size": "7-8 Y",
+   "process": "Embroidery",
+   "vendor": "BAKYA HAND EMBRO",
+   "direction": "OUT",
+   "qty": 76.0
+  },
+  {
+   "date": "2026-08-07",
+   "orderNo": "HR-001",
+   "colour": "PINK",
+   "size": "8-9 Y",
+   "process": "Embroidery",
+   "vendor": "BAKYA HAND EMBRO",
+   "direction": "OUT",
+   "qty": 73.0
+  },
+  {
+   "date": "2026-08-07",
+   "orderNo": "HR-001",
+   "colour": "PINK",
+   "size": "9-10 Y",
+   "process": "Embroidery",
+   "vendor": "BAKYA HAND EMBRO",
+   "direction": "OUT",
+   "qty": 79.0
+  },
+  {
+   "date": "2026-08-07",
+   "orderNo": "HR-001",
+   "colour": "PINK",
+   "size": "10-11 Y",
+   "process": "Embroidery",
+   "vendor": "BAKYA HAND EMBRO",
+   "direction": "OUT",
+   "qty": 63.0
+  },
+  {
+   "date": "2026-08-07",
+   "orderNo": "HR-001",
+   "colour": "PINK",
+   "size": "11-12 Y",
+   "process": "Embroidery",
+   "vendor": "BAKYA HAND EMBRO",
+   "direction": "OUT",
+   "qty": 64.0
+  },
+  {
+   "date": "2026-08-07",
+   "orderNo": "HR-001",
+   "colour": "PINK",
+   "size": "12-13 Y",
+   "process": "Embroidery",
+   "vendor": "BAKYA HAND EMBRO",
+   "direction": "OUT",
+   "qty": 47.0
+  },
+  {
+   "date": "2026-08-07",
+   "orderNo": "HR-001",
+   "colour": "PINK",
+   "size": "13-14 Y",
+   "process": "Embroidery",
+   "vendor": "BAKYA HAND EMBRO",
+   "direction": "OUT",
+   "qty": 52.0
+  },
+  {
+   "date": "2026-08-07",
+   "orderNo": "HR-001",
+   "colour": "PINK",
+   "size": "14-15 Y",
+   "process": "Embroidery",
+   "vendor": "BAKYA HAND EMBRO",
+   "direction": "OUT",
+   "qty": 4.0
+  },
+  {
+   "date": "2026-08-07",
+   "orderNo": "HR-001",
+   "colour": "PINK",
+   "size": "15-16 Y",
+   "process": "Embroidery",
+   "vendor": "BAKYA HAND EMBRO",
+   "direction": "OUT",
+   "qty": 6.0
+  },
+  {
+   "date": "2026-08-08",
+   "orderNo": "HR-005-T",
+   "colour": "PINK",
+   "size": "6-7 Y",
+   "process": "Embroidery",
+   "vendor": "CRYSTAL STONE WORK",
+   "direction": "IN",
+   "qty": 82.0
+  },
+  {
+   "date": "2026-08-08",
+   "orderNo": "HR-005-T",
+   "colour": "PINK",
+   "size": "7-8 Y",
+   "process": "Embroidery",
+   "vendor": "CRYSTAL STONE WORK",
+   "direction": "IN",
+   "qty": 91.0
+  },
+  {
+   "date": "2026-08-08",
+   "orderNo": "HR-005-T",
+   "colour": "PINK",
+   "size": "8-9 Y",
+   "process": "Embroidery",
+   "vendor": "CRYSTAL STONE WORK",
+   "direction": "IN",
+   "qty": 83.0
+  },
+  {
+   "date": "2026-08-08",
+   "orderNo": "HR-005-T",
+   "colour": "PINK",
+   "size": "9-10 Y",
+   "process": "Embroidery",
+   "vendor": "CRYSTAL STONE WORK",
+   "direction": "IN",
+   "qty": 82.0
+  },
+  {
+   "date": "2026-08-08",
+   "orderNo": "HR-005-T",
+   "colour": "PINK",
+   "size": "10-11 Y",
+   "process": "Embroidery",
+   "vendor": "CRYSTAL STONE WORK",
+   "direction": "IN",
+   "qty": 54.0
+  },
+  {
+   "date": "2026-08-08",
+   "orderNo": "HR-005-T",
+   "colour": "PINK",
+   "size": "11-12 Y",
+   "process": "Embroidery",
+   "vendor": "CRYSTAL STONE WORK",
+   "direction": "IN",
+   "qty": 56.0
+  },
+  {
+   "date": "2026-08-08",
+   "orderNo": "HR-005-T",
+   "colour": "PINK",
+   "size": "12-13 Y",
+   "process": "Embroidery",
+   "vendor": "CRYSTAL STONE WORK",
+   "direction": "IN",
+   "qty": 40.0
+  },
+  {
+   "date": "2026-08-08",
+   "orderNo": "HR-005-T",
+   "colour": "PINK",
+   "size": "13-14 Y",
+   "process": "Embroidery",
+   "vendor": "CRYSTAL STONE WORK",
+   "direction": "IN",
+   "qty": 33.0
+  },
+  {
+   "date": "2026-08-08",
+   "orderNo": "HR-005-T",
+   "colour": "PINK",
+   "size": "14-15 Y",
+   "process": "Embroidery",
+   "vendor": "CRYSTAL STONE WORK",
+   "direction": "IN",
+   "qty": 6.0
+  },
+  {
+   "date": "2026-08-08",
+   "orderNo": "HR-005-T",
+   "colour": "PINK",
+   "size": "15-16 Y",
+   "process": "Embroidery",
+   "vendor": "CRYSTAL STONE WORK",
+   "direction": "IN",
+   "qty": 10.0
+  },
+  {
+   "date": "2026-08-08",
+   "orderNo": "HR-005-B",
+   "colour": "PINK",
+   "size": "6-7 Y",
+   "process": "Embroidery",
+   "vendor": "CRYSTAL STONE WORK",
+   "direction": "IN",
+   "qty": 82.0
+  },
+  {
+   "date": "2026-08-08",
+   "orderNo": "HR-005-B",
+   "colour": "PINK",
+   "size": "7-8 Y",
+   "process": "Embroidery",
+   "vendor": "CRYSTAL STONE WORK",
+   "direction": "IN",
+   "qty": 91.0
+  },
+  {
+   "date": "2026-08-08",
+   "orderNo": "HR-005-B",
+   "colour": "PINK",
+   "size": "8-9 Y",
+   "process": "Embroidery",
+   "vendor": "CRYSTAL STONE WORK",
+   "direction": "IN",
+   "qty": 83.0
+  },
+  {
+   "date": "2026-08-08",
+   "orderNo": "HR-005-B",
+   "colour": "PINK",
+   "size": "9-10 Y",
+   "process": "Embroidery",
+   "vendor": "CRYSTAL STONE WORK",
+   "direction": "IN",
+   "qty": 82.0
+  },
+  {
+   "date": "2026-08-08",
+   "orderNo": "HR-005-B",
+   "colour": "PINK",
+   "size": "10-11 Y",
+   "process": "Embroidery",
+   "vendor": "CRYSTAL STONE WORK",
+   "direction": "IN",
+   "qty": 54.0
+  },
+  {
+   "date": "2026-08-08",
+   "orderNo": "HR-005-B",
+   "colour": "PINK",
+   "size": "11-12 Y",
+   "process": "Embroidery",
+   "vendor": "CRYSTAL STONE WORK",
+   "direction": "IN",
+   "qty": 56.0
+  },
+  {
+   "date": "2026-08-08",
+   "orderNo": "HR-005-B",
+   "colour": "PINK",
+   "size": "12-13 Y",
+   "process": "Embroidery",
+   "vendor": "CRYSTAL STONE WORK",
+   "direction": "IN",
+   "qty": 40.0
+  },
+  {
+   "date": "2026-08-08",
+   "orderNo": "HR-005-B",
+   "colour": "PINK",
+   "size": "13-14 Y",
+   "process": "Embroidery",
+   "vendor": "CRYSTAL STONE WORK",
+   "direction": "IN",
+   "qty": 33.0
+  },
+  {
+   "date": "2026-08-08",
+   "orderNo": "HR-005-B",
+   "colour": "PINK",
+   "size": "14-15 Y",
+   "process": "Embroidery",
+   "vendor": "CRYSTAL STONE WORK",
+   "direction": "IN",
+   "qty": 6.0
+  },
+  {
+   "date": "2026-08-08",
+   "orderNo": "HR-005-B",
+   "colour": "PINK",
+   "size": "15-16 Y",
+   "process": "Embroidery",
+   "vendor": "CRYSTAL STONE WORK",
+   "direction": "IN",
+   "qty": 10.0
+  },
+  {
+   "date": "2026-08-08",
+   "orderNo": "HR-003",
+   "colour": "LIME",
+   "size": "6-7 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "IN",
+   "qty": 64.0
+  },
+  {
+   "date": "2026-08-08",
+   "orderNo": "HR-003",
+   "colour": "LIME",
+   "size": "7-8 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "IN",
+   "qty": 80.0
+  },
+  {
+   "date": "2026-08-08",
+   "orderNo": "HR-003",
+   "colour": "LIME",
+   "size": "8-9 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "IN",
+   "qty": 74.0
+  },
+  {
+   "date": "2026-08-08",
+   "orderNo": "HR-003",
+   "colour": "LIME",
+   "size": "9-10 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "IN",
+   "qty": 81.0
+  },
+  {
+   "date": "2026-08-08",
+   "orderNo": "HR-003",
+   "colour": "LIME",
+   "size": "10-11 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "IN",
+   "qty": 63.0
+  },
+  {
+   "date": "2026-08-08",
+   "orderNo": "HR-003",
+   "colour": "LIME",
+   "size": "11-12 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "IN",
+   "qty": 63.0
+  },
+  {
+   "date": "2026-08-08",
+   "orderNo": "HR-003",
+   "colour": "LIME",
+   "size": "12-13 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "IN",
+   "qty": 57.0
+  },
+  {
+   "date": "2026-08-08",
+   "orderNo": "HR-003",
+   "colour": "LIME",
+   "size": "13-14 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "IN",
+   "qty": 48.0
+  },
+  {
+   "date": "2026-08-08",
+   "orderNo": "HR-003",
+   "colour": "LIME",
+   "size": "14-15 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "IN",
+   "qty": 4.0
+  },
+  {
+   "date": "2026-08-08",
+   "orderNo": "HR-003",
+   "colour": "LIME",
+   "size": "15-16 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "IN",
+   "qty": 6.0
+  },
+  {
+   "date": "2026-08-08",
+   "orderNo": "HR-003",
+   "colour": "LIME",
+   "size": "6-7 Y",
+   "process": "Embroidery",
+   "vendor": "BAKYA HAND EMBRO",
+   "direction": "OUT",
+   "qty": 64.0
+  },
+  {
+   "date": "2026-08-08",
+   "orderNo": "HR-003",
+   "colour": "LIME",
+   "size": "7-8 Y",
+   "process": "Embroidery",
+   "vendor": "BAKYA HAND EMBRO",
+   "direction": "OUT",
+   "qty": 80.0
+  },
+  {
+   "date": "2026-08-08",
+   "orderNo": "HR-003",
+   "colour": "LIME",
+   "size": "8-9 Y",
+   "process": "Embroidery",
+   "vendor": "BAKYA HAND EMBRO",
+   "direction": "OUT",
+   "qty": 74.0
+  },
+  {
+   "date": "2026-08-08",
+   "orderNo": "HR-003",
+   "colour": "LIME",
+   "size": "9-10 Y",
+   "process": "Embroidery",
+   "vendor": "BAKYA HAND EMBRO",
+   "direction": "OUT",
+   "qty": 81.0
+  },
+  {
+   "date": "2026-08-08",
+   "orderNo": "HR-003",
+   "colour": "LIME",
+   "size": "10-11 Y",
+   "process": "Embroidery",
+   "vendor": "BAKYA HAND EMBRO",
+   "direction": "OUT",
+   "qty": 63.0
+  },
+  {
+   "date": "2026-08-08",
+   "orderNo": "HR-003",
+   "colour": "LIME",
+   "size": "11-12 Y",
+   "process": "Embroidery",
+   "vendor": "BAKYA HAND EMBRO",
+   "direction": "OUT",
+   "qty": 63.0
+  },
+  {
+   "date": "2026-08-08",
+   "orderNo": "HR-003",
+   "colour": "LIME",
+   "size": "12-13 Y",
+   "process": "Embroidery",
+   "vendor": "BAKYA HAND EMBRO",
+   "direction": "OUT",
+   "qty": 57.0
+  },
+  {
+   "date": "2026-08-08",
+   "orderNo": "HR-003",
+   "colour": "LIME",
+   "size": "13-14 Y",
+   "process": "Embroidery",
+   "vendor": "BAKYA HAND EMBRO",
+   "direction": "OUT",
+   "qty": 48.0
+  },
+  {
+   "date": "2026-08-08",
+   "orderNo": "HR-003",
+   "colour": "LIME",
+   "size": "14-15 Y",
+   "process": "Embroidery",
+   "vendor": "BAKYA HAND EMBRO",
+   "direction": "OUT",
+   "qty": 4.0
+  },
+  {
+   "date": "2026-08-08",
+   "orderNo": "HR-003",
+   "colour": "LIME",
+   "size": "15-16 Y",
+   "process": "Embroidery",
+   "vendor": "BAKYA HAND EMBRO",
+   "direction": "OUT",
+   "qty": 6.0
+  },
+  {
+   "date": "2026-08-11",
+   "orderNo": "HR-004",
+   "colour": "PEACH ORANGE",
+   "size": "6-7 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "IN",
+   "qty": 64.0,
+   "remarks": "FRONT AND BACK RECD."
+  },
+  {
+   "date": "2026-08-11",
+   "orderNo": "HR-004",
+   "colour": "PEACH ORANGE",
+   "size": "7-8 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "IN",
+   "qty": 76.0
+  },
+  {
+   "date": "2026-08-11",
+   "orderNo": "HR-004",
+   "colour": "PEACH ORANGE",
+   "size": "8-9 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "IN",
+   "qty": 73.0
+  },
+  {
+   "date": "2026-08-11",
+   "orderNo": "HR-004",
+   "colour": "PEACH ORANGE",
+   "size": "9-10 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "IN",
+   "qty": 80.0
+  },
+  {
+   "date": "2026-08-11",
+   "orderNo": "HR-004",
+   "colour": "PEACH ORANGE",
+   "size": "10-11 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "IN",
+   "qty": 62.0
+  },
+  {
+   "date": "2026-08-11",
+   "orderNo": "HR-004",
+   "colour": "PEACH ORANGE",
+   "size": "11-12 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "IN",
+   "qty": 64.0
+  },
+  {
+   "date": "2026-08-11",
+   "orderNo": "HR-004",
+   "colour": "PEACH ORANGE",
+   "size": "12-13 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "IN",
+   "qty": 48.0
+  },
+  {
+   "date": "2026-08-11",
+   "orderNo": "HR-004",
+   "colour": "PEACH ORANGE",
+   "size": "13-14 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "IN",
+   "qty": 52.0
+  },
+  {
+   "date": "2026-08-11",
+   "orderNo": "HR-004",
+   "colour": "PEACH ORANGE",
+   "size": "14-15 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "IN",
+   "qty": 4.0
+  },
+  {
+   "date": "2026-08-11",
+   "orderNo": "HR-004",
+   "colour": "PEACH ORANGE",
+   "size": "15-16 Y",
+   "process": "Print",
+   "vendor": "MANGO PRINTING",
+   "direction": "IN",
+   "qty": 5.0
+  }
+ ],
+ "cutting": [
+  {
+   "date": "2026-07-22",
+   "orderNo": "HR-002",
+   "colour": "OFF-WHITE",
+   "size": "6-7 Y",
+   "fabricType": "3T FLEECE",
+   "countsAsGarment": "Y",
+   "cutQty": 62.0,
+   "gsm": 260.0,
+   "pcWtG": 211.0
+  },
+  {
+   "date": "2026-07-22",
+   "orderNo": "HR-002",
+   "colour": "OFF-WHITE",
+   "size": "7-8 Y",
+   "fabricType": "3T FLEECE",
+   "countsAsGarment": "Y",
+   "cutQty": 79.0,
+   "gsm": 260.0,
+   "pcWtG": 211.0
+  },
+  {
+   "date": "2026-07-22",
+   "orderNo": "HR-002",
+   "colour": "OFF-WHITE",
+   "size": "8-9 Y",
+   "fabricType": "3T FLEECE",
+   "countsAsGarment": "Y",
+   "cutQty": 75.0,
+   "gsm": 260.0,
+   "pcWtG": 211.0
+  },
+  {
+   "date": "2026-07-22",
+   "orderNo": "HR-002",
+   "colour": "OFF-WHITE",
+   "size": "9-10 Y",
+   "fabricType": "3T FLEECE",
+   "countsAsGarment": "Y",
+   "cutQty": 81.0,
+   "gsm": 260.0,
+   "pcWtG": 211.0
+  },
+  {
+   "date": "2026-07-22",
+   "orderNo": "HR-002",
+   "colour": "OFF-WHITE",
+   "size": "10-11 Y",
+   "fabricType": "3T FLEECE",
+   "countsAsGarment": "Y",
+   "cutQty": 62.0,
+   "gsm": 260.0,
+   "pcWtG": 211.0
+  },
+  {
+   "date": "2026-07-22",
+   "orderNo": "HR-002",
+   "colour": "OFF-WHITE",
+   "size": "11-12 Y",
+   "fabricType": "3T FLEECE",
+   "countsAsGarment": "Y",
+   "cutQty": 62.0,
+   "gsm": 260.0,
+   "pcWtG": 211.0
+  },
+  {
+   "date": "2026-07-22",
+   "orderNo": "HR-002",
+   "colour": "OFF-WHITE",
+   "size": "12-13 Y",
+   "fabricType": "3T FLEECE",
+   "countsAsGarment": "Y",
+   "cutQty": 51.0,
+   "gsm": 260.0,
+   "pcWtG": 211.0
+  },
+  {
+   "date": "2026-07-22",
+   "orderNo": "HR-002",
+   "colour": "OFF-WHITE",
+   "size": "13-14 Y",
+   "fabricType": "3T FLEECE",
+   "countsAsGarment": "Y",
+   "cutQty": 51.0,
+   "gsm": 260.0,
+   "pcWtG": 211.0
+  },
+  {
+   "date": "2026-07-22",
+   "orderNo": "HR-002",
+   "colour": "OFF-WHITE",
+   "size": "14-15 Y",
+   "fabricType": "3T FLEECE",
+   "countsAsGarment": "Y",
+   "cutQty": 3.0,
+   "gsm": 260.0,
+   "pcWtG": 211.0
+  },
+  {
+   "date": "2026-07-22",
+   "orderNo": "HR-002",
+   "colour": "OFF-WHITE",
+   "size": "15-16 Y",
+   "fabricType": "3T FLEECE",
+   "countsAsGarment": "Y",
+   "cutQty": 5.0,
+   "gsm": 260.0,
+   "pcWtG": 211.0
+  },
+  {
+   "date": "2026-07-24",
+   "orderNo": "HR-005-T",
+   "colour": "PINK",
+   "size": "6-7 Y",
+   "fabricType": "3T FLEECE",
+   "countsAsGarment": "Y",
+   "cutQty": 82.0,
+   "gsm": 260.0,
+   "pcWtG": 197.0
+  },
+  {
+   "date": "2026-07-24",
+   "orderNo": "HR-005-T",
+   "colour": "PINK",
+   "size": "7-8 Y",
+   "fabricType": "3T FLEECE",
+   "countsAsGarment": "Y",
+   "cutQty": 91.0,
+   "gsm": 260.0,
+   "pcWtG": 197.0
+  },
+  {
+   "date": "2026-07-24",
+   "orderNo": "HR-005-T",
+   "colour": "PINK",
+   "size": "8-9 Y",
+   "fabricType": "3T FLEECE",
+   "countsAsGarment": "Y",
+   "cutQty": 83.0,
+   "gsm": 260.0,
+   "pcWtG": 197.0
+  },
+  {
+   "date": "2026-07-24",
+   "orderNo": "HR-005-T",
+   "colour": "PINK",
+   "size": "9-10 Y",
+   "fabricType": "3T FLEECE",
+   "countsAsGarment": "Y",
+   "cutQty": 82.0,
+   "gsm": 260.0,
+   "pcWtG": 197.0
+  },
+  {
+   "date": "2026-07-24",
+   "orderNo": "HR-005-T",
+   "colour": "PINK",
+   "size": "10-11 Y",
+   "fabricType": "3T FLEECE",
+   "countsAsGarment": "Y",
+   "cutQty": 54.0,
+   "gsm": 260.0,
+   "pcWtG": 197.0
+  },
+  {
+   "date": "2026-07-24",
+   "orderNo": "HR-005-T",
+   "colour": "PINK",
+   "size": "11-12 Y",
+   "fabricType": "3T FLEECE",
+   "countsAsGarment": "Y",
+   "cutQty": 56.0,
+   "gsm": 260.0,
+   "pcWtG": 197.0
+  },
+  {
+   "date": "2026-07-24",
+   "orderNo": "HR-005-T",
+   "colour": "PINK",
+   "size": "12-13 Y",
+   "fabricType": "3T FLEECE",
+   "countsAsGarment": "Y",
+   "cutQty": 40.0,
+   "gsm": 260.0,
+   "pcWtG": 197.0
+  },
+  {
+   "date": "2026-07-24",
+   "orderNo": "HR-005-T",
+   "colour": "PINK",
+   "size": "13-14 Y",
+   "fabricType": "3T FLEECE",
+   "countsAsGarment": "Y",
+   "cutQty": 33.0,
+   "gsm": 260.0,
+   "pcWtG": 197.0
+  },
+  {
+   "date": "2026-07-24",
+   "orderNo": "HR-005-T",
+   "colour": "PINK",
+   "size": "14-15 Y",
+   "fabricType": "3T FLEECE",
+   "countsAsGarment": "Y",
+   "cutQty": 6.0,
+   "gsm": 260.0,
+   "pcWtG": 197.0
+  },
+  {
+   "date": "2026-07-24",
+   "orderNo": "HR-005-T",
+   "colour": "PINK",
+   "size": "15-16 Y",
+   "fabricType": "3T FLEECE",
+   "countsAsGarment": "Y",
+   "cutQty": 10.0,
+   "gsm": 260.0,
+   "pcWtG": 197.0
+  },
+  {
+   "date": "2026-07-26",
+   "orderNo": "HR-005-B",
+   "colour": "PINK",
+   "size": "6-7 Y",
+   "fabricType": "3T FLEECE",
+   "countsAsGarment": "Y",
+   "cutQty": 82.0,
+   "gsm": 260.0,
+   "pcWtG": 315.25
+  },
+  {
+   "date": "2026-07-26",
+   "orderNo": "HR-005-B",
+   "colour": "PINK",
+   "size": "7-8 Y",
+   "fabricType": "3T FLEECE",
+   "countsAsGarment": "Y",
+   "cutQty": 91.0,
+   "gsm": 260.0,
+   "pcWtG": 315.25
+  },
+  {
+   "date": "2026-07-26",
+   "orderNo": "HR-005-B",
+   "colour": "PINK",
+   "size": "8-9 Y",
+   "fabricType": "3T FLEECE",
+   "countsAsGarment": "Y",
+   "cutQty": 83.0,
+   "gsm": 260.0,
+   "pcWtG": 315.25
+  },
+  {
+   "date": "2026-07-26",
+   "orderNo": "HR-005-B",
+   "colour": "PINK",
+   "size": "9-10 Y",
+   "fabricType": "3T FLEECE",
+   "countsAsGarment": "Y",
+   "cutQty": 82.0,
+   "gsm": 260.0,
+   "pcWtG": 315.25
+  },
+  {
+   "date": "2026-07-26",
+   "orderNo": "HR-005-B",
+   "colour": "PINK",
+   "size": "10-11 Y",
+   "fabricType": "3T FLEECE",
+   "countsAsGarment": "Y",
+   "cutQty": 54.0,
+   "gsm": 260.0,
+   "pcWtG": 315.25
+  },
+  {
+   "date": "2026-07-26",
+   "orderNo": "HR-005-B",
+   "colour": "PINK",
+   "size": "11-12 Y",
+   "fabricType": "3T FLEECE",
+   "countsAsGarment": "Y",
+   "cutQty": 56.0,
+   "gsm": 260.0,
+   "pcWtG": 315.25
+  },
+  {
+   "date": "2026-07-26",
+   "orderNo": "HR-005-B",
+   "colour": "PINK",
+   "size": "12-13 Y",
+   "fabricType": "3T FLEECE",
+   "countsAsGarment": "Y",
+   "cutQty": 40.0,
+   "gsm": 260.0,
+   "pcWtG": 315.25
+  },
+  {
+   "date": "2026-07-26",
+   "orderNo": "HR-005-B",
+   "colour": "PINK",
+   "size": "13-14 Y",
+   "fabricType": "3T FLEECE",
+   "countsAsGarment": "Y",
+   "cutQty": 33.0,
+   "gsm": 260.0,
+   "pcWtG": 315.25
+  },
+  {
+   "date": "2026-07-26",
+   "orderNo": "HR-005-B",
+   "colour": "PINK",
+   "size": "14-15 Y",
+   "fabricType": "3T FLEECE",
+   "countsAsGarment": "Y",
+   "cutQty": 6.0,
+   "gsm": 260.0,
+   "pcWtG": 315.25
+  },
+  {
+   "date": "2026-07-26",
+   "orderNo": "HR-005-B",
+   "colour": "PINK",
+   "size": "15-16 Y",
+   "fabricType": "3T FLEECE",
+   "countsAsGarment": "Y",
+   "cutQty": 10.0,
+   "gsm": 260.0,
+   "pcWtG": 315.25
+  },
+  {
+   "date": "2026-07-28",
+   "orderNo": "HR-001",
+   "colour": "PINK",
+   "size": "6-7 Y",
+   "fabricType": "3T FLEECE",
+   "countsAsGarment": "Y",
+   "cutQty": 64.0,
+   "gsm": 260.0,
+   "pcWtG": 197.0
+  },
+  {
+   "date": "2026-07-28",
+   "orderNo": "HR-001",
+   "colour": "PINK",
+   "size": "7-8 Y",
+   "fabricType": "3T FLEECE",
+   "countsAsGarment": "Y",
+   "cutQty": 76.0,
+   "gsm": 260.0,
+   "pcWtG": 197.0
+  },
+  {
+   "date": "2026-07-28",
+   "orderNo": "HR-001",
+   "colour": "PINK",
+   "size": "8-9 Y",
+   "fabricType": "3T FLEECE",
+   "countsAsGarment": "Y",
+   "cutQty": 73.0,
+   "gsm": 260.0,
+   "pcWtG": 197.0
+  },
+  {
+   "date": "2026-07-28",
+   "orderNo": "HR-001",
+   "colour": "PINK",
+   "size": "9-10 Y",
+   "fabricType": "3T FLEECE",
+   "countsAsGarment": "Y",
+   "cutQty": 79.0,
+   "gsm": 260.0,
+   "pcWtG": 197.0
+  },
+  {
+   "date": "2026-07-28",
+   "orderNo": "HR-001",
+   "colour": "PINK",
+   "size": "10-11 Y",
+   "fabricType": "3T FLEECE",
+   "countsAsGarment": "Y",
+   "cutQty": 63.0,
+   "gsm": 260.0,
+   "pcWtG": 197.0
+  },
+  {
+   "date": "2026-07-28",
+   "orderNo": "HR-001",
+   "colour": "PINK",
+   "size": "11-12 Y",
+   "fabricType": "3T FLEECE",
+   "countsAsGarment": "Y",
+   "cutQty": 64.0,
+   "gsm": 260.0,
+   "pcWtG": 197.0
+  },
+  {
+   "date": "2026-07-28",
+   "orderNo": "HR-001",
+   "colour": "PINK",
+   "size": "12-13 Y",
+   "fabricType": "3T FLEECE",
+   "countsAsGarment": "Y",
+   "cutQty": 47.0,
+   "gsm": 260.0,
+   "pcWtG": 197.0
+  },
+  {
+   "date": "2026-07-28",
+   "orderNo": "HR-001",
+   "colour": "PINK",
+   "size": "13-14 Y",
+   "fabricType": "3T FLEECE",
+   "countsAsGarment": "Y",
+   "cutQty": 52.0,
+   "gsm": 260.0,
+   "pcWtG": 197.0
+  },
+  {
+   "date": "2026-07-28",
+   "orderNo": "HR-001",
+   "colour": "PINK",
+   "size": "14-15 Y",
+   "fabricType": "3T FLEECE",
+   "countsAsGarment": "Y",
+   "cutQty": 4.0,
+   "gsm": 260.0,
+   "pcWtG": 197.0
+  },
+  {
+   "date": "2026-07-28",
+   "orderNo": "HR-001",
+   "colour": "PINK",
+   "size": "15-16 Y",
+   "fabricType": "3T FLEECE",
+   "countsAsGarment": "Y",
+   "cutQty": 6.0,
+   "gsm": 260.0,
+   "pcWtG": 197.0
+  },
+  {
+   "date": "2026-07-28",
+   "orderNo": "HR-003",
+   "colour": "LIME",
+   "size": "6-7 Y",
+   "fabricType": "3T FLEECE",
+   "countsAsGarment": "Y",
+   "cutQty": 64.0,
+   "gsm": 260.0,
+   "pcWtG": 197.0
+  },
+  {
+   "date": "2026-07-28",
+   "orderNo": "HR-003",
+   "colour": "LIME",
+   "size": "7-8 Y",
+   "fabricType": "3T FLEECE",
+   "countsAsGarment": "Y",
+   "cutQty": 80.0,
+   "gsm": 260.0,
+   "pcWtG": 197.0
+  },
+  {
+   "date": "2026-07-28",
+   "orderNo": "HR-003",
+   "colour": "LIME",
+   "size": "8-9 Y",
+   "fabricType": "3T FLEECE",
+   "countsAsGarment": "Y",
+   "cutQty": 74.0,
+   "gsm": 260.0,
+   "pcWtG": 197.0
+  },
+  {
+   "date": "2026-07-28",
+   "orderNo": "HR-003",
+   "colour": "LIME",
+   "size": "9-10 Y",
+   "fabricType": "3T FLEECE",
+   "countsAsGarment": "Y",
+   "cutQty": 81.0,
+   "gsm": 260.0,
+   "pcWtG": 197.0
+  },
+  {
+   "date": "2026-07-28",
+   "orderNo": "HR-003",
+   "colour": "LIME",
+   "size": "10-11 Y",
+   "fabricType": "3T FLEECE",
+   "countsAsGarment": "Y",
+   "cutQty": 63.0,
+   "gsm": 260.0,
+   "pcWtG": 197.0
+  },
+  {
+   "date": "2026-07-28",
+   "orderNo": "HR-003",
+   "colour": "LIME",
+   "size": "11-12 Y",
+   "fabricType": "3T FLEECE",
+   "countsAsGarment": "Y",
+   "cutQty": 63.0,
+   "gsm": 260.0,
+   "pcWtG": 197.0
+  },
+  {
+   "date": "2026-07-28",
+   "orderNo": "HR-003",
+   "colour": "LIME",
+   "size": "12-13 Y",
+   "fabricType": "3T FLEECE",
+   "countsAsGarment": "Y",
+   "cutQty": 57.0,
+   "gsm": 260.0,
+   "pcWtG": 197.0
+  },
+  {
+   "date": "2026-07-28",
+   "orderNo": "HR-003",
+   "colour": "LIME",
+   "size": "13-14 Y",
+   "fabricType": "3T FLEECE",
+   "countsAsGarment": "Y",
+   "cutQty": 48.0,
+   "gsm": 260.0,
+   "pcWtG": 197.0
+  },
+  {
+   "date": "2026-07-28",
+   "orderNo": "HR-003",
+   "colour": "LIME",
+   "size": "14-15 Y",
+   "fabricType": "3T FLEECE",
+   "countsAsGarment": "Y",
+   "cutQty": 4.0,
+   "gsm": 260.0,
+   "pcWtG": 197.0
+  },
+  {
+   "date": "2026-07-28",
+   "orderNo": "HR-003",
+   "colour": "LIME",
+   "size": "15-16 Y",
+   "fabricType": "3T FLEECE",
+   "countsAsGarment": "Y",
+   "cutQty": 6.0,
+   "gsm": 260.0,
+   "pcWtG": 197.0
+  },
+  {
+   "date": "2026-07-29",
+   "orderNo": "HR-004",
+   "colour": "PEACH ORANGE",
+   "size": "6-7 Y",
+   "fabricType": "3T FLEECE",
+   "countsAsGarment": "Y",
+   "cutQty": 64.0,
+   "gsm": 260.0,
+   "pcWtG": 256.0
+  },
+  {
+   "date": "2026-07-29",
+   "orderNo": "HR-004",
+   "colour": "PEACH ORANGE",
+   "size": "7-8 Y",
+   "fabricType": "3T FLEECE",
+   "countsAsGarment": "Y",
+   "cutQty": 76.0,
+   "gsm": 260.0,
+   "pcWtG": 256.0
+  },
+  {
+   "date": "2026-07-29",
+   "orderNo": "HR-004",
+   "colour": "PEACH ORANGE",
+   "size": "8-9 Y",
+   "fabricType": "3T FLEECE",
+   "countsAsGarment": "Y",
+   "cutQty": 73.0,
+   "gsm": 260.0,
+   "pcWtG": 256.0
+  },
+  {
+   "date": "2026-07-29",
+   "orderNo": "HR-004",
+   "colour": "PEACH ORANGE",
+   "size": "9-10 Y",
+   "fabricType": "3T FLEECE",
+   "countsAsGarment": "Y",
+   "cutQty": 80.0,
+   "gsm": 260.0,
+   "pcWtG": 256.0
+  },
+  {
+   "date": "2026-07-29",
+   "orderNo": "HR-004",
+   "colour": "PEACH ORANGE",
+   "size": "10-11 Y",
+   "fabricType": "3T FLEECE",
+   "countsAsGarment": "Y",
+   "cutQty": 62.0,
+   "gsm": 260.0,
+   "pcWtG": 256.0
+  },
+  {
+   "date": "2026-07-29",
+   "orderNo": "HR-004",
+   "colour": "PEACH ORANGE",
+   "size": "11-12 Y",
+   "fabricType": "3T FLEECE",
+   "countsAsGarment": "Y",
+   "cutQty": 64.0,
+   "gsm": 260.0,
+   "pcWtG": 256.0
+  },
+  {
+   "date": "2026-07-29",
+   "orderNo": "HR-004",
+   "colour": "PEACH ORANGE",
+   "size": "12-13 Y",
+   "fabricType": "3T FLEECE",
+   "countsAsGarment": "Y",
+   "cutQty": 48.0,
+   "gsm": 260.0,
+   "pcWtG": 256.0
+  },
+  {
+   "date": "2026-07-29",
+   "orderNo": "HR-004",
+   "colour": "PEACH ORANGE",
+   "size": "13-14 Y",
+   "fabricType": "3T FLEECE",
+   "countsAsGarment": "Y",
+   "cutQty": 52.0,
+   "gsm": 260.0,
+   "pcWtG": 256.0
+  },
+  {
+   "date": "2026-07-29",
+   "orderNo": "HR-004",
+   "colour": "PEACH ORANGE",
+   "size": "14-15 Y",
+   "fabricType": "3T FLEECE",
+   "countsAsGarment": "Y",
+   "cutQty": 4.0,
+   "gsm": 260.0,
+   "pcWtG": 256.0
+  },
+  {
+   "date": "2026-07-29",
+   "orderNo": "HR-004",
+   "colour": "PEACH ORANGE",
+   "size": "15-16 Y",
+   "fabricType": "3T FLEECE",
+   "countsAsGarment": "Y",
+   "cutQty": 5.0,
+   "gsm": 260.0,
+   "pcWtG": 256.0
+  },
+  {
+   "date": "2026-08-04",
+   "orderNo": "HR-008",
+   "colour": "OFF-WHITE",
+   "size": "0-3 M",
+   "fabricType": "Slub Jersey",
+   "countsAsGarment": "Y",
+   "cutQty": 51.0
+  },
+  {
+   "date": "2026-08-04",
+   "orderNo": "HR-008",
+   "colour": "OFF-WHITE",
+   "size": "3-6 M",
+   "fabricType": "Slub Jersey",
+   "countsAsGarment": "Y",
+   "cutQty": 95.0
+  },
+  {
+   "date": "2026-08-04",
+   "orderNo": "HR-008",
+   "colour": "OFF-WHITE",
+   "size": "6-9 M",
+   "fabricType": "Slub Jersey",
+   "countsAsGarment": "Y",
+   "cutQty": 121.0
+  },
+  {
+   "date": "2026-08-04",
+   "orderNo": "HR-008",
+   "colour": "OFF-WHITE",
+   "size": "9-12 M",
+   "fabricType": "Slub Jersey",
+   "countsAsGarment": "Y",
+   "cutQty": 143.0
+  },
+  {
+   "date": "2026-08-04",
+   "orderNo": "HR-008",
+   "colour": "OFF-WHITE",
+   "size": "12-18 M",
+   "fabricType": "Slub Jersey",
+   "countsAsGarment": "Y",
+   "cutQty": 158.0
+  },
+  {
+   "date": "2026-08-04",
+   "orderNo": "HR-008",
+   "colour": "OFF-WHITE",
+   "size": "18-24 M",
+   "fabricType": "Slub Jersey",
+   "countsAsGarment": "Y",
+   "cutQty": 129.0
+  },
+  {
+   "date": "2026-08-04",
+   "orderNo": "HR-008",
+   "colour": "OFF-WHITE",
+   "size": "24-36 M",
+   "fabricType": "Slub Jersey",
+   "countsAsGarment": "Y",
+   "cutQty": 38.0
+  },
+  {
+   "date": "2026-08-05",
+   "orderNo": "HR-012",
+   "colour": "WHITE",
+   "size": "0-3 M",
+   "fabricType": "Single Jersey",
+   "countsAsGarment": "Y",
+   "cutQty": 52.0
+  },
+  {
+   "date": "2026-08-05",
+   "orderNo": "HR-012",
+   "colour": "WHITE",
+   "size": "3-6 M",
+   "fabricType": "Single Jersey",
+   "countsAsGarment": "Y",
+   "cutQty": 93.0
+  },
+  {
+   "date": "2026-08-05",
+   "orderNo": "HR-012",
+   "colour": "WHITE",
+   "size": "6-9 M",
+   "fabricType": "Single Jersey",
+   "countsAsGarment": "Y",
+   "cutQty": 121.0
+  },
+  {
+   "date": "2026-08-05",
+   "orderNo": "HR-012",
+   "colour": "WHITE",
+   "size": "9-12 M",
+   "fabricType": "Single Jersey",
+   "countsAsGarment": "Y",
+   "cutQty": 143.0
+  },
+  {
+   "date": "2026-08-05",
+   "orderNo": "HR-012",
+   "colour": "WHITE",
+   "size": "12-18 M",
+   "fabricType": "Single Jersey",
+   "countsAsGarment": "Y",
+   "cutQty": 158.0
+  },
+  {
+   "date": "2026-08-05",
+   "orderNo": "HR-012",
+   "colour": "WHITE",
+   "size": "18-24 M",
+   "fabricType": "Single Jersey",
+   "countsAsGarment": "Y",
+   "cutQty": 129.0
+  },
+  {
+   "date": "2026-08-05",
+   "orderNo": "HR-012",
+   "colour": "WHITE",
+   "size": "24-36 M",
+   "fabricType": "Single Jersey",
+   "countsAsGarment": "Y",
+   "cutQty": 38.0
+  }
+ ],
+ "fusing": [
+  {
+   "date": "2026-08-05",
+   "orderNo": "HR-002",
+   "colour": "OFF-WHITE",
+   "size": "6-7 Y",
+   "fusedQty": 62.0,
+   "remarks": "TRICOT - EMBRO"
+  },
+  {
+   "date": "2026-08-05",
+   "orderNo": "HR-002",
+   "colour": "OFF-WHITE",
+   "size": "7-8 Y",
+   "fusedQty": 79.0
+  },
+  {
+   "date": "2026-08-05",
+   "orderNo": "HR-002",
+   "colour": "OFF-WHITE",
+   "size": "8-9 Y",
+   "fusedQty": 75.0
+  },
+  {
+   "date": "2026-08-06",
+   "orderNo": "HR-002",
+   "colour": "OFF-WHITE",
+   "size": "9-10 Y",
+   "fusedQty": 81.0
+  },
+  {
+   "date": "2026-08-06",
+   "orderNo": "HR-002",
+   "colour": "OFF-WHITE",
+   "size": "10-11 Y",
+   "fusedQty": 62.0
+  },
+  {
+   "date": "2026-08-06",
+   "orderNo": "HR-002",
+   "colour": "OFF-WHITE",
+   "size": "11-12 Y",
+   "fusedQty": 62.0
+  },
+  {
+   "date": "2026-08-06",
+   "orderNo": "HR-002",
+   "colour": "OFF-WHITE",
+   "size": "12-13 Y",
+   "fusedQty": 51.0
+  },
+  {
+   "date": "2026-08-06",
+   "orderNo": "HR-002",
+   "colour": "OFF-WHITE",
+   "size": "13-14 Y",
+   "fusedQty": 51.0
+  },
+  {
+   "date": "2026-08-06",
+   "orderNo": "HR-002",
+   "colour": "OFF-WHITE",
+   "size": "14-15 Y",
+   "fusedQty": 3.0
+  },
+  {
+   "date": "2026-08-06",
+   "orderNo": "HR-002",
+   "colour": "OFF-WHITE",
+   "size": "15-16 Y",
+   "fusedQty": 5.0
+  }
+ ],
+ "sewing": [
+  {
+   "date": "2026-08-07",
+   "orderNo": "HR-002",
+   "line": "Line 1",
+   "operators": 10.0,
+   "hours": 8.0,
+   "block1": 0.0,
+   "block2": 0.0,
+   "block3": 0.0,
+   "issuedToLine": 499.0,
+   "remarks": "FED INTO LINE"
+  },
+  {
+   "date": "2026-08-08",
+   "orderNo": "HR-002",
+   "line": "Line 1",
+   "operators": 10.0,
+   "hours": 8.0,
+   "block1": 60.0,
+   "block2": 150.0,
+   "block3": 40.0,
+   "issuedToLine": 32.0
+  },
+  {
+   "date": "2026-08-09",
+   "orderNo": "HR-002",
+   "line": "Line 1",
+   "operators": 10.0,
+   "hours": 8.0,
+   "block1": 59.0,
+   "block2": 150.0,
+   "block3": 40.0
+  },
+  {
+   "date": "2026-08-10",
+   "orderNo": "HR-005-T",
+   "line": "Line 1",
+   "operators": 10.0,
+   "hours": 8.0,
+   "block1": 0.0,
+   "block2": 0.0,
+   "block3": 0.0,
+   "issuedToLine": 230.0,
+   "remarks": "FED INTO LINE"
+  }
+ ],
+ "checking": [
+  {
+   "date": "2026-08-09",
+   "orderNo": "HR-002",
+   "colour": "OFF-WHITE"
+  }
+ ],
+ "packing": [],
+ "inspection": [],
+ "shipment": [],
+ "approvals": [
+  {
+   "orderNo": "HR-001",
+   "approvalType": "Lab Dip",
+   "required": "Y",
+   "status": "Approved",
+   "sentDate": "2026-06-13",
+   "decisionDate": "2026-06-17",
+   "blocksProduction": "N"
+  },
+  {
+   "orderNo": "HR-002",
+   "approvalType": "Lab Dip",
+   "required": "Y",
+   "status": "Approved",
+   "sentDate": "2026-06-13",
+   "decisionDate": "2026-06-17",
+   "blocksProduction": "N"
+  },
+  {
+   "orderNo": "HR-003",
+   "approvalType": "Lab Dip",
+   "required": "Y",
+   "status": "Approved",
+   "sentDate": "2026-06-13",
+   "decisionDate": "2026-06-17",
+   "blocksProduction": "N"
+  },
+  {
+   "orderNo": "HR-004",
+   "approvalType": "Lab Dip",
+   "required": "Y",
+   "status": "Approved",
+   "sentDate": "2026-06-13",
+   "decisionDate": "2026-06-17",
+   "blocksProduction": "N"
+  },
+  {
+   "orderNo": "HR-005-T",
+   "approvalType": "Lab Dip",
+   "required": "Y",
+   "status": "Approved",
+   "sentDate": "2026-06-13",
+   "decisionDate": "2026-06-17",
+   "blocksProduction": "N"
+  },
+  {
+   "orderNo": "HR-005-B",
+   "approvalType": "Lab Dip",
+   "required": "Y",
+   "status": "Approved",
+   "sentDate": "2026-06-13",
+   "decisionDate": "2026-06-17",
+   "blocksProduction": "N"
+  },
+  {
+   "orderNo": "HR-001",
+   "approvalType": "PP Sample",
+   "required": "Y",
+   "status": "Approved",
+   "sentDate": "2026-07-18",
+   "decisionDate": "2026-07-23",
+   "blocksProduction": "Y"
+  },
+  {
+   "orderNo": "HR-002",
+   "approvalType": "PP Sample",
+   "required": "Y",
+   "status": "Approved",
+   "sentDate": "2026-07-18",
+   "decisionDate": "2026-07-23",
+   "blocksProduction": "Y"
+  },
+  {
+   "orderNo": "HR-003",
+   "approvalType": "PP Sample",
+   "required": "Y",
+   "status": "Approved",
+   "sentDate": "2026-07-25",
+   "decisionDate": "2026-07-31",
+   "blocksProduction": "Y"
+  },
+  {
+   "orderNo": "HR-004",
+   "approvalType": "PP Sample",
+   "required": "Y",
+   "status": "Approved",
+   "sentDate": "2026-07-25",
+   "decisionDate": "2026-08-10",
+   "remarks": "COURIER WENT MISSING",
+   "blocksProduction": "Y"
+  },
+  {
+   "orderNo": "HR-005-T",
+   "approvalType": "PP Sample",
+   "required": "Y",
+   "status": "Approved",
+   "sentDate": "2026-07-18",
+   "decisionDate": "2026-07-23",
+   "blocksProduction": "Y"
+  },
+  {
+   "orderNo": "HR-005-B",
+   "approvalType": "PP Sample",
+   "required": "Y",
+   "status": "Approved",
+   "sentDate": "2026-07-18",
+   "decisionDate": "2026-07-23",
+   "blocksProduction": "Y"
+  }
+ ],
+ "waivers": [
+  {
+   "orderNo": "HR-001",
+   "alertType": "OVER-CUT",
+   "approved": "Y",
+   "approvedBy": "ASHWATH",
+   "approvalDate": "2026-08-07",
+   "reason": "IT'S APPROVED",
+   "validUntil": "2026-08-25"
+  },
+  {
+   "orderNo": "HR-002",
+   "alertType": "OVER-CUT",
+   "approved": "Y",
+   "approvedBy": "ASHWATH",
+   "approvalDate": "2026-08-07",
+   "reason": "IT'S APPROVED",
+   "validUntil": "2026-08-25"
+  },
+  {
+   "orderNo": "HR-003",
+   "alertType": "OVER-CUT",
+   "approved": "Y",
+   "approvedBy": "ASHWATH",
+   "approvalDate": "2026-08-07",
+   "reason": "IT'S APPROVED",
+   "validUntil": "2026-08-25"
+  },
+  {
+   "orderNo": "HR-004",
+   "alertType": "OVER-CUT",
+   "approved": "Y",
+   "approvedBy": "ASHWATH",
+   "approvalDate": "2026-08-07",
+   "reason": "IT'S APPROVED",
+   "validUntil": "2026-08-25"
+  },
+  {
+   "orderNo": "HR-005-T",
+   "alertType": "OVER-CUT",
+   "approved": "Y",
+   "approvedBy": "ASHWATH",
+   "approvalDate": "2026-08-07",
+   "reason": "IT'S APPROVED",
+   "validUntil": "2026-08-25"
+  },
+  {
+   "orderNo": "HR-005-B",
+   "alertType": "OVER-CUT",
+   "approved": "Y",
+   "approvedBy": "ASHWATH",
+   "approvalDate": "2026-08-07",
+   "reason": "IT'S APPROVED",
+   "validUntil": "2026-08-25"
+  },
+  {
+   "orderNo": "HR-006-A",
+   "alertType": "RECUT PENDING",
+   "approved": "Y",
+   "approvedBy": "ASHWATH",
+   "approvalDate": "2026-08-08",
+   "reason": "IT'S APPROVED",
+   "validUntil": "2026-08-14"
+  },
+  {
+   "orderNo": "HR-006-B",
+   "alertType": "RECUT PENDING",
+   "approved": "Y",
+   "approvedBy": "ASHWATH",
+   "approvalDate": "2026-08-08",
+   "reason": "IT'S APPROVED",
+   "validUntil": "2026-08-14"
+  },
+  {
+   "orderNo": "HR-007",
+   "alertType": "RECUT PENDING",
+   "approved": "Y",
+   "approvedBy": "ASHWATH",
+   "approvalDate": "2026-08-08",
+   "reason": "IT'S APPROVED",
+   "validUntil": "2026-08-14"
+  },
+  {
+   "orderNo": "HR-009",
+   "alertType": "RECUT PENDING",
+   "approved": "Y",
+   "approvedBy": "ASHWATH",
+   "approvalDate": "2026-08-08",
+   "reason": "IT'S APPROVED",
+   "validUntil": "2026-08-14"
+  },
+  {
+   "orderNo": "HR-011",
+   "alertType": "RECUT PENDING",
+   "approved": "Y",
+   "approvedBy": "ASHWATH",
+   "approvalDate": "2026-08-08",
+   "reason": "IT'S APPROVED",
+   "validUntil": "2026-08-14"
+  },
+  {
+   "orderNo": "HR-012",
+   "alertType": "RECUT PENDING",
+   "approved": "Y",
+   "approvedBy": "ASHWATH",
+   "approvalDate": "2026-08-08",
+   "reason": "IT'S APPROVED",
+   "validUntil": "2026-08-14"
+  },
+  {
+   "orderNo": "HR-013",
+   "alertType": "RECUT PENDING",
+   "approved": "Y",
+   "approvedBy": "ASHWATH",
+   "approvalDate": "2026-08-08",
+   "reason": "IT'S APPROVED",
+   "validUntil": "2026-08-14"
+  },
+  {
+   "orderNo": "HR-014",
+   "alertType": "RECUT PENDING",
+   "approved": "Y",
+   "approvedBy": "ASHWATH",
+   "approvalDate": "2026-08-08",
+   "reason": "IT'S APPROVED",
+   "validUntil": "2026-08-14"
+  },
+  {
+   "orderNo": "HR-010",
+   "alertType": "RECUT PENDING",
+   "approved": "Y",
+   "approvedBy": "ASHWATH",
+   "approvalDate": "2026-08-08",
+   "reason": "IT'S APPROVED",
+   "validUntil": "2026-08-14"
+  }
+ ],
+ "masters": {
+  "Buyers": [
+   "BABY SHOP - VIGASH",
+   "BABY SHOP - VENKAT",
+   "CDRL - SNS",
+   "MOKIDA -SNS",
+   "BABYHUG"
+  ],
+  "Colours": [
+   "PINK",
+   "OFF-WHITE",
+   "LIME",
+   "PEACH ORANGE",
+   "CHERRY RED/OFF-WHITE",
+   "TEAL",
+   "MINT GREEN",
+   "WHITE",
+   "BLUE"
+  ],
+  "Sizes": [
+   "0-3 M",
+   "3-6 M",
+   "6-9 M",
+   "9-12 M",
+   "12-18 M",
+   "18-24 M",
+   "24-36 M",
+   "2-3 Y",
+   "3-4 Y",
+   "4-5 Y",
+   "5-6 Y",
+   "6-7 Y",
+   "7-8 Y",
+   "8-9 Y",
+   "9-10 Y",
+   "10-11 Y",
+   "11-12 Y",
+   "12-13 Y",
+   "13-14 Y",
+   "14-15 Y",
+   "15-16 Y"
+  ],
+  "Lines": [
+   "Line 1",
+   "Line 2"
+  ],
+  "Order Status": [
+   "Active",
+   "On Hold",
+   "Closed",
+   "Cancelled"
+  ],
+  "Yes/No": [
+   "Y",
+   "N"
+  ],
+  "Vendors": [
+   "JAYAM SHREE ROTARY",
+   "SYSTEM KNIT FINISHERS",
+   "VINAYAGA PRINTING",
+   "GAIN UP EMBROIDERY",
+   "MANGO PRINTING",
+   "CRYSTAL STONE WORK",
+   "BAKYA HAND EMBRO"
+  ],
+  "Job Work Process": [
+   "Print",
+   "Embroidery",
+   "Wash",
+   "Tie&Dye",
+   "Rotary AOP"
+  ],
+  "Direction": [
+   "OUT",
+   "IN"
+  ],
+  "Approval Type": [
+   "Lab Dip",
+   "Fit Approval",
+   "Strike Off",
+   "Trim Card",
+   "PP Sample",
+   "Size Set"
+  ],
+  "Approval Status": [
+   "Pending",
+   "Approved",
+   "Rejected",
+   "Not Required"
+  ],
+  "Recut Status": [
+   "-",
+   "Recut Required",
+   "Recut Done",
+   "Ship Short Approved",
+   "Over Cut Approved"
+  ],
+  "Delay Reason": [
+   "-",
+   "Fabric Late",
+   "Trims Late",
+   "Approval Late",
+   "Job Work Vendor Late",
+   "Capacity Shortfall",
+   "Quality Rework",
+   "Buyer Change",
+   "Power/Machine Breakdown"
+  ],
+  "Inspection Result": [
+   "Pending",
+   "Pass",
+   "Fail",
+   "Not Required"
+  ],
+  "Fabric Type": [
+   "Single Jersey",
+   "Loopknit",
+   "1x1 Rib",
+   "2x2 Rib",
+   "Interlock",
+   "Pique",
+   "3T FLEECE",
+   "French Terry",
+   "Slub Jersey",
+   "Twill",
+   "Lining",
+   "Other"
+  ],
+  "Set Role": [
+   "-",
+   "Primary",
+   "Secondary"
+  ],
+  "Process": [
+   "Cutting",
+   "Fusing",
+   "Print",
+   "Embroidery",
+   "Wash",
+   "Tie&Dye",
+   "Other",
+   "Sewing",
+   "Checking",
+   "Packing",
+   "Inspection",
+   "Shipment",
+   "Rotary AOP"
+  ],
+  "Type": [
+   "In-house",
+   "In-house",
+   "Outsourced",
+   "Outsourced",
+   "Outsourced",
+   "Outsourced",
+   "Outsourced",
+   "In-house",
+   "In-house",
+   "In-house",
+   "In-house",
+   "In-house",
+   "Outsourced"
+  ],
+  "Alert Type": [
+   "ALL",
+   "OVERDUE",
+   "SHIPMENT RISK",
+   "APPROVAL BLOCK",
+   "FABRIC WAITING",
+   "TRIMS BLOCK",
+   "AT JOB WORK",
+   "AGED WIP",
+   "RECUT PENDING",
+   "SEWING BEHIND",
+   "DHU HIGH",
+   "INSPECTION BLOCK",
+   "SET PAIR GAP",
+   "FABRIC WASTAGE"
+  ],
+  "Management can waive?": [
+   "Y",
+   "Y",
+   "Y",
+   "Y",
+   "Y",
+   "Y",
+   "Y",
+   "Y",
+   "Y",
+   "Y",
+   "Y",
+   "Y",
+   "Y",
+   "N"
+  ],
+  "Team (Merchandiser / Planner)": [
+   "YUGENDRAN",
+   "AKBAR",
+   "SAMBATH",
+   "PUVITHRAN"
+  ],
+  "Trim Item": [
+   "Main Label",
+   "Care Label",
+   "Size Label",
+   "Hang Tag",
+   "Price Tag",
+   "Poly Bag",
+   "Carton",
+   "Button",
+   "Zipper",
+   "Elastic",
+   "Drawcord",
+   "Sewing Thread",
+   "Sticker",
+   "Tissue Paper"
+  ]
+ }
+}

@@ -1,0 +1,15 @@
+node_modules/
+dist/
+*.local
+.DS_Store
+
+# The live database and anything the app writes at runtime.
+data/huerex.json
+data/.huerex.tmp
+data/*.corrupt-*
+
+# Local verification helpers.
+shot.mjs
+interact.mjs
+shots/
+tsconfig.tsbuildinfo
