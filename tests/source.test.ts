@@ -1,6 +1,11 @@
 /**
- * Store selectors.
+ * Checks made by reading the source.
  *
+ * Two things that type-check perfectly, pass every other test, and still break
+ * the app for somebody: a store selector that loops the renderer, and a
+ * dependency on a server out on the internet.
+ *
+ * ── Selectors ──
  * A selector that builds a value instead of picking one out is a screen that
  * goes white. `useStore((s) => s.data.matrix.filter(...))` hands back a new
  * array every time it runs; React compares it with the last one, sees a
@@ -95,5 +100,47 @@ check(
   /export const NONE\b/.test(store),
 )
 
-console.log(failures === 0 ? '\nAll selector checks passed.' : `\n${failures} check(s) FAILED.`)
+/* ── Nothing may be fetched from the internet ──────────────────────────
+ *
+ * The fonts used to come from Google on every page load, so a factory with no
+ * internet lost the typography the number columns are aligned against. They now
+ * ship with the app. This keeps it that way: one <link> to a CDN put back by
+ * habit would undo it silently, and only somebody offline would ever notice.
+ */
+const OFFSITE = /(fonts\.googleapis\.com|fonts\.gstatic\.com|cdn\.jsdelivr\.net|cdnjs\.cloudflare\.com|unpkg\.com)/
+
+const shipped = [
+  path.resolve(SRC, '..', 'index.html'),
+  ...sources(SRC),
+]
+const external = shipped
+  .filter((file) => OFFSITE.test(codeOnly(fs.readFileSync(file, 'utf8'))))
+  .map((file) => path.relative(path.resolve(SRC, '..'), file))
+
+check(
+  'nothing the browser loads comes from another server',
+  external.length === 0,
+  external.length ? external.join(', ') : 'fonts and assets are all served by this app',
+)
+
+/* The font files themselves must actually be there to serve. */
+const FONTS = path.resolve(SRC, '..', 'public', 'fonts')
+const woff2 = fs.existsSync(FONTS) ? fs.readdirSync(FONTS).filter((f) => f.endsWith('.woff2')) : []
+check(
+  'the typefaces ship with the app',
+  woff2.length >= 4,
+  woff2.length ? woff2.join(', ') : 'public/fonts is empty — the app would fall back to system fonts',
+)
+
+/* Every face the stylesheet asks for must exist, or it silently falls back. */
+const fontCss = fs.readFileSync(path.join(SRC, 'styles', 'fonts.css'), 'utf8')
+const referenced = [...fontCss.matchAll(/url\('\/fonts\/([^']+)'\)/g)].map((m) => m[1])
+const missing = referenced.filter((name) => !woff2.includes(name))
+check(
+  'every @font-face points at a file that exists',
+  referenced.length > 0 && missing.length === 0,
+  missing.length ? `missing: ${missing.join(', ')}` : `${referenced.length} faces, all present`,
+)
+
+console.log(failures === 0 ? '\nAll source checks passed.' : `\n${failures} check(s) FAILED.`)
 process.exitCode = failures === 0 ? 0 : 1

@@ -23,10 +23,12 @@ npm run dev
 
 The first start imports the workbook into `data/huerex.json` and asks you to
 create the administrator account. Nothing else to set up — no database server,
-no cloud.
+no cloud, and nothing fetched from the internet at runtime: the two typefaces
+ship with the app, so a machine that has never been online looks identical to
+one that has.
 
 ```bash
-npm test          # the costing maths, the reconciliation identity, access control and live sync
+npm test          # the costing maths, the reconciliation identity, access control, live sync
 npm run build     # production bundle
 npm start         # serve the built app and the api from one process, port 5274
 npm run seed      # rebuild data/huerex.json from the workbook (discards live data)
@@ -243,10 +245,13 @@ src/
     sets.ts          set pairing
     costing.ts       quantities, cost heads, rate memory, plan vs actual
   components/      design system, SmartCombo, DataGrid, LogTable, AppShell
+  styles/fonts.css   the two typefaces, served from this machine
   pages/           one page per part of the factory
+public/fonts/    Inter and JetBrains Mono, so nothing is fetched from Google
 tests/
   costing.test.ts     the cost maths
   production.test.ts  the reconciliation identity, against real data
+  source.test.ts      read the source: no looping selectors, no offsite fetches
   security.test.ts    access control, driven through the real HTTP server
   livesync.test.ts    two people, two sessions, one server
 ```
