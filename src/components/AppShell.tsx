@@ -12,7 +12,7 @@ import {
   Shirt, Sparkles, Sun, Truck, Users, Waypoints, X,
   History, LogOut, UserCog, Wifi, WifiOff,
 } from 'lucide-react'
-import { useDerived, useStore } from '../lib/store'
+import { NONE, useDerived, useStore } from '../lib/store'
 import { Badge, Button, Tooltip } from './ui'
 import { initials } from '../lib/format'
 
@@ -381,7 +381,7 @@ interface Command { id: string; label: string; hint?: string; group: string; run
 function CommandPalette({ open, onClose }: { open: boolean; onClose: () => void }) {
   const navigate = useNavigate()
   const orders = useStore((s) => s.data.orders)
-  const permissions = useStore((s) => s.session?.permissions ?? [])
+  const permissions = useStore((s) => s.session?.permissions ?? NONE)
   const [query, setQuery] = useState('')
   const [active, setActive] = useState(0)
   const inputRef = useRef<HTMLInputElement>(null)

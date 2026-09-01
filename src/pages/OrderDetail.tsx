@@ -282,14 +282,20 @@ function Overview({ facts }: { facts: NonNullable<ReturnType<typeof useDerived>[
 /* ── Route ───────────────────────────────────────────────────────────── */
 
 function RouteEditor({ orderNo }: { orderNo: string }) {
-  const steps = useStore((s) => s.data.routeSteps.filter((r) => r.orderNo === orderNo))
+  // Select the collection itself and narrow it here. A selector that filters
+  // hands back a new array on every call, which React reads as the store having
+  // changed again — it re-renders forever and the screen goes white.
+  const routeSteps = useStore((s) => s.data.routeSteps)
   const processTypes = useStore((s) => s.processTypes)
   const add = useStore((s) => s.add)
   const drop = useStore((s) => s.drop)
   const patch = useStore((s) => s.patch)
   const [adding, setAdding] = useState('')
 
-  const sorted = useMemo(() => [...steps].sort((a, b) => a.stepNo - b.stepNo), [steps])
+  const sorted = useMemo(
+    () => routeSteps.filter((r) => r.orderNo === orderNo).sort((a, b) => a.stepNo - b.stepNo),
+    [routeSteps, orderNo],
+  )
 
   const move = (step: RouteStep, direction: -1 | 1) => {
     const index = sorted.findIndex((s) => s.id === step.id)
@@ -382,7 +388,9 @@ function RouteEditor({ orderNo }: { orderNo: string }) {
 /* ── Size matrix ─────────────────────────────────────────────────────── */
 
 function SizeMatrix({ orderNo, order }: { orderNo: string; order: Order }) {
-  const rows = useStore((s) => s.data.matrix.filter((r) => r.orderNo === orderNo))
+  // Narrowed with a memo, not in the selector — see the note in RouteEditor.
+  const matrix = useStore((s) => s.data.matrix)
+  const rows = useMemo(() => matrix.filter((r) => r.orderNo === orderNo), [matrix, orderNo])
   const { derived } = useDerived()
   const facts = derived.byOrderNo.get(orderNo)
 

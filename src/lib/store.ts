@@ -19,6 +19,16 @@ import { deriveSets, type SetSummary } from './engine/sets'
 import { deriveAlerts, type Alert } from './engine/alerts'
 import { harvestRates } from './engine/costing'
 
+/**
+ * The one empty array every selector falls back to.
+ *
+ * `useStore((s) => s.something ?? [])` looks harmless and is not: the literal is
+ * a new array each time the selector runs, React reads that as the store having
+ * changed, and the component re-renders until it dies with a white screen. One
+ * shared reference is the whole fix.
+ */
+export const NONE: never[] = []
+
 const EMPTY_STATE: AppState = {
   orders: [], buyers: [], routeSteps: [], matrix: [], fabric: [], trims: [], jobwork: [],
   cutting: [], fusing: [], sewing: [], checking: [], packing: [], inspection: [],

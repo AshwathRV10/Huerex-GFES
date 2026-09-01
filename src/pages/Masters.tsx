@@ -10,7 +10,7 @@ import { PageHeader } from '../components/AppShell'
 import { StatTile } from '../components/StatTile'
 import { Badge, Button, Card, CardHeader, Empty, Field, Tooltip } from '../components/ui'
 import { useComboStats } from '../hooks/useComboStats'
-import { useStore } from '../lib/store'
+import { NONE, useStore } from '../lib/store'
 import { num } from '../lib/format'
 
 /** Lists worth showing, in the order somebody would look for them. */
@@ -129,7 +129,7 @@ export default function Masters() {
 function MasterList({
   listKey, label, hint, filter,
 }: { listKey: string; label: string; hint: string; filter: string }) {
-  const values = useStore((s) => s.masters[listKey] ?? [])
+  const values = useStore((s) => s.masters[listKey] ?? NONE)
   const addMaster = useStore((s) => s.addMaster)
   const removeMaster = useStore((s) => s.removeMaster)
   const stats = useComboStats(listKey)

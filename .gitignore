@@ -16,3 +16,5 @@ interact.mjs
 verify.mjs
 shots/
 tsconfig.tsbuildinfo
+repro.mjs
+boundary.mjs

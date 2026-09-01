@@ -16,7 +16,7 @@ import {
 } from '../components/ui'
 import { RequirePermission, usePermission } from '../components/Gate'
 import { api, type AccountSummary, type PermissionDef, type RoleSummary } from '../lib/api'
-import { useStore } from '../lib/store'
+import { NONE, useStore } from '../lib/store'
 import { shortDate } from '../lib/format'
 
 type Tab = 'people' | 'roles'
@@ -205,7 +205,7 @@ function RoleEditor({
   roles, canEdit, onChanged,
 }: { roles: RoleSummary[]; canEdit: boolean; onChanged: () => void }) {
   const notify = useStore((s) => s.notify)
-  const catalogue = useStore((s) => s.session?.catalogue ?? []) as PermissionDef[]
+  const catalogue = useStore((s) => s.session?.catalogue ?? NONE) as PermissionDef[]
   const [selectedId, setSelectedId] = useState(roles[0]?.id ?? '')
   const [draft, setDraft] = useState<string[]>([])
   const [saving, setSaving] = useState(false)

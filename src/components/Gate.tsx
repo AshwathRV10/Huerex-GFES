@@ -8,14 +8,14 @@
 import type { ReactNode } from 'react'
 import { Lock } from 'lucide-react'
 import { Card, Empty } from './ui'
-import { useStore } from '../lib/store'
+import { NONE, useStore } from '../lib/store'
 
 /** True when the signed-in role grants the permission. */
 export const usePermission = (permission: string) =>
   useStore((s) => s.session?.permissions.includes(permission) ?? false)
 
 export const usePermissions = () =>
-  useStore((s) => s.session?.permissions ?? [])
+  useStore((s) => s.session?.permissions ?? NONE)
 
 /** Renders children only with the permission; otherwise `fallback`, or nothing. */
 export function Gate({

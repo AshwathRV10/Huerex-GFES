@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
-import { Navigate, Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import { AppShell } from './components/AppShell'
+import { ErrorBoundary } from './components/ErrorBoundary'
 import { useStore } from './lib/store'
 import { Button, Callout } from './components/ui'
 
@@ -70,56 +71,67 @@ export default function App() {
 
   return (
     <AppShell>
-      <Routes>
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/alerts" element={<Alerts />} />
+      <ScreenBoundary>
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/alerts" element={<Alerts />} />
 
-        <Route path="/orders" element={<Orders />} />
-        <Route path="/orders/:orderNo" element={<OrderDetail />} />
-        <Route
-          path="/costing"
-          element={<RequirePermission permission="costing.view" what="Costing"><Costing /></RequirePermission>}
-        />
-        <Route
-          path="/costing/:orderNo"
-          element={<RequirePermission permission="costing.view" what="Costing"><CostingDetail /></RequirePermission>}
-        />
-        <Route
-          path="/rates"
-          element={<RequirePermission permission="costing.view" what="The rate book"><RateBook /></RequirePermission>}
-        />
-        <Route path="/buyers" element={<Buyers />} />
+          <Route path="/orders" element={<Orders />} />
+          <Route path="/orders/:orderNo" element={<OrderDetail />} />
+          <Route
+            path="/costing"
+            element={<RequirePermission permission="costing.view" what="Costing"><Costing /></RequirePermission>}
+          />
+          <Route
+            path="/costing/:orderNo"
+            element={<RequirePermission permission="costing.view" what="Costing"><CostingDetail /></RequirePermission>}
+          />
+          <Route
+            path="/rates"
+            element={<RequirePermission permission="costing.view" what="The rate book"><RateBook /></RequirePermission>}
+          />
+          <Route path="/buyers" element={<Buyers />} />
 
-        <Route path="/fabric" element={<Fabric />} />
-        <Route path="/trims" element={<Trims />} />
+          <Route path="/fabric" element={<Fabric />} />
+          <Route path="/trims" element={<Trims />} />
 
-        <Route path="/cutting" element={<Cutting />} />
-        <Route path="/fusing" element={<Fusing />} />
-        <Route path="/job-work" element={<JobWork />} />
-        <Route path="/sewing" element={<Sewing />} />
-        <Route path="/checking" element={<Checking />} />
-        <Route path="/packing" element={<Packing />} />
-        <Route path="/inspection" element={<Inspection />} />
-        <Route path="/shipment" element={<Shipment />} />
+          <Route path="/cutting" element={<Cutting />} />
+          <Route path="/fusing" element={<Fusing />} />
+          <Route path="/job-work" element={<JobWork />} />
+          <Route path="/sewing" element={<Sewing />} />
+          <Route path="/checking" element={<Checking />} />
+          <Route path="/packing" element={<Packing />} />
+          <Route path="/inspection" element={<Inspection />} />
+          <Route path="/shipment" element={<Shipment />} />
 
-        <Route path="/wip" element={<Wip />} />
-        <Route path="/reconciliation" element={<Reconciliation />} />
-        <Route path="/timeline" element={<Timeline />} />
-        <Route path="/sets" element={<SetControl />} />
+          <Route path="/wip" element={<Wip />} />
+          <Route path="/reconciliation" element={<Reconciliation />} />
+          <Route path="/timeline" element={<Timeline />} />
+          <Route path="/sets" element={<SetControl />} />
 
-        <Route path="/approvals" element={<Approvals />} />
-        <Route path="/masters" element={<Masters />} />
-        <Route path="/people" element={<People />} />
-        <Route path="/audit" element={<AuditLogPage />} />
-        <Route
-          path="/settings"
-          element={<RequirePermission permission="admin.settings" what="Settings"><SettingsPage /></RequirePermission>}
-        />
+          <Route path="/approvals" element={<Approvals />} />
+          <Route path="/masters" element={<Masters />} />
+          <Route path="/people" element={<People />} />
+          <Route path="/audit" element={<AuditLogPage />} />
+          <Route
+            path="/settings"
+            element={<RequirePermission permission="admin.settings" what="Settings"><SettingsPage /></RequirePermission>}
+          />
 
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </ScreenBoundary>
     </AppShell>
   )
+}
+
+/**
+ * One boundary around whichever screen is showing, reset by the route — so a
+ * screen that fails does not follow the user to the next one.
+ */
+function ScreenBoundary({ children }: { children: React.ReactNode }) {
+  const { pathname } = useLocation()
+  return <ErrorBoundary resetKey={pathname}>{children}</ErrorBoundary>
 }
 
 function Splash() {

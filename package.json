@@ -13,7 +13,7 @@
     "preview": "vite preview",
     "start": "node --import tsx server/index.ts",
     "seed": "tsx server/seed.ts",
-    "test": "tsx tests/costing.test.ts && tsx tests/production.test.ts && tsx tests/security.test.ts && tsx tests/livesync.test.ts"
+    "test": "tsx tests/costing.test.ts && tsx tests/production.test.ts && tsx tests/selectors.test.ts && tsx tests/security.test.ts && tsx tests/livesync.test.ts"
   },
   "dependencies": {
     "clsx": "^2.1.1",
