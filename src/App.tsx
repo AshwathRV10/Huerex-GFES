@@ -30,12 +30,15 @@ import SetControl from './pages/SetControl'
 import Approvals from './pages/Approvals'
 import Masters from './pages/Masters'
 import SettingsPage from './pages/Settings'
+import PrintChallan from './pages/PrintChallan'
+import PrintCosting from './pages/PrintCosting'
 import SignIn, { AuthLoading, ChangePasswordGate } from './pages/SignIn'
 import People from './pages/People'
 import AuditLogPage from './pages/AuditLog'
 import { RequirePermission } from './components/Gate'
 
 export default function App() {
+  const printing = useLocation().pathname.startsWith('/print/')
   const ready = useStore((s) => s.ready)
   const error = useStore((s) => s.error)
   const authChecked = useStore((s) => s.authChecked)
@@ -66,6 +69,19 @@ export default function App() {
           <Button variant="primary" onClick={() => load()}>Try again</Button>
         </div>
       </div>
+    )
+  }
+
+  // Documents that get printed sit outside the shell: no rail, no toolbar, so
+  // what the browser puts on paper is the document and nothing else.
+  if (printing) {
+    return (
+      <ScreenBoundary>
+        <Routes>
+          <Route path="/print/challan/:challanNo" element={<PrintChallan />} />
+          <Route path="/print/costing/:orderNo" element={<PrintCosting />} />
+        </Routes>
+      </ScreenBoundary>
     )
   }
 

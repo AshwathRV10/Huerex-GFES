@@ -135,6 +135,32 @@ number or a remark — repeated onto the next row it is not a shortcut, it is a
 false record. Where a reference genuinely does repeat, like a shipment's invoice
 number across its cartons, the page says so explicitly.
 
+## Documents that leave the building
+
+Two things get printed, from the browser's own print dialogue — which gives
+paper for the vendor and **Save as PDF** for the email, from one implementation,
+with no library and no internet.
+
+**The job work challan.** Give a movement a challan number on the Job work sheet
+and it becomes a document: the lines sharing that number, in size order, with
+quantities, the process, the order, and space for two signatures. The number
+carries down the block as you type, the way the sheet's ditto marks used to
+mean. The eight numbers already written into the workbook's remarks column
+(`DC: 152`, then `"` down the block) are lifted into their own field on import,
+so old despatches print correctly too.
+
+**The cost sheet.** Quantities, every cost head with the rate behind it, the
+cost of one garment and how that sits against the price quoted. It is behind
+`costing.export` — checked on the server, not only in the browser — and every
+sheet printed is written to the audit log with who took it and for which order.
+A modest costing fits one A4 page; a long one runs to two, and the break falls
+before the conclusion so the second sheet is the answer and the signatures
+rather than four stray rows.
+
+The letterhead comes from **Settings → Your factory** and is never filled in for
+you. A challan carrying a made-up name or GSTIN would be worse than one with a
+blank space where the real thing goes.
+
 ## Type to search, type to add
 
 Every field that asks for a colour, vendor, fabric, trim, style, buyer, size,
@@ -264,6 +290,7 @@ src/
     sets.ts          set pairing
     costing.ts       quantities, cost heads, rate memory, plan vs actual
   components/      design system, SmartCombo, DataGrid, LogTable, AppShell
+    PrintDocument    the A4 frame and letterhead both documents share
   styles/fonts.css   the two typefaces, served from this machine
   pages/           one page per part of the factory
 public/fonts/    Inter and JetBrains Mono, so nothing is fetched from Google

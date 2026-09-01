@@ -22,6 +22,7 @@ export type AuditAction =
   | 'role.create' | 'role.update' | 'role.delete'
   | 'backup.download' | 'backup.restore' | 'data.reset'
   | 'backup.schedule' | 'backup.run' | 'backup.auto' | 'backup.failed'
+  | 'costing.export'
   | 'access.denied'
 
 export interface AuditEntry {

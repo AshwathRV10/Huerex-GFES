@@ -327,6 +327,28 @@ app.get('/api/backup', requirePermission('admin.backup'), (req, res) => {
   res.json(backupPayload())
 })
 
+/**
+ * Records that somebody printed a cost sheet.
+ *
+ * The permission is checked here and not only in the browser, so a role without
+ * `costing.export` cannot reach it by typing the URL. What this cannot do is
+ * stop a person who may already read costings from photographing the screen —
+ * so the honest value of this route is the trail it leaves: who took a sheet of
+ * rates and margins out of the system, and for which order.
+ */
+app.post('/api/costings/:orderNo/exported', requirePermission('costing.export'), (req, res) => {
+  const orderNo = decodeURIComponent(req.params.orderNo)
+  const costing = collection('costings').find((c) => c.orderNo === orderNo)
+  record({
+    principal: req.principal, action: 'costing.export', target: 'costings',
+    recordId: costing?.id ?? null,
+    summary: `Printed the cost sheet for ${orderNo}`,
+    ip: clientIp(req), sensitive: true,
+  })
+  flush()
+  ok(res, { recorded: true })
+})
+
 /* The nightly copy: what it is set to do, and whether it is actually doing it. */
 
 app.get('/api/backup/schedule', requirePermission('admin.backup'), (_req, res) => {

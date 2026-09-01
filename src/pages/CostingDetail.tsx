@@ -10,7 +10,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import {
-  ArrowLeft, ChevronRight, Copy, Layers, Plus, Save, Scissors,
+  ArrowLeft, ChevronRight, Copy, Layers, Plus, Printer, Save, Scissors,
   Sparkles, Trash2, Truck, Wallet,
 } from 'lucide-react'
 import { PageHeader } from '../components/AppShell'
@@ -21,6 +21,7 @@ import {
   Segmented, Toggle, Tooltip,
 } from '../components/ui'
 import { useComboStats } from '../hooks/useComboStats'
+import { Gate } from '../components/Gate'
 import { isConflict } from '../lib/api'
 import { useDerived, useStore } from '../lib/store'
 import {
@@ -173,6 +174,17 @@ export default function CostingDetail() {
         subtitle={[order.buyer, order.styleCode, order.styleName].filter(Boolean).join(' · ')}
         actions={
           <>
+            <Gate permission="costing.export">
+              <Button
+                icon={<Printer className="size-4" />}
+                onClick={() => navigate(`/print/costing/${encodeURIComponent(order.orderNo)}${
+                  view === 'actual' ? '?view=actual' : ''}`)}
+                disabled={!stored || dirty}
+                title={dirty ? 'Save the costing first — the sheet prints what is stored' : undefined}
+              >
+                Print sheet
+              </Button>
+            </Gate>
             <Button icon={<Copy className="size-4" />} onClick={() => setCopying(true)}>Copy from…</Button>
             <Button
               variant="primary" loading={saving} disabled={!dirty}

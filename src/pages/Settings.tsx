@@ -13,6 +13,7 @@ import {
 } from '../components/ui'
 import { api, type BackupSchedule, type BackupSettings } from '../lib/api'
 import { useStore } from '../lib/store'
+import type { Company } from '../lib/types'
 import type { ProcessTypes } from '../lib/engine/production'
 import type { Settings } from '../lib/types'
 
@@ -169,6 +170,8 @@ export default function SettingsPage() {
           </Card>
         </div>
       </div>
+
+      <YourFactory />
 
       <AutomaticBackup />
 
@@ -383,6 +386,108 @@ function AutomaticBackup() {
           it is. Passwords are not in it: they are stored as hashes and those are excluded, so a restore
           keeps the accounts that already exist rather than bringing old ones back.
         </Callout>
+      </Card>
+    </Section>
+  )
+}
+
+/* ── The letterhead on printed documents ──────────────────────────────── */
+
+const EMPTY_COMPANY: Company = {
+  name: '', addressLines: '', gstin: '', phone: '', email: '',
+  challanNote: 'Goods sent for job work and to be returned.',
+}
+
+function YourFactory() {
+  const settings = useStore((s) => s.settings)
+  const saveSettings = useStore((s) => s.saveSettings)
+  const company: Company = { ...EMPTY_COMPANY, ...(settings.company ?? {}) }
+  const [draft, setDraft] = useState<Company>(company)
+
+  // Follow the stored values when they change under us — a colleague editing
+  // them, or the first load arriving after this rendered.
+  useEffect(() => { setDraft({ ...EMPTY_COMPANY, ...(settings.company ?? {}) }) }, [settings.company])
+
+  const commit = (patch: Partial<Company>) => {
+    const next = { ...draft, ...patch }
+    setDraft(next)
+    if (JSON.stringify(next) !== JSON.stringify(company)) saveSettings({ company: next })
+  }
+
+  return (
+    <Section
+      title="Your factory"
+      description="Printed on the top of every challan and cost sheet. Nothing here is filled in for you — a challan carrying a made-up name or GSTIN would be worse than a blank one."
+      className="mt-6"
+    >
+      <Card className="p-4 space-y-4">
+        {!company.name.trim() && (
+          <Callout tone="warn" title="Documents will print without a letterhead">
+            Until the name is filled in, a challan handed to a vendor has nothing on it saying who sent it.
+          </Callout>
+        )}
+
+        <div className="grid sm:grid-cols-2 gap-3">
+          <Field
+            label="Factory name"
+            value={draft.name}
+            onChange={(e) => setDraft({ ...draft, name: e.target.value })}
+            onBlur={() => commit({})}
+            placeholder="As it should appear on a challan"
+          />
+          <Field
+            label="GSTIN"
+            value={draft.gstin}
+            onChange={(e) => setDraft({ ...draft, gstin: e.target.value.toUpperCase() })}
+            onBlur={() => commit({})}
+            hint="Left blank if you would rather not print it"
+          />
+        </div>
+
+        <label className="block">
+          <span className="block text-2xs font-semibold uppercase tracking-[0.07em] text-ink-3 mb-1.5">
+            Address
+          </span>
+          <textarea
+            value={draft.addressLines}
+            onChange={(e) => setDraft({ ...draft, addressLines: e.target.value })}
+            onBlur={() => commit({})}
+            rows={3}
+            placeholder={'Street\nCity, State  PIN'}
+            className="field w-full resize-y leading-relaxed"
+          />
+          <span className="block text-2xs text-ink-3 mt-1">One line per line, as you want it printed</span>
+        </label>
+
+        <div className="grid sm:grid-cols-2 gap-3">
+          <Field
+            label="Phone" value={draft.phone}
+            onChange={(e) => setDraft({ ...draft, phone: e.target.value })}
+            onBlur={() => commit({})}
+          />
+          <Field
+            label="Email" value={draft.email}
+            onChange={(e) => setDraft({ ...draft, email: e.target.value })}
+            onBlur={() => commit({})}
+          />
+        </div>
+
+        <label className="block">
+          <span className="block text-2xs font-semibold uppercase tracking-[0.07em] text-ink-3 mb-1.5">
+            Note at the foot of a challan
+          </span>
+          <textarea
+            value={draft.challanNote}
+            onChange={(e) => setDraft({ ...draft, challanNote: e.target.value })}
+            onBlur={() => commit({})}
+            rows={2}
+            className="field w-full resize-y leading-relaxed"
+          />
+          <span className="block text-2xs text-ink-3 mt-1">
+            Your own wording. How goods sent for job work should be described is yours to state, so nothing
+            about it is assumed here.
+          </span>
+        </label>
       </Card>
     </Section>
   )

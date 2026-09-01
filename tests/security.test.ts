@@ -328,6 +328,31 @@ async function run() {
   check('a backup contains no session tokens',
     (backupFile.body?.collections?.sessions ?? []).length === 0)
 
+  /* 17 · Taking a cost sheet out of the building.
+   *
+   * The print route is gated in the browser, which is convenience. The claim
+   * worth checking is the server one: a role without costing.export cannot
+   * reach the endpoint by typing a URL, and every sheet that is printed leaves
+   * a line saying who took it and for which order. */
+  const anOrder = (await admin.get('/api/orders')).body.data[0].orderNo
+  const exportPath = `/api/costings/${encodeURIComponent(anOrder)}/exported`
+
+  check('an administrator can record a cost sheet export',
+    (await admin.post(exportPath)).status === 200)
+  check('the floor cannot export a cost sheet',
+    (await floor.post(exportPath)).status === 403)
+  check('a merchandiser can — costing is their job',
+    (await merch.post(exportPath)).status === 200)
+
+  const exportEntries = (await admin.get('/api/audit?limit=300')).body.data
+    .filter((e: any) => e.action === 'costing.export')
+  check('printing a cost sheet is on the record', exportEntries.length >= 2,
+    `${exportEntries.length} export(s) logged`)
+  check('and marked as commercially sensitive', exportEntries[0]?.sensitive === true)
+  check('the log names who took it',
+    exportEntries.some((e: any) => e.userName && e.summary.includes(anOrder)),
+    exportEntries[0]?.summary ?? '')
+
   console.log(failures === 0
     ? '\nAll security checks passed.'
     : `\n${failures} security check(s) FAILED.`)

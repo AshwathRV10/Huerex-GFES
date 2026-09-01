@@ -228,6 +228,11 @@ export const api = {
     request<BackupSchedule>('/backup/schedule', { method: 'PATCH', body: JSON.stringify(patch) }),
 
   runBackup: () => request<BackupStatus>('/backup/run', { method: 'POST' }),
+
+  /** Records that a cost sheet was taken out of the system, and re-checks the
+   *  permission on the server so a URL alone cannot reach one. */
+  recordCostingExport: (orderNo: string) =>
+    request<{ recorded: boolean }>(`/costings/${encodeURIComponent(orderNo)}/exported`, { method: 'POST' }),
 }
 
 export { ApiError }
