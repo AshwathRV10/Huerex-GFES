@@ -6,6 +6,19 @@
  * always ready for the next entry: pick the order and the colour and size
  * fields narrow to what that order was actually booked in, so a day's cutting
  * is a few keystrokes per line rather than a hunt through a dropdown.
+ *
+ * After each entry the row keeps what is likely to repeat — the date, the
+ * order, the colour, the fabric, the vendor — because twenty cutting rows for
+ * one order differ only in size and quantity, and re-picking the same three
+ * values twenty times is typing that carries no information.
+ *
+ * Quantities and free text are the exceptions and never carry. A stale colour
+ * is obvious the moment you look at it; a stale quantity looks exactly like a
+ * real one, and saving 62 pieces twice because the field was already filled is
+ * a worse problem than the typing it would have saved. The same goes for a
+ * delivery challan number or a remark: repeated onto the next row it is not a
+ * shortcut, it is a false record. Every carried value is tinted until you touch
+ * it, so nothing is inherited invisibly.
  */
 import { useMemo, useRef, useState, type ReactNode } from 'react'
 import clsx from 'clsx'
@@ -23,6 +36,18 @@ export type FieldDef<T> = {
   width?: string
   required?: boolean
   hideBelow?: 'sm' | 'md' | 'lg'
+  /**
+   * Whether this field keeps its value for the next entry. Categories carry by
+   * default; quantities and free text do not — see the note at the top of this
+   * file. Set it explicitly where a page knows better.
+   */
+  carry?: boolean
+  /**
+   * Takes the cursor after an entry is added. For the field that changes on
+   * every line of a block — the size — this is the difference between carrying
+   * values forward and actually saving keystrokes.
+   */
+  focusAfterAdd?: boolean
 } & (
   | { kind: 'date' }
   | { kind: 'text'; placeholder?: string }
@@ -68,6 +93,21 @@ export interface LogTableProps<T extends { id: string }> {
 
 const HIDE_BELOW = { sm: 'hidden sm:table-cell', md: 'hidden md:table-cell', lg: 'hidden lg:table-cell' }
 
+/**
+ * Whether a field keeps its value for the next entry.
+ *
+ * Categories — the order, the colour, the fabric, the vendor — repeat down a
+ * block and carry. Quantities and free text do not: a stale quantity looks
+ * exactly like a real one, and a delivery challan number repeated onto the next
+ * row is a false record rather than a shortcut. A field can override either
+ * way, which is how the shipment's invoice number keeps its value.
+ *
+ * Exported so this rule can be checked directly — it is the one part of
+ * carrying forward that turns a convenience into wrong data if it is wrong.
+ */
+export const carriesForward = <T,>(field: FieldDef<T>): boolean =>
+  field.carry ?? (field.kind !== 'number' && field.kind !== 'text')
+
 export function LogTable<T extends { id: string }>({
   collection, rows, fields, derived = [], blank, validate, rowTone,
   emptyTitle = 'No entries yet', emptyDetail, sortBy, maxHeight = 'max-h-[calc(100vh-20rem)]', toolbar,
@@ -80,7 +120,42 @@ export function LogTable<T extends { id: string }>({
   const [draft, setDraft] = useState<Partial<T>>(() => blank())
   const [saving, setSaving] = useState(false)
   const [confirmDelete, setConfirmDelete] = useState<string | null>(null)
-  const firstFieldRef = useRef<HTMLDivElement>(null)
+  /** Fields holding a value inherited from the last entry rather than typed. */
+  const [carried, setCarried] = useState<Set<string>>(() => new Set())
+  const entryRowRef = useRef<HTMLTableRowElement>(null)
+
+  const editField = (key: string, value: unknown) => {
+    setDraft((d) => ({ ...d, [key]: value }))
+    // Touching a field makes it yours, so the tint goes.
+    setCarried((prev) => {
+      if (!prev.has(key)) return prev
+      const next = new Set(prev)
+      next.delete(key)
+      return next
+    })
+  }
+
+  const clearRow = () => {
+    setDraft(blank())
+    setCarried(new Set())
+  }
+
+  /**
+   * Puts the cursor where the next keystroke belongs: the field a page has
+   * claimed, otherwise the first one left empty. Landing on a field that is
+   * already filled — the date, or an order carried from the row above — would
+   * cost a tab on every line and undo most of what carrying forward saves.
+   */
+  const focusNextEntry = (next: Partial<T>) => {
+    const isEmpty = (f: FieldDef<T>) => {
+      const v = (next as Record<string, unknown>)[f.key]
+      return v === undefined || v === null || v === '' || (f.kind === 'number' && v === 0)
+    }
+    const target = fields.find((f) => f.focusAfterAdd) ?? fields.find(isEmpty) ?? fields[0]
+    if (!target) return
+    const cell = entryRowRef.current?.querySelector(`[data-field="${target.key}"]`)
+    cell?.querySelector<HTMLElement>('input, select, button')?.focus()
+  }
 
   const ordered = useMemo(() => (sortBy ? [...rows].sort(sortBy) : rows), [rows, sortBy])
   const problem = validate?.(draft) ?? null
@@ -93,10 +168,26 @@ export function LogTable<T extends { id: string }>({
     if (problem) { notify('risk', 'Cannot save this entry', problem); return }
     setSaving(true)
     try {
-      await add(collection, draft as never)
-      setDraft(blank())
+      const saved = draft
+      await add(collection, saved as never)
+
+      // Start from a blank row, then put back what is worth keeping.
+      const fresh = blank()
+      const kept = new Set<string>()
+      for (const field of fields) {
+        if (!carriesForward(field)) continue
+        const value = (saved as Record<string, unknown>)[field.key]
+        if (value === undefined || value === null || value === '') continue
+        ;(fresh as Record<string, unknown>)[field.key] = value
+        // Only tint what genuinely came from the last row. A date that equals
+        // the blank row's own default was not inherited from anywhere.
+        const fallback = (blank() as Record<string, unknown>)[field.key]
+        if (JSON.stringify(value) !== JSON.stringify(fallback)) kept.add(field.key)
+      }
+      setDraft(fresh)
+      setCarried(kept)
       // Keep the operator in the row so the next entry is immediate.
-      firstFieldRef.current?.querySelector('input')?.focus()
+      focusNextEntry(fresh)
     } finally {
       setSaving(false)
     }
@@ -161,23 +252,32 @@ export function LogTable<T extends { id: string }>({
 
           <tbody>
             {/* The next entry always sits at the top, ready to type into. */}
-            <tr className="border-b-2 border-brand-500/25 bg-brand-500/[0.035]">
-              {fields.map((field, index) => (
-                <td
-                  key={field.key}
-                  className={clsx('px-1.5 py-1.5 align-top', field.hideBelow && HIDE_BELOW[field.hideBelow])}
-                >
-                  <div ref={index === 0 ? firstFieldRef : undefined}>
+            <tr ref={entryRowRef} className="border-b-2 border-brand-500/25 bg-brand-500/[0.035]">
+              {fields.map((field) => {
+                const inherited = carried.has(field.key)
+                return (
+                  <td
+                    key={field.key}
+                    data-field={field.key}
+                    title={inherited ? 'Kept from the entry before — change it if it is wrong' : undefined}
+                    className={clsx(
+                      'px-1.5 py-1.5 align-top transition-colors',
+                      // Tinted until touched, so an inherited value is never
+                      // mistaken for one somebody meant to type.
+                      inherited && 'bg-saffron/[0.09]',
+                      field.hideBelow && HIDE_BELOW[field.hideBelow],
+                    )}
+                  >
                     <CellEditor
                       field={field}
                       value={draft[field.key]}
                       draft={draft}
-                      onChange={(value) => setDraft((d) => ({ ...d, [field.key]: value }))}
+                      onChange={(value) => editField(field.key, value)}
                       onEnter={commit}
                     />
-                  </div>
-                </td>
-              ))}
+                  </td>
+                )
+              })}
               {derived.map((column) => (
                 <td key={column.key} className={clsx('px-2 bg-ink/[0.02]', column.hideBelow && HIDE_BELOW[column.hideBelow])} />
               ))}
@@ -195,13 +295,15 @@ export function LogTable<T extends { id: string }>({
                     />
                   </Tooltip>
                   {dirty && (
-                    <Button
-                      size="sm"
-                      variant="quiet"
-                      onClick={() => setDraft(blank())}
-                      aria-label="Clear"
-                      icon={<X className="size-3.5" />}
-                    />
+                    <Tooltip label={carried.size ? 'Start a fresh row  ·  clears what was kept' : 'Clear'}>
+                      <Button
+                        size="sm"
+                        variant="quiet"
+                        onClick={clearRow}
+                        aria-label="Clear"
+                        icon={<X className="size-3.5" />}
+                      />
+                    </Tooltip>
                   )}
                 </div>
               </td>

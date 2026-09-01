@@ -32,8 +32,10 @@ export default function Shipment() {
     colourField<ShipmentRow>(),
     sizeField<ShipmentRow>(),
     { kind: 'number', key: 'shipQty', header: 'Ship qty', width: '6.5rem', required: true },
-    { kind: 'text', key: 'invoiceNo', header: 'Invoice no', width: '8rem' },
-    { kind: 'text', key: 'buyerPoNo', header: 'Buyer PO', width: '8rem', hideBelow: 'lg' },
+    // Every line of one shipment sits under the same invoice and the same buyer
+    // PO, so these two keep their value where free text otherwise would not.
+    { kind: 'text', key: 'invoiceNo', header: 'Invoice no', width: '8rem', carry: true },
+    { kind: 'text', key: 'buyerPoNo', header: 'Buyer PO', width: '8rem', hideBelow: 'lg', carry: true },
     { kind: 'number', key: 'cartons', header: 'Cartons', width: '5.5rem', hideBelow: 'md' },
     { kind: 'number', key: 'grossWtKg', header: 'Gross wt', width: '6rem', decimals: 2, suffix: 'kg', hideBelow: 'lg' },
     { kind: 'number', key: 'netWtKg', header: 'Net wt', width: '6rem', decimals: 2, suffix: 'kg', hideBelow: 'lg' },

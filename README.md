@@ -117,6 +117,24 @@ you, without anyone typing a thing:
 What is left to type is the number nobody has recorded yet. There is also
 **Copy from…** to start from another order's costing wholesale.
 
+## The entry row keeps what repeats
+
+Twenty cutting lines for one order differ only in size and quantity. So after
+each entry the row keeps the date, the order, the colour and the fabric, and the
+cursor lands on the size — the field that actually changes. Two values typed per
+line instead of five.
+
+What is kept is tinted until you touch it, so an inherited value is never
+mistaken for one somebody meant to type, and the previous value shows greyed in
+the box, ready to be typed over.
+
+**Quantities and free text never carry.** A stale colour is obvious on sight; a
+stale quantity looks exactly like a real one, and posting 62 pieces twice is a
+worse problem than the typing it saved. The same goes for a delivery challan
+number or a remark — repeated onto the next row it is not a shortcut, it is a
+false record. Where a reference genuinely does repeat, like a shipment's invoice
+number across its cartons, the page says so explicitly.
+
 ## Type to search, type to add
 
 Every field that asks for a colour, vendor, fabric, trim, style, buyer, size,

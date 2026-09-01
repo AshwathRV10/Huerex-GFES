@@ -142,5 +142,59 @@ check(
   missing.length ? `missing: ${missing.join(', ')}` : `${referenced.length} faces, all present`,
 )
 
+/* ── Carrying values forward must never carry a number ────────────────
+ *
+ * The entry row keeps what repeats down a block so twenty cutting lines are
+ * not twenty re-picks of the same order. The saving is real and so is the
+ * danger: a colour left over from the row above is obvious on sight, but a
+ * quantity left over looks exactly like one somebody meant to type, and
+ * posting 62 pieces twice is worse than the typing it saved. Same for a
+ * challan number or a remark — repeated onto the next row it is a false
+ * record. So the rule is checked here rather than trusted.
+ */
+const { carriesForward } = await import('../src/components/LogTable.js')
+
+const kinds = [
+  ['combo', true, 'a colour or an order repeats down a block'],
+  ['select', true, 'so does a fixed choice'],
+  ['toggle', true, 'and a yes/no'],
+  ['date', true, 'and the date being worked on'],
+  ['number', false, 'A QUANTITY MUST NEVER CARRY'],
+  ['text', false, 'nor a remark or a challan number'],
+] as const
+
+for (const [kind, expected, why] of kinds) {
+  check(
+    `${kind} fields ${expected ? 'carry' : 'do NOT carry'} — ${why}`,
+    carriesForward({ kind, key: 'x', header: 'X' } as never) === expected,
+  )
+}
+
+check(
+  'a page can still opt a field in explicitly',
+  carriesForward({ kind: 'text', key: 'invoiceNo', header: 'Invoice', carry: true } as never) === true,
+)
+check(
+  'and opt one out',
+  carriesForward({ kind: 'combo', key: 'colour', header: 'Colour', carry: false } as never) === false,
+)
+
+/* Nothing may opt a quantity in by mistake — that is the one that corrupts
+ * production numbers rather than merely annoying somebody. */
+const optedIn: string[] = []
+for (const file of sources(SRC)) {
+  const text = codeOnly(fs.readFileSync(file, 'utf8'))
+  for (const line of text.split('\n')) {
+    if (/kind:\s*'number'/.test(line) && /carry:\s*true/.test(line)) {
+      optedIn.push(`${path.relative(SRC, file)}: ${line.trim().slice(0, 90)}`)
+    }
+  }
+}
+check(
+  'no page opts a quantity into carrying forward',
+  optedIn.length === 0,
+  optedIn.length ? optedIn.join('; ') : 'checked every field declaration',
+)
+
 console.log(failures === 0 ? '\nAll source checks passed.' : `\n${failures} check(s) FAILED.`)
 process.exitCode = failures === 0 ? 0 : 1
