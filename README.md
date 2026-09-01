@@ -272,9 +272,11 @@ point the others at `http://<that-machine>:5274`. Everyone signs in with their
 own account; what each of them can see is decided by their role, on that
 machine, before anything is sent.
 
-Put it behind HTTPS before it leaves the office network — the session cookie is
-marked `secure` as soon as the request arrives over TLS, and nothing else in the
-app needs to change to move it to a server.
+Put it behind HTTPS before it leaves the office network. Nothing else in the app
+needs to change: a request that arrives over TLS gets a `Secure` session cookie
+on its own, including behind a reverse proxy terminating HTTPS, so there is no
+setting to forget. (`HUEREX_SECURE_COOKIES=1` forces it on where the app cannot
+tell.)
 
 ---
 

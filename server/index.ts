@@ -11,7 +11,7 @@
  *   2. Redact the payload, do not merely gate the page.
  *   3. Write an audit row for anything that changes.
  */
-import express from 'express'
+import express, { type Request } from 'express'
 import cors from 'cors'
 import fs from 'node:fs'
 import path from 'node:path'
@@ -39,8 +39,21 @@ import { broadcastChange, broadcastReload, broadcastSessionInvalidated, presence
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const ROOT = path.resolve(__dirname, '..')
 const PORT = Number(process.env.PORT ?? 5274)
-/** Set HUEREX_SECURE_COOKIES=1 when serving over HTTPS. */
-const SECURE_COOKIES = process.env.HUEREX_SECURE_COOKIES === '1'
+/**
+ * Whether to mark the session cookie `Secure`, which stops the browser sending
+ * it over plain HTTP.
+ *
+ * Normally this decides itself: a request that arrived over TLS gets a secure
+ * cookie. `trust proxy` is on above, so this is right behind a reverse proxy
+ * terminating HTTPS too. Nobody has to remember a setting for the safe thing to
+ * happen — forgetting it is how a session cookie ends up travelling in clear.
+ *
+ * HUEREX_SECURE_COOKIES=1 forces it on regardless, for a setup where the app
+ * cannot tell. There is deliberately no way to force it off: on a LAN over
+ * plain HTTP the automatic answer is already no.
+ */
+const FORCE_SECURE_COOKIES = process.env.HUEREX_SECURE_COOKIES === '1'
+const secureCookie = (req: Request) => FORCE_SECURE_COOKIES || req.secure
 
 load()
 ensureRoles()
@@ -149,7 +162,7 @@ app.post('/api/auth/bootstrap', (req, res) => {
     summary: `First administrator "${user.userName}" created`, ip: clientIp(req), sensitive: true,
   })
   flush()
-  res.setHeader('Set-Cookie', sessionCookie(token, SECURE_COOKIES))
+  res.setHeader('Set-Cookie', sessionCookie(token, secureCookie(req)))
   ok(res, { user: publicUser(user) })
 })
 
@@ -186,7 +199,7 @@ app.post('/api/auth/login', (req, res) => {
     summary: `${user.displayName || user.userName} signed in`, ip,
   })
   flush()
-  res.setHeader('Set-Cookie', sessionCookie(token, SECURE_COOKIES))
+  res.setHeader('Set-Cookie', sessionCookie(token, secureCookie(req)))
   ok(res, { user: publicUser(user), mustChangePassword: user.mustChangePassword })
 })
 
@@ -239,7 +252,7 @@ app.post('/api/auth/password', requireSignedIn, (req, res) => {
   endAllSessionsFor(user.id)
   if (keep && thisToken) {
     const fresh = startSession(user, clientIp(req), String(req.headers['user-agent'] ?? ''))
-    res.setHeader('Set-Cookie', sessionCookie(fresh, SECURE_COOKIES))
+    res.setHeader('Set-Cookie', sessionCookie(fresh, secureCookie(req)))
   }
   flush()
   ok(res, { changed: true })
