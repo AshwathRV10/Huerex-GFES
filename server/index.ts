@@ -13,6 +13,10 @@
  */
 import express, { type Request } from 'express'
 import cors from 'cors'
+import {
+  DEFAULT_BACKUP_SETTINGS, backupPayload, backupSettings, backupStatus,
+  runBackup, startBackupSchedule,
+} from './backup.js'
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -317,14 +321,46 @@ app.get('/api/backup', requirePermission('admin.backup'), (req, res) => {
     principal: req.principal, action: 'backup.download', target: 'database',
     summary: 'Downloaded a full backup', ip: clientIp(req), sensitive: true,
   })
-  const copy = structuredClone(get()) as { collections: Record<string, unknown[]> }
-  // A backup is for restoring data, not for lifting credentials out of.
-  copy.collections.users = (copy.collections.users as Record<string, unknown>[]).map((u) => ({
-    ...u, passwordHash: '[excluded from backup]',
-  }))
-  copy.collections.sessions = []
+  // Same payload the nightly copy writes, so the two cannot drift into one
+  // carrying something the other strips.
   res.setHeader('Content-Disposition', `attachment; filename="huerex-${new Date().toISOString().slice(0, 10)}.json"`)
-  res.json(copy)
+  res.json(backupPayload())
+})
+
+/* The nightly copy: what it is set to do, and whether it is actually doing it. */
+
+app.get('/api/backup/schedule', requirePermission('admin.backup'), (_req, res) => {
+  ok(res, { settings: backupSettings(), status: backupStatus(), defaults: DEFAULT_BACKUP_SETTINGS })
+})
+
+app.patch('/api/backup/schedule', requirePermission('admin.backup'), (req, res) => {
+  const before = backupSettings()
+  get().singletons.backup = { ...before, ...req.body }
+  touch()
+  const after = backupSettings()
+  record({
+    principal: req.principal, action: 'backup.schedule', target: 'backup',
+    summary: after.enabled
+      ? `Automatic backup set for ${String(after.hour).padStart(2, '0')}:${String(after.minute).padStart(2, '0')}, keeping ${after.keep}`
+      : 'Turned automatic backup off',
+    before, after, ip: clientIp(req), sensitive: true,
+  })
+  flush()
+  ok(res, { settings: after, status: backupStatus() })
+})
+
+app.post('/api/backup/run', requirePermission('admin.backup'), async (req, res) => {
+  const status = await runBackup(req.principal?.userName ?? 'someone')
+  record({
+    principal: req.principal, action: 'backup.run', target: 'backup',
+    summary: status.lastError
+      ? `A backup was asked for and failed: ${status.lastError}`
+      : `Wrote a backup to ${status.lastPath}`,
+    ip: clientIp(req), sensitive: true,
+  })
+  flush()
+  if (status.lastError) return bad(res, 500, status.lastError)
+  ok(res, status)
 })
 
 app.post('/api/restore', requirePermission('admin.backup'), (req, res) => {
@@ -806,6 +842,30 @@ app.listen(PORT, () => {
   console.log(`  HUEREX GFES api  →  http://localhost:${PORT}`)
   if (needsBootstrap()) console.log('  first run — open the app to create the administrator account')
   if (!fs.existsSync(dist)) console.log(`  web (vite dev)   →  http://localhost:5273`)
+
+  const backup = backupSettings()
+  if (backup.enabled) {
+    const at = `${String(backup.hour).padStart(2, '0')}:${String(backup.minute).padStart(2, '0')}`
+    console.log(`  backup daily at ${at}  →  ${backup.folder}  (keeping ${backup.keep})`)
+  } else {
+    console.log('  automatic backup is off — Settings can turn it on')
+  }
+  startBackupSchedule((status) => {
+    // Nobody is watching a screen at nine at night, so the run is recorded
+    // where it can be read afterwards: the console and the audit log.
+    console.log(status.lastError
+      ? `  backup FAILED: ${status.lastError}`
+      : `  backup written: ${status.lastPath}`)
+    record({
+      principal: null, action: status.lastError ? 'backup.failed' : 'backup.auto',
+      target: 'backup',
+      summary: status.lastError
+        ? `The automatic backup failed: ${status.lastError}`
+        : `Automatic backup written to ${status.lastPath}`,
+      ip: 'the server itself', sensitive: true,
+    })
+    flush()
+  })
 })
 
 export type { User }

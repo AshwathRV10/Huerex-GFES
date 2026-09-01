@@ -235,6 +235,7 @@ server/          Express API over a single JSON file
   redact.ts        strips restricted collections and fields per request
   audit.ts         append-only log with before/after values
   events.ts        the live stream, filtered per person
+  backup.ts        the nightly copy: schedule, retention, catch-up
 data/
   workbook-seed.json   what a person actually typed into GFES V5.1
   huerex.json          the live database (gitignored)
@@ -253,6 +254,7 @@ tests/
   production.test.ts  the reconciliation identity, against real data
   source.test.ts      read the source: no looping selectors, no offsite fetches
   security.test.ts    access control, driven through the real HTTP server
+  backup.test.ts      that the nightly copy is worth having, and says so if not
   livesync.test.ts    two people, two sessions, one server
 ```
 
@@ -261,22 +263,70 @@ it**, so a number can never drift from the entry behind it. The derivation
 engine is pure functions over plain data — which is why it can be tested
 without a browser.
 
+## Running it in the factory
+
+One machine holds the data; everybody else opens it in a browser. Nothing else
+is needed — no server room, no monthly bill, no internet.
+
+```bash
+npm run build
+npm start                       # port 5274
+```
+
+Everyone else goes to `http://<that-machine>:5274` and signs in with their own
+account. What each of them can see is decided by their role, on that machine,
+before anything is sent.
+
+Worth doing on the machine that holds it: set it to start `npm start` on boot
+(Task Scheduler on Windows, a systemd unit on Linux) so a power cut does not
+quietly leave the factory without its system, and give it a fixed address on
+your network so the bookmark keeps working.
+
+### Reaching it when you are not there
+
+Do **not** forward a port on the office router. That publishes the factory's
+costings to the whole internet and leaves a login page as the only thing
+between them and anybody who finds it.
+
+Install [Tailscale](https://tailscale.com) on the office machine and on your
+laptop or phone, sign both into the same account, and the office machine gets a
+private address only your own devices can reach. Then
+`http://<that-address>:5274` works from anywhere, over an encrypted link, with
+nothing exposed publicly and nothing to pay for a handful of devices. The app
+needs no changes and no port opened.
+
+If the day comes that the whole team needs it from outside, that is when a real
+server and a certificate are worth the trouble — and the app is ready for it: a
+request arriving over TLS gets a `Secure` cookie by itself.
+
+### Backups happen on their own
+
+A dated copy of the database is written every day, to a folder you choose in
+**Settings → Automatic backup** — nine at night by default, keeping the last 30.
+
+Point it at something that is not the same disk: a second drive, a NAS share, a
+synced folder. A copy beside the original protects you from a mistake but not
+from the failure that actually happens, which is the disk itself.
+
+- If the machine was off at the appointed hour, the missed copy is taken shortly
+  after it next starts. A night is not skipped because nobody was there.
+- If the folder cannot be written to — the drive unplugged, the share gone — the
+  Settings page says so in as many words. **A backup silently not happening is
+  worse than no backup at all, because somebody believes they have one.**
+- Every file operation is asynchronous and gives up after a minute, so a network
+  share whose machine has gone away cannot freeze the app for the whole factory.
+- The file holds every price, rate and margin in plain text, so it is written
+  readable only by the account running the app. Treat that folder like the
+  costing sheet it is.
+- Password hashes and session tokens are never in it. A restore therefore keeps
+  the accounts that exist rather than bringing old ones back.
+
 ### The database is a file
 
-`data/huerex.json`. Copy it and you have a complete backup; **Settings →
-Download a backup** does the same through the browser. Writes land atomically,
-so a power cut cannot leave it half-written.
-
-For a team on one network, run `npm run build && npm start` on one machine and
-point the others at `http://<that-machine>:5274`. Everyone signs in with their
-own account; what each of them can see is decided by their role, on that
-machine, before anything is sent.
-
-Put it behind HTTPS before it leaves the office network. Nothing else in the app
-needs to change: a request that arrives over TLS gets a `Secure` session cookie
-on its own, including behind a reverse proxy terminating HTTPS, so there is no
-setting to forget. (`HUEREX_SECURE_COOKIES=1` forces it on where the app cannot
-tell.)
+`data/huerex.json`. Copy it and you have a complete backup — which is exactly
+what the nightly job does, and what **Settings → Download a backup** does
+through the browser. Writes land atomically, so a power cut cannot leave it
+half-written.
 
 ---
 

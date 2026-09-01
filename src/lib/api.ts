@@ -46,6 +46,28 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
   return body.data as T
 }
 
+export interface BackupSettings {
+  enabled: boolean
+  folder: string
+  hour: number
+  minute: number
+  keep: number
+}
+
+export interface BackupStatus {
+  lastAt: string | null
+  lastPath: string | null
+  lastBytes: number | null
+  lastError: string | null
+  lastReason: string | null
+}
+
+export interface BackupSchedule {
+  settings: BackupSettings
+  status: BackupStatus
+  defaults: BackupSettings
+}
+
 export interface ServerState {
   collections: Record<string, any[]>
   masters: Masters
@@ -199,6 +221,13 @@ export const api = {
 
   restore: (database: unknown) =>
     request<{ restored: boolean }>('/restore', { method: 'POST', body: JSON.stringify(database) }),
+
+  backupSchedule: () => request<BackupSchedule>('/backup/schedule'),
+
+  saveBackupSchedule: (patch: Partial<BackupSettings>) =>
+    request<BackupSchedule>('/backup/schedule', { method: 'PATCH', body: JSON.stringify(patch) }),
+
+  runBackup: () => request<BackupStatus>('/backup/run', { method: 'POST' }),
 }
 
 export { ApiError }
