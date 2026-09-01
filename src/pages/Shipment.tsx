@@ -13,6 +13,7 @@ import { LogTable, type DerivedColumn, type FieldDef } from '../components/LogTa
 import { Badge, Button, Callout, Card, CardHeader, Section, Tooltip } from '../components/ui'
 import { StatTile } from '../components/StatTile'
 import { useDerived, useStore } from '../lib/store'
+import { usePermission } from '../components/Gate'
 import { num, pct, today } from '../lib/format'
 import { colourField, dateField, orderField, requireFields, sizeField } from './fields'
 import type { ShipmentRow } from '../lib/types'
@@ -23,6 +24,7 @@ export default function Shipment() {
   const buyers = useStore((s) => s.data.buyers)
   const inspections = useStore((s) => s.data.inspection)
   const { derived } = useDerived()
+  const showCosting = usePermission('costing.view')
 
   const fields: FieldDef<ShipmentRow>[] = useMemo(() => [
     dateField<ShipmentRow>(),
@@ -124,28 +126,34 @@ export default function Shipment() {
       <PageHeader
         title="Shipment"
         subtitle="Excess ships with the order, so shipped quantity is meant to run over what was booked. What matters is whether it stays inside what the buyer agreed."
-        actions={<Link to="/buyers"><Button size="sm" variant="ghost">Set buyer excess</Button></Link>}
+        actions={showCosting
+          ? <Link to="/buyers"><Button size="sm" variant="ghost">Set buyer excess</Button></Link>
+          : undefined}
       />
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-5">
         <StatTile label="Shipped" value={num(shipped)} caption="pcs out the gate" tone="ok" icon={<Container className="size-4" />} />
         <StatTile label="Cartons" value={num(cartons)} />
         <StatTile label="Invoices" value={num(new Set(rows.map((r) => r.invoiceNo).filter(Boolean)).size)} />
-        <StatTile
-          label="Over the agreed excess" value={num(beyondAgreed.length)}
-          caption={beyondAgreed.length ? 'orders shipped beyond what was agreed' : 'every shipment is inside its excess'}
-          tone={beyondAgreed.length ? 'warn' : 'ok'}
-        />
+        {showCosting ? (
+          <StatTile
+            label="Over the agreed excess" value={num(beyondAgreed.length)}
+            caption={beyondAgreed.length ? 'orders shipped beyond what was agreed' : 'every shipment is inside its excess'}
+            tone={beyondAgreed.length ? 'warn' : 'ok'}
+          />
+        ) : (
+          <StatTile label="Entries" value={num(rows.length)} caption="dispatch rows logged" />
+        )}
       </div>
 
-      {excessView.some((row) => !row.excessSet) && (
+      {showCosting && excessView.some((row) => !row.excessSet) && (
         <Callout tone="warn" title="Some buyers have no excess percentage set">
           Excess differs buyer to buyer and the costing cannot tell a planned overship from an accident until
           it is recorded. <Link to="/buyers" className="underline">Set it on the buyers page</Link>.
         </Callout>
       )}
 
-      {excessView.length > 0 && (
+      {showCosting && excessView.length > 0 && (
         <Card className="mt-5">
           <CardHeader title="Excess against the order" subtitle="Shipped pieces beyond the booked quantity, next to the excess the buyer agreed to" />
           <div className="overflow-x-auto">

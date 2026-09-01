@@ -21,11 +21,12 @@ npm run dev
 - app → <http://localhost:5273>
 - api → <http://localhost:5274>
 
-The first start imports the workbook into `data/huerex.json`. Nothing else to
-set up — no database server, no accounts, no cloud.
+The first start imports the workbook into `data/huerex.json` and asks you to
+create the administrator account. Nothing else to set up — no database server,
+no cloud.
 
 ```bash
-npm test          # engine checks: the costing maths and the reconciliation identity
+npm test          # the costing maths, the reconciliation identity, access control and live sync
 npm run build     # production bundle
 npm start         # serve the built app and the api from one process, port 5274
 npm run seed      # rebuild data/huerex.json from the workbook (discards live data)
@@ -156,6 +157,70 @@ Any process named in a route now works, whoever does it.
 
 ---
 
+## Who can see what
+
+Costing is the commercially sensitive part of this system, so access to it is a
+permission and not a screen you happen not to click on.
+
+**Roles ship configurable, and five come set up:**
+
+| role | what it is for |
+| --- | --- |
+| Administrator | everything, including accounts and roles. Cannot be reduced or deleted — a factory locked out of its own system has no way back in. |
+| Merchandiser | orders, production and **costing**: rates, prices, margins. |
+| Planner | orders, production and materials. No costing. |
+| Floor | logs what was cut, sewn, checked, packed. Nothing else. |
+| Viewer | reads. Changes nothing. No costing. |
+
+Permissions are per module, per screen and per action — view, create, edit,
+approve, export, delete — and every one of them can be moved between roles from
+**People → Roles**.
+
+### Enforced on the server, not by hiding buttons
+
+Restricted data never reaches the browser in the first place. A Floor operator's
+copy of the state does not contain the costings, the rate book, the selling
+price on an order, or the buyer's payment terms — not hidden in it, *not in it*.
+Typing the URL of a costing page, calling the API directly, or reading what came
+over the wire all give the same nothing.
+
+The same filter applies to the live stream: when a merchandiser edits a quote,
+people without costing access are not notified that anything happened, and when
+they are told an order changed, the price is stripped from the row they receive.
+
+`tests/security.test.ts` boots the real server and proves this — 58 checks,
+including grepping the raw response body for the withheld figures rather than
+trusting a parsed field.
+
+### The audit log
+
+Every sensitive action is recorded with who, when, what record, and the values
+before and after: sign-ins and failed sign-ins, refused access attempts, costing
+and rate changes, price changes, account and role changes, backups, restores and
+resets. It is append-only — nothing in the application deletes from it — and
+password hashes and session tokens are stripped before anything is written.
+
+### Accounts
+
+Passwords are stored as scrypt hashes with a per-account salt, compared in
+constant time. Sessions are random tokens of which only the hash is kept, in
+httpOnly cookies, expiring after 12 hours or 4 idle. Repeated failed sign-ins
+are throttled. An unknown username and a wrong password give the same answer, so
+the login page cannot be used to find out who has an account.
+
+Changing somebody's role or deactivating them takes effect immediately: their
+open sessions end and the tab they are sitting in front of asks them to sign in
+again.
+
+### Two people, one row
+
+Everyone sees everyone else's entries as they are made, and who is online. A
+costing carries the revision it was opened at, so if two people have the same
+one open the second save is refused rather than silently overwriting the first —
+you are shown their version and asked which to keep.
+
+---
+
 ## How it is built
 
 ```
@@ -163,6 +228,11 @@ server/          Express API over a single JSON file
   store.ts         atomic writes (temp file + rename), debounced
   seed.ts          imports the workbook
   index.ts         REST: rows, masters, settings, backup, restore
+  auth.ts          scrypt passwords, sessions, sign-in throttling
+  rbac.ts          the permission catalogue and the roles that ship
+  redact.ts        strips restricted collections and fields per request
+  audit.ts         append-only log with before/after values
+  events.ts        the live stream, filtered per person
 data/
   workbook-seed.json   what a person actually typed into GFES V5.1
   huerex.json          the live database (gitignored)
@@ -174,7 +244,11 @@ src/
     costing.ts       quantities, cost heads, rate memory, plan vs actual
   components/      design system, SmartCombo, DataGrid, LogTable, AppShell
   pages/           one page per part of the factory
-tests/           engine checks, run with `npm test`
+tests/
+  costing.test.ts     the cost maths
+  production.test.ts  the reconciliation identity, against real data
+  security.test.ts    access control, driven through the real HTTP server
+  livesync.test.ts    two people, two sessions, one server
 ```
 
 The client holds the whole dataset in memory and **derives every figure from
@@ -189,7 +263,13 @@ Download a backup** does the same through the browser. Writes land atomically,
 so a power cut cannot leave it half-written.
 
 For a team on one network, run `npm run build && npm start` on one machine and
-point the others at `http://<that-machine>:5274`.
+point the others at `http://<that-machine>:5274`. Everyone signs in with their
+own account; what each of them can see is decided by their role, on that
+machine, before anything is sent.
+
+Put it behind HTTPS before it leaves the office network — the session cookie is
+marked `secure` as soon as the request arrives over TLS, and nothing else in the
+app needs to change to move it to a server.
 
 ---
 

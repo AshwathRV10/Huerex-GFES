@@ -17,6 +17,7 @@ import {
 import { useComboStats } from '../hooks/useComboStats'
 import { useCostSummary } from '../hooks/useCostSummary'
 import { useDerived, useStore } from '../lib/store'
+import { Gate, usePermission } from '../components/Gate'
 import { resolveQuantities } from '../lib/engine/costing'
 import { money, num, pct, shortDate } from '../lib/format'
 import type { MatrixRow, Order, RouteStep } from '../lib/types'
@@ -29,6 +30,7 @@ export default function OrderDetail() {
   const navigate = useNavigate()
   const { derived, alerts } = useDerived()
   const cost = useCostSummary()
+  const showCosting = usePermission('costing.view')
   const [tab, setTab] = useState<Tab>('overview')
 
   const facts = derived.byOrderNo.get(decoded)
@@ -71,32 +73,43 @@ export default function OrderDetail() {
         }
         subtitle={[order.styleCode, order.styleName].filter(Boolean).join(' · ')}
         actions={
-          <Link to={`/costing/${encodeURIComponent(order.orderNo)}`}>
-            <Button variant="primary" icon={<Calculator className="size-4" />}>
-              {costing ? 'Open costing' : 'Cost this order'}
-            </Button>
-          </Link>
+          <Gate permission="costing.view">
+            <Link to={`/costing/${encodeURIComponent(order.orderNo)}`}>
+              <Button variant="primary" icon={<Calculator className="size-4" />}>
+                {costing ? 'Open costing' : 'Cost this order'}
+              </Button>
+            </Link>
+          </Gate>
         }
       />
 
       {/* Headline numbers */}
       <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3 mb-5">
         <StatTile label="Order qty" value={num(order.orderQty)} caption="pcs booked" />
-        <StatTile
-          label="Will ship" value={num(quantities.shipped)}
-          caption={quantities.excessQty > 0 ? `+${num(quantities.excessQty)} excess at ${pct(quantities.excessPct, 1)}` : 'no excess set'}
-          tone={quantities.excessQty > 0 ? 'saffron' : 'neutral'}
-        />
+        {showCosting ? (
+          <StatTile
+            label="Will ship" value={num(quantities.shipped)}
+            caption={quantities.excessQty > 0 ? `+${num(quantities.excessQty)} excess at ${pct(quantities.excessPct, 1)}` : 'no excess set'}
+            tone={quantities.excessQty > 0 ? 'saffron' : 'neutral'}
+          />
+        ) : (
+          <StatTile label="Size rows" value={num(facts.cells.length)} caption="colour and size combinations" />
+        )}
         <StatTile label="Cut" value={num(facts.cumCut)} meter={{ value: facts.cumCut, max: order.orderQty || 1 }} />
         <StatTile label="Shipped" value={num(facts.cumShipped)} tone="ok" meter={{ value: facts.cumShipped, max: order.orderQty || 1 }} />
         <StatTile label="WIP" value={num(facts.totalWip)} tone={facts.agedWip ? 'warn' : 'brand'} caption={facts.agedWip ? `${num(facts.agedWip)} aged` : 'on the floor'} />
-        <StatTile
-          label="Margin"
-          value={result?.marginPct != null ? pct(result.marginPct, 1) : '—'}
-          caption={result && result.totalCost > 0 ? `${money(result.costPerShippedPc, result.currency)} a piece` : 'not costed yet'}
-          tone={!result || result.sellingPrice == null ? 'neutral' : result.margin < 0 ? 'risk' : (result.marginPct ?? 0) < 0.08 ? 'warn' : 'ok'}
-          to={`/costing/${encodeURIComponent(order.orderNo)}`}
-        />
+        {showCosting ? (
+          <StatTile
+            label="Margin"
+            value={result?.marginPct != null ? pct(result.marginPct, 1) : '—'}
+            caption={result && result.totalCost > 0 ? `${money(result.costPerShippedPc, result.currency)} a piece` : 'not costed yet'}
+            tone={!result || result.sellingPrice == null ? 'neutral' : result.margin < 0 ? 'risk' : (result.marginPct ?? 0) < 0.08 ? 'warn' : 'ok'}
+            to={`/costing/${encodeURIComponent(order.orderNo)}`}
+          />
+        ) : (
+          <StatTile label="Rejected" value={num(facts.cumReject)} caption="pcs failed at checking"
+            tone={facts.cumReject ? 'risk' : 'neutral'} />
+        )}
       </div>
 
       {orderAlerts.length > 0 && (

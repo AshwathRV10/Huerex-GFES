@@ -7,7 +7,10 @@
  * and rolls back if the server refuses.
  */
 import { create } from 'zustand'
-import { api, type ServerState } from './api'
+import {
+  api, isConflict, setUnauthenticatedHandler,
+  type PresenceEntry, type ServerState, type SessionInfo,
+} from './api'
 import type {
   AppState, Buyer, CollectionKey, Costing, Masters, Order, RateEntry, Settings,
 } from './types'
@@ -48,6 +51,18 @@ interface Store {
   ready: boolean
   error: string | null
   saving: number
+
+  /* ── Session ─────────────────────────────────────────────────────── */
+  /** null while unknown, then either a session or `false` for signed out. */
+  session: SessionInfo | null
+  signedIn: boolean
+  needsBootstrap: boolean
+  authChecked: boolean
+  mustChangePassword: boolean
+  /** Everyone with the app open right now. */
+  present: PresenceEntry[]
+  /** True while the live connection is up. */
+  live: boolean
   data: AppState
   masters: Masters
   settings: Settings
@@ -55,12 +70,26 @@ interface Store {
   toasts: Toast[]
 
   load: () => Promise<void>
+  checkAuth: () => Promise<void>
+  signIn: (userName: string, password: string) => Promise<void>
+  signOut: () => Promise<void>
+  bootstrapAdmin: (input: { userName: string; displayName: string; password: string }) => Promise<void>
+  changeOwnPassword: (current: string, next: string) => Promise<void>
+  /** True when the signed-in role grants this permission. */
+  can: (permission: string) => boolean
+  connectLive: () => void
   notify: (tone: Toast['tone'], message: string, detail?: string) => void
   dismiss: (id: string) => void
 
   add: <K extends CollectionKey>(collection: K, row: Partial<AppState[K][number]>) => Promise<AppState[K][number]>
   addMany: <K extends CollectionKey>(collection: K, rows: Partial<AppState[K][number]>[]) => Promise<void>
-  patch: <K extends CollectionKey>(collection: K, id: string, patch: Partial<AppState[K][number]>) => Promise<void>
+  /**
+   * `expectRev` refuses the write if somebody else has changed the row since,
+   * instead of overwriting them. Without it, last write wins.
+   */
+  patch: <K extends CollectionKey>(
+    collection: K, id: string, patch: Partial<AppState[K][number]>, expectRev?: number,
+  ) => Promise<void>
   drop: (collection: CollectionKey, id: string) => Promise<void>
 
   addMaster: (list: string, value: string) => Promise<string>
@@ -74,15 +103,168 @@ interface Store {
 
 let toastCounter = 0
 
+/** The one live connection. Kept outside the store so React never re-renders on it. */
+let liveSource: EventSource | null = null
+
+/** Any 401 from any call drops the session, so a revoked account cannot linger. */
+setUnauthenticatedHandler(() => {
+  liveSource?.close()
+  liveSource = null
+  const store = useStore.getState()
+  if (store.signedIn) {
+    useStore.setState({ signedIn: false, session: null, live: false, present: [] })
+  }
+})
+
+type SetState = (partial: Partial<Store> | ((s: Store) => Partial<Store>)) => void
+type GetState = () => Store
+
+/**
+ * Folds somebody else's change into our copy.
+ *
+ * The row arrives already filtered by the server for what this viewer may see,
+ * so anything that reaches here is safe to store as-is.
+ */
+function applyRemoteChange(
+  set: SetState,
+  get: GetState,
+  change: {
+    collection: CollectionKey; action: string; recordId?: string
+    row?: Record<string, unknown> | null; byUserName: string
+  },
+) {
+  const { collection, action, recordId, row } = change
+  const current = get().data[collection] as { id: string }[] | undefined
+  if (!current) return
+
+  if (action === 'reload') { get().load(); return }
+  if (action === 'delete' && recordId) {
+    set((s) => ({ data: { ...s.data, [collection]: current.filter((r) => r.id !== recordId) } as AppState }))
+    return
+  }
+  if (!row || !recordId) return
+
+  const exists = current.some((r) => r.id === recordId)
+  set((s) => ({
+    data: {
+      ...s.data,
+      [collection]: exists
+        ? current.map((r) => (r.id === recordId ? { ...r, ...row } : r))
+        : [...current, row as { id: string }],
+    } as AppState,
+  }))
+}
+
 export const useStore = create<Store>((set, get) => ({
   ready: false,
   error: null,
   saving: 0,
+  session: null,
+  signedIn: false,
+  needsBootstrap: false,
+  authChecked: false,
+  mustChangePassword: false,
+  present: [],
+  live: false,
   data: EMPTY_STATE,
   masters: {},
   settings: DEFAULT_SETTINGS,
   processTypes: {},
   toasts: [],
+
+  can(permission) {
+    return get().session?.permissions.includes(permission) ?? false
+  },
+
+  async checkAuth() {
+    try {
+      const status = await api.authStatus()
+      if (!status.signedIn) {
+        set({ authChecked: true, signedIn: false, session: null, needsBootstrap: status.needsBootstrap, ready: true })
+        return
+      }
+      const session = await api.me()
+      set({ authChecked: true, signedIn: true, session, needsBootstrap: false })
+      await get().load()
+      get().connectLive()
+    } catch (error) {
+      set({
+        authChecked: true, signedIn: false, session: null, ready: true,
+        error: error instanceof Error && !(error as { status?: number }).status
+          ? error.message : null,
+      })
+    }
+  },
+
+  async signIn(userName, password) {
+    const result = await api.login(userName, password)
+    const session = await api.me()
+    set({ signedIn: true, session, mustChangePassword: result.mustChangePassword, error: null })
+    await get().load()
+    get().connectLive()
+  },
+
+  async signOut() {
+    try { await api.logout() } catch { /* the cookie is going either way */ }
+    liveSource?.close()
+    liveSource = null
+    set({
+      signedIn: false, session: null, present: [], live: false,
+      data: EMPTY_STATE, masters: {}, mustChangePassword: false,
+    })
+  },
+
+  async bootstrapAdmin(input) {
+    await api.bootstrap(input)
+    const session = await api.me()
+    set({ signedIn: true, session, needsBootstrap: false, error: null })
+    await get().load()
+    get().connectLive()
+  },
+
+  async changeOwnPassword(current, next) {
+    await api.changePassword(current, next)
+    set({ mustChangePassword: false })
+    get().notify('ok', 'Password changed', 'Your other sessions have been signed out')
+  },
+
+  connectLive() {
+    if (liveSource) return
+    liveSource = new EventSource('/api/events', { withCredentials: true })
+
+    liveSource.onopen = () => set({ live: true })
+    liveSource.onerror = () => {
+      // EventSource reconnects by itself; this only reflects the state.
+      set({ live: false })
+    }
+
+    liveSource.addEventListener('presence', (event) => {
+      try { set({ present: JSON.parse((event as MessageEvent).data) }) } catch { /* ignore */ }
+    })
+
+    liveSource.addEventListener('change', (event) => {
+      try {
+        const change = JSON.parse((event as MessageEvent).data) as {
+          collection: CollectionKey; action: string; recordId?: string
+          row?: Record<string, unknown> | null; byUserId: string | null; byUserName: string
+        }
+        // Skip the echo of our own write; the optimistic update already landed.
+        if (change.byUserId && change.byUserId === get().session?.userId) return
+        applyRemoteChange(set, get, change)
+      } catch { /* a malformed frame is not worth crashing over */ }
+    })
+
+    liveSource.addEventListener('reload', () => { get().load() })
+
+    liveSource.addEventListener('reauth', (event) => {
+      let reason = 'Your access has changed. Please sign in again.'
+      try { reason = JSON.parse((event as MessageEvent).data).reason ?? reason } catch { /* keep default */ }
+      liveSource?.close()
+      liveSource = null
+      set({ signedIn: false, session: null, live: false, present: [] })
+      get().notify('info', 'Signed out', reason)
+    })
+  },
 
   async load() {
     try {
@@ -96,6 +278,8 @@ export const useStore = create<Store>((set, get) => ({
         processTypes: server.processTypes ?? {},
       })
     } catch (error) {
+      const status = (error as { status?: number }).status
+      if (status === 401) { set({ ready: true, signedIn: false, session: null }); return }
       set({ ready: true, error: error instanceof Error ? error.message : 'Could not load the data' })
     }
   },
@@ -142,7 +326,7 @@ export const useStore = create<Store>((set, get) => ({
     }
   },
 
-  async patch(collection, id, patchValue) {
+  async patch(collection, id, patchValue, expectRev) {
     const previous = get().data[collection] as { id: string }[]
     // Show the change straight away; put it back if the server says no.
     set((s) => ({
@@ -154,10 +338,12 @@ export const useStore = create<Store>((set, get) => ({
       } as AppState,
     }))
     try {
-      await api.update(collection, id, patchValue as never)
+      await api.update(collection, id, patchValue as never, expectRev)
     } catch (error) {
       set((s) => ({ data: { ...s.data, [collection]: previous } as AppState }))
-      get().notify('risk', 'Could not save that change', message(error))
+      // A conflict is not a failure to report here — the caller is showing the
+      // other person's version and asking what to do about it.
+      if (!isConflict(error)) get().notify('risk', 'Could not save that change', message(error))
       throw error
     } finally {
       set((s) => ({ saving: s.saving - 1 }))
@@ -242,7 +428,10 @@ export const useStore = create<Store>((set, get) => ({
     const next = { ...costing, updatedAt: new Date().toISOString() }
     const exists = data.costings.some((c) => c.id === costing.id)
 
-    if (exists) await get().patch('costings', costing.id, next)
+    // A costing is the row two people are most likely to have open at once, so
+    // the save carries the revision it was loaded at and is refused if somebody
+    // else has saved in the meantime.
+    if (exists) await get().patch('costings', costing.id, next, costing.rev)
     else await get().add('costings', next)
 
     if (!order) return

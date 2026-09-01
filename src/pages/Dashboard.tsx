@@ -15,6 +15,7 @@ import { PageHeader } from '../components/AppShell'
 import { StatTile, Stat } from '../components/StatTile'
 import { Badge, Button, Card, CardHeader, Empty, Meter, Section, Tooltip } from '../components/ui'
 import { useDerived, useStore } from '../lib/store'
+import { Gate, usePermission } from '../components/Gate'
 import { useCostSummary } from '../hooks/useCostSummary'
 import { money, moneyShort, num, pct, shortDate } from '../lib/format'
 import type { Alert } from '../lib/engine/alerts'
@@ -23,6 +24,7 @@ export default function Dashboard() {
   const { derived, alerts } = useDerived()
   const cost = useCostSummary()
   const orders = useStore((s) => s.data.orders)
+  const showCosting = usePermission('costing.view')
   const { totals } = derived
 
   const live = derived.orders.filter((o) => o.order.status === 'Active')
@@ -40,7 +42,9 @@ export default function Dashboard() {
         subtitle="Live orders only. One row per transaction, one truth per number — if a figure looks wrong, the entry behind it is wrong."
         actions={
           <>
-            <Link to="/costing"><Button icon={<Calculator className="size-4" />}>Costing</Button></Link>
+            <Gate permission="costing.view">
+              <Link to="/costing"><Button icon={<Calculator className="size-4" />}>Costing</Button></Link>
+            </Gate>
             <Link to="/orders"><Button variant="primary" icon={<Shirt className="size-4" />}>Orders</Button></Link>
           </>
         }
@@ -99,6 +103,7 @@ export default function Dashboard() {
       </div>
 
       {/* ── Commercial ─────────────────────────────────────────────── */}
+      <Gate permission="costing.view">
       <Section
         title="The money"
         description="Every costed order priced against the quote. Orders without a costing are not in these figures."
@@ -143,6 +148,7 @@ export default function Dashboard() {
           </Card>
         </div>
       </Section>
+      </Gate>
 
       <div className="grid xl:grid-cols-[1.55fr_1fr] gap-5 items-start">
         {/* ── What needs me today ──────────────────────────────────── */}
@@ -235,8 +241,8 @@ export default function Dashboard() {
                   <th className="text-left px-3 py-2 w-56">Progress</th>
                   <th className="text-right px-3 py-2 hidden lg:table-cell">WIP</th>
                   <th className="text-right px-3 py-2 hidden lg:table-cell">Ex-factory</th>
-                  <th className="text-right px-3 py-2">Cost / pc</th>
-                  <th className="text-right px-3 py-2">Margin</th>
+                  {showCosting && <th className="text-right px-3 py-2">Cost / pc</th>}
+                  {showCosting && <th className="text-right px-3 py-2">Margin</th>}
                 </tr>
               </thead>
               <tbody>
@@ -274,22 +280,26 @@ export default function Dashboard() {
                           {shortDate(facts.order.exFactoryDate)}
                         </span>
                       </td>
-                      <td className="px-3 py-2 text-right num text-sm">
-                        {result && result.totalCost > 0
-                          ? money(result.costPerShippedPc, result.currency)
-                          : <Link to={`/costing/${encodeURIComponent(facts.order.orderNo)}`} className="text-brand-600 hover:underline text-xs">cost it</Link>}
-                      </td>
-                      <td className="px-3 py-2 text-right">
-                        {result && result.sellingPrice != null && result.totalCost > 0 ? (
-                          <Tooltip label={`${money(result.margin, result.currency)} on ${num(result.quantities.invoiced)} invoiced pcs`}>
-                            <Badge tone={result.margin < 0 ? 'risk' : (result.marginPct ?? 0) < 0.08 ? 'warn' : 'ok'}>
-                              {result.marginPct != null ? pct(result.marginPct, 1) : '—'}
-                            </Badge>
-                          </Tooltip>
-                        ) : (
-                          <span className="text-ink-3/60 text-xs">—</span>
-                        )}
-                      </td>
+                      {showCosting && (
+                        <td className="px-3 py-2 text-right num text-sm">
+                          {result && result.totalCost > 0
+                            ? money(result.costPerShippedPc, result.currency)
+                            : <Link to={`/costing/${encodeURIComponent(facts.order.orderNo)}`} className="text-brand-600 hover:underline text-xs">cost it</Link>}
+                        </td>
+                      )}
+                      {showCosting && (
+                        <td className="px-3 py-2 text-right">
+                          {result && result.sellingPrice != null && result.totalCost > 0 ? (
+                            <Tooltip label={`${money(result.margin, result.currency)} on ${num(result.quantities.invoiced)} invoiced pcs`}>
+                              <Badge tone={result.margin < 0 ? 'risk' : (result.marginPct ?? 0) < 0.08 ? 'warn' : 'ok'}>
+                                {result.marginPct != null ? pct(result.marginPct, 1) : '—'}
+                              </Badge>
+                            </Tooltip>
+                          ) : (
+                            <span className="text-ink-3/60 text-xs">—</span>
+                          )}
+                        </td>
+                      )}
                     </tr>
                   )
                 })}

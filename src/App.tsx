@@ -29,14 +29,27 @@ import SetControl from './pages/SetControl'
 import Approvals from './pages/Approvals'
 import Masters from './pages/Masters'
 import SettingsPage from './pages/Settings'
+import SignIn, { AuthLoading, ChangePasswordGate } from './pages/SignIn'
+import People from './pages/People'
+import AuditLogPage from './pages/AuditLog'
+import { RequirePermission } from './components/Gate'
 
 export default function App() {
   const ready = useStore((s) => s.ready)
   const error = useStore((s) => s.error)
+  const authChecked = useStore((s) => s.authChecked)
+  const signedIn = useStore((s) => s.signedIn)
+  const mustChangePassword = useStore((s) => s.mustChangePassword)
+  const checkAuth = useStore((s) => s.checkAuth)
   const load = useStore((s) => s.load)
 
-  useEffect(() => { load() }, [load])
+  useEffect(() => { checkAuth() }, [checkAuth])
 
+  // Until the session is resolved, showing either the app or the login form
+  // would be a guess — so neither is shown.
+  if (!authChecked) return <AuthLoading />
+  if (!signedIn) return <SignIn />
+  if (mustChangePassword) return <ChangePasswordGate />
   if (!ready) return <Splash />
 
   if (error) {
@@ -63,9 +76,18 @@ export default function App() {
 
         <Route path="/orders" element={<Orders />} />
         <Route path="/orders/:orderNo" element={<OrderDetail />} />
-        <Route path="/costing" element={<Costing />} />
-        <Route path="/costing/:orderNo" element={<CostingDetail />} />
-        <Route path="/rates" element={<RateBook />} />
+        <Route
+          path="/costing"
+          element={<RequirePermission permission="costing.view" what="Costing"><Costing /></RequirePermission>}
+        />
+        <Route
+          path="/costing/:orderNo"
+          element={<RequirePermission permission="costing.view" what="Costing"><CostingDetail /></RequirePermission>}
+        />
+        <Route
+          path="/rates"
+          element={<RequirePermission permission="costing.view" what="The rate book"><RateBook /></RequirePermission>}
+        />
         <Route path="/buyers" element={<Buyers />} />
 
         <Route path="/fabric" element={<Fabric />} />
@@ -87,7 +109,12 @@ export default function App() {
 
         <Route path="/approvals" element={<Approvals />} />
         <Route path="/masters" element={<Masters />} />
-        <Route path="/settings" element={<SettingsPage />} />
+        <Route path="/people" element={<People />} />
+        <Route path="/audit" element={<AuditLogPage />} />
+        <Route
+          path="/settings"
+          element={<RequirePermission permission="admin.settings" what="Settings"><SettingsPage /></RequirePermission>}
+        />
 
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

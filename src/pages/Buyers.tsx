@@ -14,10 +14,19 @@ import {
 } from '../components/ui'
 import { useCostSummary } from '../hooks/useCostSummary'
 import { useDerived, useStore } from '../lib/store'
+import { RequirePermission, usePermission } from '../components/Gate'
 import { moneyShort, num, pct } from '../lib/format'
 import type { Buyer } from '../lib/types'
 
 export default function Buyers() {
+  return (
+    <RequirePermission permission="masters.view" what="Buyers">
+      <BuyersInner />
+    </RequirePermission>
+  )
+}
+
+function BuyersInner() {
   const buyers = useStore((s) => s.data.buyers)
   const orders = useStore((s) => s.data.orders)
   const patch = useStore((s) => s.patch)
@@ -26,6 +35,8 @@ export default function Buyers() {
   const cost = useCostSummary()
   const [adding, setAdding] = useState(false)
   const [name, setName] = useState('')
+  const showCosting = usePermission('costing.view')
+  const canManage = usePermission('masters.manage')
 
   const summary = useMemo(() => {
     const map = new Map<string, {
@@ -61,24 +72,42 @@ export default function Buyers() {
       <PageHeader
         title="Buyers"
         subtitle="Excess ships with the order, so it is produced and it costs money. What varies is who pays for it — and that is a buyer-by-buyer agreement."
-        actions={<Button variant="primary" icon={<Plus className="size-4" />} onClick={() => setAdding(true)}>Add a buyer</Button>}
+        actions={canManage
+          ? <Button variant="primary" icon={<Plus className="size-4" />} onClick={() => setAdding(true)}>Add a buyer</Button>
+          : undefined}
       />
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-5">
         <StatTile label="Buyers" value={num(buyers.length)} icon={<Users className="size-4" />} />
         <StatTile label="Live orders" value={num(orders.filter((o) => o.status === 'Active').length)} />
-        <StatTile
-          label="Excess not set" value={num(unset.length)}
-          tone={unset.length ? 'warn' : 'ok'}
-          caption={unset.length ? 'costings are assuming zero excess' : 'every buyer has an agreed excess'}
-        />
-        <StatTile
-          label="Free excess given away" value={moneyShort(cost.totals.excessGiveaway, cost.totals.currency)}
-          tone={cost.totals.excessGiveaway > 0 ? 'warn' : 'neutral'}
-        />
+        {showCosting ? (
+          <>
+            <StatTile
+              label="Excess not set" value={num(unset.length)}
+              tone={unset.length ? 'warn' : 'ok'}
+              caption={unset.length ? 'costings are assuming zero excess' : 'every buyer has an agreed excess'}
+            />
+            <StatTile
+              label="Free excess given away" value={moneyShort(cost.totals.excessGiveaway, cost.totals.currency)}
+              tone={cost.totals.excessGiveaway > 0 ? 'warn' : 'neutral'}
+            />
+          </>
+        ) : (
+          <>
+            <StatTile label="Shipped" value={num(derived.totals.shipped)} caption="pcs across live orders" tone="ok" />
+            <StatTile label="On the floor" value={num(derived.totals.wip)} caption="pcs in work" />
+          </>
+        )}
       </div>
 
-      {unset.length > 0 && (
+      {!showCosting && (
+        <Callout tone="info" title="Excess and payment terms are not part of your access">
+          They are commercial terms, so they travel only with costing access. Everything else about each
+          buyer is below.
+        </Callout>
+      )}
+
+      {showCosting && unset.length > 0 && (
         <Callout tone="warn" title={`${unset.length} buyer${unset.length > 1 ? 's have' : ' has'} no excess percentage`}>
           Until it is set, every costing for {unset.map((b) => b.name).join(', ')} assumes nothing extra is
           shipped — which understates what the order really costs to make.
@@ -99,13 +128,14 @@ export default function Buyers() {
                     subtitle={stats
                       ? `${stats.live} live of ${stats.orders} orders · ${num(stats.qty)} pcs booked`
                       : 'no orders yet'}
-                    actions={
-                      buyer.excessPctSet
-                        ? <Badge tone="ok">{pct(buyer.excessPct, 1)} excess</Badge>
-                        : <Badge tone="warn">excess not set</Badge>
-                    }
+                    actions={showCosting
+                      ? (buyer.excessPctSet
+                          ? <Badge tone="ok">{pct(buyer.excessPct, 1)} excess</Badge>
+                          : <Badge tone="warn">excess not set</Badge>)
+                      : undefined}
                   />
                   <div className="p-4 grid sm:grid-cols-2 gap-4">
+                    {showCosting && <>
                     <Field
                       label="Excess %"
                       suffix="%"
@@ -143,13 +173,14 @@ export default function Buyers() {
                       placeholder="e.g. 60 days from B/L"
                       onBlur={(e) => set(buyer, 'paymentTerms', e.target.value)}
                     />
+                    </>}
                     <Field
                       label="Notes"
                       defaultValue={buyer.notes}
                       onBlur={(e) => set(buyer, 'notes', e.target.value)}
                     />
                   </div>
-                  {stats && stats.costed > 0 && (
+                  {showCosting && stats && stats.costed > 0 && (
                     <div className="px-4 py-3 border-t border-line bg-raised/50 flex items-center justify-between gap-3 text-sm">
                       <span className="text-ink-3 text-xs">
                         {stats.costed} of {stats.orders} orders costed

@@ -7,9 +7,12 @@ dist/
 data/huerex.json
 data/.huerex.tmp
 data/*.corrupt-*
+# Throwaway databases the test suites boot a server against.
+data/huerex.*-test.json
 
 # Local verification helpers.
 shot.mjs
 interact.mjs
+verify.mjs
 shots/
 tsconfig.tsbuildinfo

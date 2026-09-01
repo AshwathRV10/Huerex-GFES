@@ -21,6 +21,7 @@ import {
   Segmented, Toggle, Tooltip,
 } from '../components/ui'
 import { useComboStats } from '../hooks/useComboStats'
+import { isConflict } from '../lib/api'
 import { useDerived, useStore } from '../lib/store'
 import {
   computeActual, computeCosting, findRate, prefillCosting, type CostResult,
@@ -62,6 +63,8 @@ export default function CostingDetail() {
   const [view, setView] = useState<'plan' | 'actual'>('plan')
   const [saving, setSaving] = useState(false)
   const [copying, setCopying] = useState(false)
+  /** Their version, when somebody else saved while this one was open. */
+  const [conflict, setConflict] = useState<Costing | null>(null)
 
   // Load the stored costing, or build a fresh one out of what is already known.
   useEffect(() => {
@@ -90,18 +93,35 @@ export default function CostingDetail() {
   )
   const shown = view === 'actual' && actual ? actual : planned
 
-  const save = async () => {
+  /**
+   * `overwrite` drops the version check, for when the user has looked at the
+   * other person's version and decided theirs is the one to keep.
+   */
+  const save = async (overwrite = false) => {
     if (!draft) return
     setSaving(true)
     try {
-      await saveCosting(draft)
+      await saveCosting(overwrite ? { ...draft, rev: undefined } : draft)
+      setConflict(null)
       // Keep the order's headline price in step with the costing.
       if (order && draft.sellingPrice !== order.sellingPrice) {
         await patch('orders', order.id, { sellingPrice: draft.sellingPrice })
       }
+    } catch (error) {
+      // The store has already said its piece about anything but a conflict.
+      if (isConflict(error)) {
+        setConflict((error.payload as { current?: Costing } | undefined)?.current ?? null)
+      }
     } finally {
       setSaving(false)
     }
+  }
+
+  const takeTheirs = () => {
+    if (!conflict) return
+    setDraft(structuredClone(conflict))
+    setProvenance({})
+    setConflict(null)
   }
 
   useEffect(() => {
@@ -156,13 +176,35 @@ export default function CostingDetail() {
             <Button icon={<Copy className="size-4" />} onClick={() => setCopying(true)}>Copy from…</Button>
             <Button
               variant="primary" loading={saving} disabled={!dirty}
-              icon={<Save className="size-4" />} onClick={save}
+              icon={<Save className="size-4" />} onClick={() => save()}
             >
               {stored ? 'Save' : 'Save costing'}
             </Button>
           </>
         }
       />
+
+      {conflict && (
+        <div className="mb-4">
+          <Callout tone="warn" title="Somebody else saved this costing while you had it open">
+            <p>
+              Their version is dated{' '}
+              <span className="num">{new Date(conflict.updatedAt).toLocaleString('en-GB')}</span>
+              {conflict.sellingPrice !== null && (
+                <> and quotes <span className="num">{money(conflict.sellingPrice, conflict.currency)}</span> a piece</>
+              )}
+              . Nothing has been overwritten — decide which one to keep.
+            </p>
+            <div className="flex flex-wrap gap-2 mt-2.5">
+              <Button size="sm" onClick={takeTheirs}>Open their version</Button>
+              <Button size="sm" variant="primary" loading={saving} onClick={() => save(true)}>
+                Keep mine and save over it
+              </Button>
+              <Button size="sm" variant="ghost" onClick={() => setConflict(null)}>Leave it for now</Button>
+            </div>
+          </Callout>
+        </div>
+      )}
 
       {!stored && Object.keys(provenance).length > 0 && (
         <Callout tone="info" title="Started from what the system already knows">

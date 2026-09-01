@@ -210,6 +210,12 @@ export interface OverheadCostLine {
 
 export interface Costing {
   id: Id
+  /**
+   * Stamped by the server and bumped on every write. A costing is the one place
+   * two people are likely to be editing the same row at once, so a save carries
+   * the revision it started from and is refused if that has moved on.
+   */
+  rev?: number
   orderNo: string
   /** A costing is a named scenario, so a quote can be compared to a revision. */
   name: string
