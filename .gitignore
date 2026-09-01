@@ -2,14 +2,17 @@ node_modules/
 dist/
 *.local
 .DS_Store
+tsconfig.tsbuildinfo
 
 # The live database and anything the app writes at runtime.
 data/huerex.json
 data/.huerex.tmp
 data/*.corrupt-*
+# Throwaway databases the test suites boot a server against.
+data/huerex.*-test.json
 
-# Local verification helpers.
-shot.mjs
-interact.mjs
+# Throwaway scripts for driving the app in a browser: screenshots, reproducing
+# a bug, checking what the console says. Written as needed, kept out of the
+# repo. Root only, so a real module under src/ or server/ is never swallowed.
+/*.mjs
 shots/
-tsconfig.tsbuildinfo

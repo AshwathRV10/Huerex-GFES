@@ -15,6 +15,7 @@ import { StatTile } from '../components/StatTile'
 import { useComboStats } from '../hooks/useComboStats'
 import { useCostSummary } from '../hooks/useCostSummary'
 import { useDerived, useStore } from '../lib/store'
+import { usePermission } from '../components/Gate'
 import { money, num, pct, shortDate, today } from '../lib/format'
 import type { OrderFacts } from '../lib/engine/production'
 import type { Order } from '../lib/types'
@@ -26,6 +27,8 @@ export default function Orders() {
   const cost = useCostSummary()
   const [filter, setFilter] = useState<StatusFilter>('Active')
   const [creating, setCreating] = useState(false)
+  const showCosting = usePermission('costing.view')
+  const canCreate = usePermission('orders.create')
   const navigate = useNavigate()
 
   const rows = useMemo(
@@ -103,17 +106,17 @@ export default function Orders() {
         )
       },
     },
-    {
-      key: 'price', header: 'Price / pc', align: 'right', width: '7rem', hideBelow: 'lg',
-      value: (r) => r.order.sellingPrice ?? -1,
-      render: (r) => r.order.sellingPrice != null
+    ...(showCosting ? [{
+      key: 'price', header: 'Price / pc', align: 'right' as const, width: '7rem', hideBelow: 'lg' as const,
+      value: (r: OrderFacts) => r.order.sellingPrice ?? -1,
+      render: (r: OrderFacts) => r.order.sellingPrice != null
         ? <span className="text-sm">{money(r.order.sellingPrice, r.order.currency)}</span>
         : <Link to={`/costing/${encodeURIComponent(r.order.orderNo)}`} className="text-xs text-brand-600 hover:underline">set price</Link>,
-    },
-    {
-      key: 'cost', header: 'Cost / pc', align: 'right', width: '7rem', derived: true,
-      value: (r) => cost.byOrder.get(r.order.orderNo)?.planned.costPerShippedPc ?? -1,
-      render: (r) => {
+    }] : []),
+    ...(showCosting ? [{
+      key: 'cost', header: 'Cost / pc', align: 'right' as const, width: '7rem', derived: true,
+      value: (r: OrderFacts) => cost.byOrder.get(r.order.orderNo)?.planned.costPerShippedPc ?? -1,
+      render: (r: OrderFacts) => {
         const entry = cost.byOrder.get(r.order.orderNo)
         if (!entry || entry.planned.totalCost === 0) {
           return <Link to={`/costing/${encodeURIComponent(r.order.orderNo)}`} className="text-xs text-brand-600 hover:underline">cost it</Link>
@@ -121,11 +124,10 @@ export default function Orders() {
         const result = entry.actual ?? entry.planned
         return <span className="text-sm">{money(result.costPerShippedPc, result.currency)}</span>
       },
-    },
-    {
-      key: 'margin', header: 'Margin', align: 'right', width: '6.5rem', derived: true,
-      value: (r) => cost.byOrder.get(r.order.orderNo)?.planned.marginPct ?? -99,
-      render: (r) => {
+    }, {
+      key: 'margin', header: 'Margin', align: 'right' as const, width: '6.5rem', derived: true,
+      value: (r: OrderFacts) => cost.byOrder.get(r.order.orderNo)?.planned.marginPct ?? -99,
+      render: (r: OrderFacts) => {
         const entry = cost.byOrder.get(r.order.orderNo)
         const result = entry?.actual ?? entry?.planned
         if (!result || result.sellingPrice == null || result.totalCost === 0) {
@@ -139,7 +141,7 @@ export default function Orders() {
           </Tooltip>
         )
       },
-    },
+    }] : []),
     {
       key: 'setup', header: 'Setup', width: '13rem', derived: true, hideBelow: 'lg',
       value: (r) => r.setupCheck,
@@ -158,7 +160,9 @@ export default function Orders() {
       <PageHeader
         title="Orders"
         subtitle="The master record. Everything else in the system hangs off these rows."
-        actions={<Button variant="primary" icon={<Plus className="size-4" />} onClick={() => setCreating(true)}>New order</Button>}
+        actions={canCreate
+          ? <Button variant="primary" icon={<Plus className="size-4" />} onClick={() => setCreating(true)}>New order</Button>
+          : undefined}
       />
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-5">
@@ -168,10 +172,14 @@ export default function Orders() {
           label="Setup incomplete" value={num(needSetup.length)}
           tone={needSetup.length ? 'warn' : 'ok'} icon={<TriangleAlert className="size-4" />}
         />
-        <StatTile
-          label="Not costed" value={num(needCosting.length)}
-          tone={needCosting.length ? 'warn' : 'ok'} to="/costing"
-        />
+        {showCosting ? (
+          <StatTile
+            label="Not costed" value={num(needCosting.length)}
+            tone={needCosting.length ? 'warn' : 'ok'} to="/costing"
+          />
+        ) : (
+          <StatTile label="Shipped" value={num(derived.totals.shipped)} caption="pcs out the gate" tone="ok" />
+        )}
       </div>
 
       {needSetup.length > 0 && (

@@ -64,7 +64,10 @@ export interface TrimRow {
 
 export interface JobWorkRow {
   id: Id; date: string; orderNo: string; colour: string; size: string
-  process: string; vendor: string; direction: 'OUT' | 'IN' | string; qty: number; remarks: string
+  process: string; vendor: string; direction: 'OUT' | 'IN' | string; qty: number
+  /** The factory's own delivery challan number. Groups the rows of one challan. */
+  challanNo: string
+  remarks: string
 }
 
 export interface CuttingRow {
@@ -210,6 +213,12 @@ export interface OverheadCostLine {
 
 export interface Costing {
   id: Id
+  /**
+   * Stamped by the server and bumped on every write. A costing is the one place
+   * two people are likely to be editing the same row at once, so a save carries
+   * the revision it started from and is refused if that has moved on.
+   */
+  rev?: number
   orderNo: string
   /** A costing is a named scenario, so a quote can be compared to a revision. */
   name: string
@@ -233,6 +242,23 @@ export interface Costing {
   notes: string
 }
 
+/**
+ * Who the factory is, for the top of a printed document.
+ *
+ * Empty until somebody fills it in. Nothing here is guessed: a challan carries
+ * a real company's name and registration to a real vendor, and inventing either
+ * would be worse than leaving the letterhead blank.
+ */
+export interface Company {
+  name: string
+  addressLines: string
+  gstin: string
+  phone: string
+  email: string
+  /** Printed at the foot of a challan. The factory's own wording. */
+  challanNote: string
+}
+
 export interface Settings {
   currency: string
   defaultFabricLeadDays: number
@@ -246,6 +272,7 @@ export interface Settings {
   defaultRejectionPct: number
   defaultFabricWastagePct: number
   defaultTrimWastagePct: number
+  company?: Company
 }
 
 export type Masters = Record<string, string[]>

@@ -1,3 +1,5 @@
+@import './fonts.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -169,4 +171,55 @@
     animation-iteration-count: 1 !important;
     transition-duration: .01ms !important;
   }
+}
+
+/* ── Printed documents ──────────────────────────────────────────────────
+   A challan goes out with the goods and a costing sheet gets filed, so these
+   are laid out for A4 and for ink rather than for a screen: no colour that
+   needs a colour printer, no background wash that drinks toner, hairline
+   rules, and type sized to be read across a table.                      */
+
+.sheet {
+  width: 210mm;
+  min-height: 297mm;
+  padding: 13mm 13mm 14mm;
+  box-sizing: border-box;
+}
+
+@media screen and (max-width: 230mm) {
+  /* Below A4 the sheet would overflow the window, so it scales down whole
+     rather than being cut off — what you see is still the page shape. */
+  .sheet { width: 100%; min-height: 0; padding: 8mm; }
+}
+
+@media print {
+  @page { size: A4; margin: 0; }
+
+  html, body {
+    background: #fff !important;
+    /* Print at the paper's own size, whatever the screen zoom was. */
+    width: 210mm;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Screen furniture: the rail, the toolbar, the print button itself. */
+  .no-print, nav, aside { display: none !important; }
+
+  .sheet {
+    width: 210mm;
+    min-height: auto;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    margin: 0;
+  }
+
+  /* A table row split across a page break is unreadable, and a heading left
+     alone at the foot of a page is worse. */
+  tr, .keep-together { break-inside: avoid; page-break-inside: avoid; }
+  thead { display: table-header-group; }
+  h1, h2, h3 { break-after: avoid; page-break-after: avoid; }
+
+  /* Let the browser lay out ink honestly instead of dropping backgrounds. */
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 }

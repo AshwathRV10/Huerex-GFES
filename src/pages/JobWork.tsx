@@ -7,6 +7,8 @@
  */
 import { useMemo, useState } from 'react'
 import { Truck } from 'lucide-react'
+import { Link } from 'react-router-dom'
+import { Printer } from 'lucide-react'
 import { PageHeader } from '../components/AppShell'
 import { LogTable, type DerivedColumn, type FieldDef } from '../components/LogTable'
 import { Badge, Card, CardHeader, Section, Segmented } from '../components/ui'
@@ -39,7 +41,13 @@ export default function JobWork() {
       options: [{ value: 'OUT', label: 'OUT · sent' }, { value: 'IN', label: 'IN · returned' }],
     },
     { kind: 'number', key: 'qty', header: 'Qty', width: '5.5rem', required: true },
-    { kind: 'text', key: 'remarks', header: 'DC / remarks', width: '9rem', hideBelow: 'lg' },
+    // Every line of one despatch shares a challan number, so it keeps its value
+    // down the block the way the sheet's ditto marks used to mean.
+    {
+      kind: 'text', key: 'challanNo', header: 'Challan no', width: '7rem', carry: true,
+      note: 'groups the lines of one despatch',
+    },
+    { kind: 'text', key: 'remarks', header: 'Remarks', width: '9rem', hideBelow: 'lg' },
   ], [])
 
   /** Cumulative movements per order, colour, size and process. */
@@ -148,6 +156,8 @@ export default function JobWork() {
         <StatTile label="Vendors holding stock" value={num(byVendor.length)} tone={byVendor.length ? 'warn' : 'ok'} />
       </div>
 
+      <Challans rows={rows} />
+
       {byVendor.length > 0 && (
         <Card className="mb-5">
           <CardHeader title="Who is holding your pieces" subtitle="Oldest consignment first" />
@@ -177,7 +187,7 @@ export default function JobWork() {
           validate={requireFields<JobWorkRow>(fields)}
           blank={() => ({
             date: today(), orderNo: '', colour: '', size: '', process: '', vendor: '',
-            direction: 'OUT', qty: 0, remarks: '',
+            direction: 'OUT', qty: 0, challanNo: '', remarks: '',
           })}
           sortBy={(a, b) => (b.date ?? '').localeCompare(a.date ?? '')}
           rowTone={(row) => (routeHas.get(row.orderNo)?.has(row.process) ? null : 'warn')}
@@ -197,5 +207,78 @@ export default function JobWork() {
         />
       </Section>
     </>
+  )
+}
+
+/* ── Challans, ready to print ─────────────────────────────────────────── */
+
+interface Challan {
+  key: string
+  challanNo: string
+  vendor: string
+  direction: string
+  date: string
+  lines: number
+  pieces: number
+}
+
+/**
+ * The despatches that have a challan number, newest first.
+ *
+ * A challan is the set of lines sharing a number, a vendor and a direction —
+ * so this is a list of the actual pieces of paper, not of the rows behind them.
+ */
+function Challans({ rows }: { rows: JobWorkRow[] }) {
+  const challans = useMemo<Challan[]>(() => {
+    const map = new Map<string, Challan>()
+    for (const row of rows) {
+      if (!row.challanNo) continue
+      const key = `${row.challanNo}|${row.vendor}|${row.direction}`
+      const found = map.get(key)
+      if (found) {
+        found.lines += 1
+        found.pieces += row.qty || 0
+        if ((row.date ?? '') < found.date) found.date = row.date
+      } else {
+        map.set(key, {
+          key, challanNo: row.challanNo, vendor: row.vendor, direction: row.direction,
+          date: row.date, lines: 1, pieces: row.qty || 0,
+        })
+      }
+    }
+    return [...map.values()].sort((a, b) =>
+      (b.date ?? '').localeCompare(a.date ?? '') || b.challanNo.localeCompare(a.challanNo))
+  }, [rows])
+
+  if (challans.length === 0) return null
+
+  return (
+    <Card className="mb-5">
+      <CardHeader
+        title="Challans"
+        subtitle="Give a movement a challan number and it becomes a document you can hand over"
+        icon={<Printer className="size-4" />}
+      />
+      <div className="divide-y divide-line max-h-72 overflow-y-auto">
+        {challans.map((challan) => (
+          <Link
+            key={challan.key}
+            to={`/print/challan/${encodeURIComponent(challan.challanNo)}` +
+                `?vendor=${encodeURIComponent(challan.vendor)}&direction=${challan.direction}`}
+            className="flex items-center gap-3 px-4 py-2.5 hover:bg-ink/[0.025] transition-colors group"
+          >
+            <span className="num text-sm font-semibold text-ink w-16 shrink-0">{challan.challanNo}</span>
+            <span className="text-sm text-ink-2 truncate flex-1">{challan.vendor}</span>
+            <Badge tone={challan.direction === 'IN' ? 'ok' : 'neutral'}>{challan.direction}</Badge>
+            <span className="num text-2xs text-ink-3 hidden sm:block w-24 text-right">
+              {challan.lines} line{challan.lines === 1 ? '' : 's'}
+            </span>
+            <span className="num text-sm w-20 text-right">{num(challan.pieces)} pcs</span>
+            <span className="num text-2xs text-ink-3 w-24 text-right hidden md:block">{challan.date}</span>
+            <Printer className="size-3.5 text-ink-3 group-hover:text-brand-600 transition-colors shrink-0" />
+          </Link>
+        ))}
+      </div>
+    </Card>
   )
 }

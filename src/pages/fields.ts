@@ -58,6 +58,10 @@ export function sizeField<T extends HasOrder>(): FieldDef<T> {
     required: true,
     list: 'sizes',
     suggest: (draft) => sizesOf(draft.orderNo, (draft as { colour?: string }).colour),
+    // In every block of the real workbook the size changes line to line while
+    // the order, colour and fabric hold still — so this is where the cursor
+    // belongs once an entry is saved.
+    focusAfterAdd: true,
   }
 }
 

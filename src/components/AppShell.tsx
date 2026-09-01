@@ -10,13 +10,15 @@ import {
   CheckCheck, ClipboardCheck, Cog, Container, Factory, FileText, Gauge, Grid2x2,
   Layers, Moon, Package, PanelLeftClose, PanelLeft, Ruler, Scissors, Search,
   Shirt, Sparkles, Sun, Truck, Users, Waypoints, X,
+  History, LogOut, UserCog, Wifi, WifiOff,
 } from 'lucide-react'
-import { useDerived, useStore } from '../lib/store'
-import { Badge, Button } from './ui'
+import { NONE, useDerived, useStore } from '../lib/store'
+import { Badge, Button, Tooltip } from './ui'
+import { initials } from '../lib/format'
 
 /* ── Navigation ──────────────────────────────────────────────────────── */
 
-interface NavItem { to: string; label: string; icon: ReactNode; badge?: 'alerts' }
+interface NavItem { to: string; label: string; icon: ReactNode; badge?: 'alerts'; permission: string }
 interface NavGroup { title: string; items: NavItem[] }
 
 const size = 'size-[1.05rem]'
@@ -25,54 +27,56 @@ export const NAV: NavGroup[] = [
   {
     title: 'Control',
     items: [
-      { to: '/', label: 'Dashboard', icon: <Gauge className={size} /> },
-      { to: '/alerts', label: 'Alerts', icon: <AlertTriangle className={size} />, badge: 'alerts' },
+      { to: '/', label: 'Dashboard', icon: <Gauge className={size} />, permission: 'orders.view' },
+      { to: '/alerts', label: 'Alerts', icon: <AlertTriangle className={size} />, badge: 'alerts', permission: 'approvals.view' },
     ],
   },
   {
     title: 'Commercial',
     items: [
-      { to: '/orders', label: 'Orders', icon: <Shirt className={size} /> },
-      { to: '/costing', label: 'Costing', icon: <Calculator className={size} /> },
-      { to: '/rates', label: 'Rate book', icon: <BadgeIndianRupee className={size} /> },
-      { to: '/buyers', label: 'Buyers', icon: <Users className={size} /> },
+      { to: '/orders', label: 'Orders', icon: <Shirt className={size} />, permission: 'orders.view' },
+      { to: '/costing', label: 'Costing', icon: <Calculator className={size} />, permission: 'costing.view' },
+      { to: '/rates', label: 'Rate book', icon: <BadgeIndianRupee className={size} />, permission: 'costing.view' },
+      { to: '/buyers', label: 'Buyers', icon: <Users className={size} />, permission: 'masters.view' },
     ],
   },
   {
     title: 'Materials',
     items: [
-      { to: '/fabric', label: 'Fabric', icon: <Layers className={size} /> },
-      { to: '/trims', label: 'Trims', icon: <Boxes className={size} /> },
+      { to: '/fabric', label: 'Fabric', icon: <Layers className={size} />, permission: 'materials.view' },
+      { to: '/trims', label: 'Trims', icon: <Boxes className={size} />, permission: 'materials.view' },
     ],
   },
   {
     title: 'Floor',
     items: [
-      { to: '/cutting', label: 'Cutting', icon: <Scissors className={size} /> },
-      { to: '/fusing', label: 'Fusing', icon: <Ruler className={size} /> },
-      { to: '/job-work', label: 'Job work', icon: <Truck className={size} /> },
-      { to: '/sewing', label: 'Sewing', icon: <Factory className={size} /> },
-      { to: '/checking', label: 'Checking', icon: <CheckCheck className={size} /> },
-      { to: '/packing', label: 'Packing', icon: <Package className={size} /> },
-      { to: '/inspection', label: 'Inspection', icon: <ClipboardCheck className={size} /> },
-      { to: '/shipment', label: 'Shipment', icon: <Container className={size} /> },
+      { to: '/cutting', label: 'Cutting', icon: <Scissors className={size} />, permission: 'production.view' },
+      { to: '/fusing', label: 'Fusing', icon: <Ruler className={size} />, permission: 'production.view' },
+      { to: '/job-work', label: 'Job work', icon: <Truck className={size} />, permission: 'production.view' },
+      { to: '/sewing', label: 'Sewing', icon: <Factory className={size} />, permission: 'production.view' },
+      { to: '/checking', label: 'Checking', icon: <CheckCheck className={size} />, permission: 'production.view' },
+      { to: '/packing', label: 'Packing', icon: <Package className={size} />, permission: 'production.view' },
+      { to: '/inspection', label: 'Inspection', icon: <ClipboardCheck className={size} />, permission: 'production.view' },
+      { to: '/shipment', label: 'Shipment', icon: <Container className={size} />, permission: 'production.view' },
     ],
   },
   {
     title: 'Analysis',
     items: [
-      { to: '/wip', label: 'WIP', icon: <Waypoints className={size} /> },
-      { to: '/reconciliation', label: 'Reconciliation', icon: <ChartNoAxesCombined className={size} /> },
-      { to: '/timeline', label: 'Timeline', icon: <FileText className={size} /> },
-      { to: '/sets', label: 'Set control', icon: <Grid2x2 className={size} /> },
+      { to: '/wip', label: 'WIP', icon: <Waypoints className={size} />, permission: 'production.view' },
+      { to: '/reconciliation', label: 'Reconciliation', icon: <ChartNoAxesCombined className={size} />, permission: 'production.view' },
+      { to: '/timeline', label: 'Timeline', icon: <FileText className={size} />, permission: 'production.view' },
+      { to: '/sets', label: 'Set control', icon: <Grid2x2 className={size} />, permission: 'production.view' },
     ],
   },
   {
     title: 'Setup',
     items: [
-      { to: '/approvals', label: 'Approvals', icon: <Banknote className={size} /> },
-      { to: '/masters', label: 'Masters', icon: <Sparkles className={size} /> },
-      { to: '/settings', label: 'Settings', icon: <Cog className={size} /> },
+      { to: '/approvals', label: 'Approvals', icon: <Banknote className={size} />, permission: 'approvals.view' },
+      { to: '/masters', label: 'Masters', icon: <Sparkles className={size} />, permission: 'masters.view' },
+      { to: '/people', label: 'People & roles', icon: <UserCog className={size} />, permission: 'admin.users' },
+      { to: '/audit', label: 'Audit log', icon: <History className={size} />, permission: 'audit.view' },
+      { to: '/settings', label: 'Settings', icon: <Cog className={size} />, permission: 'admin.settings' },
     ],
   },
 ]
@@ -104,7 +108,16 @@ export function AppShell({ children }: { children: ReactNode }) {
   const [paletteOpen, setPaletteOpen] = useState(false)
   const { alerts } = useDerived()
   const saving = useStore((s) => s.saving)
+  const session = useStore((s) => s.session)
   const location = useLocation()
+
+  // A rail entry the role cannot open is noise, so groups that empty out vanish.
+  const nav = useMemo(() => {
+    const granted = new Set(session?.permissions ?? [])
+    return NAV
+      .map((group) => ({ ...group, items: group.items.filter((item) => granted.has(item.permission)) }))
+      .filter((group) => group.items.length > 0)
+  }, [session])
 
   useEffect(() => {
     try { localStorage.setItem('huerex.rail', collapsed ? 'collapsed' : 'open') } catch { /* private mode */ }
@@ -163,7 +176,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         </div>
 
         <nav className="flex-1 overflow-y-auto no-scrollbar py-3 px-2 space-y-4">
-          {NAV.map((group) => (
+          {nav.map((group) => (
             <div key={group.title}>
               {!collapsed && (
                 <p className="px-2.5 mb-1 text-[0.625rem] font-semibold uppercase tracking-[0.1em] text-ink-3/70">
@@ -210,6 +223,12 @@ export function AppShell({ children }: { children: ReactNode }) {
             </div>
           ))}
         </nav>
+
+        {!collapsed && session && (
+          <div className="px-2 pb-2 shrink-0">
+            <AccountCard />
+          </div>
+        )}
 
         <div className={clsx('border-t border-line p-2 shrink-0 flex items-center gap-1', collapsed && 'flex-col')}>
           <Button
@@ -264,6 +283,7 @@ export function AppShell({ children }: { children: ReactNode }) {
             </kbd>
           </button>
           <div className="flex-1" />
+          <PresenceChip />
           {highCount > 0 && (
             <Link to="/alerts">
               <Badge tone="risk" dot>{highCount} need attention</Badge>
@@ -282,6 +302,73 @@ export function AppShell({ children }: { children: ReactNode }) {
   )
 }
 
+/**
+ * Who you are, who else has the app open, and whether the live connection is
+ * healthy. Presence comes from the same stream that carries changes, so if this
+ * shows people, sync is genuinely working.
+ */
+function AccountCard() {
+  const session = useStore((s) => s.session)
+  const present = useStore((s) => s.present)
+  const live = useStore((s) => s.live)
+  const signOut = useStore((s) => s.signOut)
+  const [open, setOpen] = useState(false)
+  if (!session) return null
+
+  const others = present.filter((p) => p.userId !== session.userId)
+
+  return (
+    <div className="rounded-xl border border-line bg-raised/60 p-2">
+      <button
+        onClick={() => setOpen((v) => !v)}
+        className="w-full flex items-center gap-2 text-left rounded-lg px-1 py-0.5 hover:bg-ink/[0.04] transition-colors"
+      >
+        <span className="size-7 rounded-lg bg-brand-500/15 text-brand-600 grid place-items-center text-2xs font-semibold shrink-0">
+          {initials(session.userName)}
+        </span>
+        <span className="min-w-0 flex-1">
+          <span className="block text-sm text-ink truncate leading-tight">{session.userName}</span>
+          <span className="block text-2xs text-ink-3 truncate">{session.roleName}</span>
+        </span>
+        <Tooltip label={live ? 'Live — changes appear as they happen' : 'Reconnecting…'}>
+          <span className={clsx('shrink-0', live ? 'text-ok' : 'text-warn')}>
+            {live ? <Wifi className="size-3.5" /> : <WifiOff className="size-3.5" />}
+          </span>
+        </Tooltip>
+      </button>
+
+      {open && (
+        <div className="mt-2 pt-2 border-t border-line space-y-2 animate-fade-in">
+          {others.length > 0 ? (
+            <div>
+              <p className="text-2xs uppercase tracking-[0.07em] text-ink-3 font-semibold mb-1">
+                Also here now
+              </p>
+              <ul className="space-y-0.5">
+                {others.map((person) => (
+                  <li key={person.userId} className="flex items-center gap-1.5 text-2xs text-ink-2">
+                    <span className="size-1.5 rounded-full bg-ok shrink-0" />
+                    <span className="truncate">{person.userName}</span>
+                    <span className="text-ink-3 truncate">· {person.roleName}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : (
+            <p className="text-2xs text-ink-3">Nobody else is in the app right now.</p>
+          )}
+          <Button
+            size="sm" variant="secondary" className="w-full"
+            icon={<LogOut className="size-3.5" />} onClick={() => signOut()}
+          >
+            Sign out
+          </Button>
+        </div>
+      )}
+    </div>
+  )
+}
+
 const isTyping = (target: EventTarget | null) => {
   const el = target as HTMLElement | null
   return !!el && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA' || el.tagName === 'SELECT' || el.isContentEditable)
@@ -294,6 +381,7 @@ interface Command { id: string; label: string; hint?: string; group: string; run
 function CommandPalette({ open, onClose }: { open: boolean; onClose: () => void }) {
   const navigate = useNavigate()
   const orders = useStore((s) => s.data.orders)
+  const permissions = useStore((s) => s.session?.permissions ?? NONE)
   const [query, setQuery] = useState('')
   const [active, setActive] = useState(0)
   const inputRef = useRef<HTMLInputElement>(null)
@@ -301,8 +389,9 @@ function CommandPalette({ open, onClose }: { open: boolean; onClose: () => void 
   useEffect(() => { if (open) { setQuery(''); setActive(0); setTimeout(() => inputRef.current?.focus(), 10) } }, [open])
 
   const commands = useMemo<Command[]>(() => {
+    const granted = new Set(permissions)
     const pages = NAV.flatMap((group) =>
-      group.items.map((item) => ({
+      group.items.filter((item) => granted.has(item.permission)).map((item) => ({
         id: `nav:${item.to}`,
         label: item.label,
         group: group.title,
@@ -318,16 +407,18 @@ function CommandPalette({ open, onClose }: { open: boolean; onClose: () => void 
       icon: <Shirt className="size-4" />,
       run: () => navigate(`/orders/${encodeURIComponent(order.orderNo)}`),
     }))
-    const costingCommands = orders.map((order) => ({
-      id: `cost:${order.orderNo}`,
-      label: `Costing · ${order.orderNo}`,
-      hint: order.buyer,
-      group: 'Costing',
-      icon: <Calculator className="size-4" />,
-      run: () => navigate(`/costing/${encodeURIComponent(order.orderNo)}`),
-    }))
+    const costingCommands = granted.has('costing.view')
+      ? orders.map((order) => ({
+          id: `cost:${order.orderNo}`,
+          label: `Costing · ${order.orderNo}`,
+          hint: order.buyer,
+          group: 'Costing',
+          icon: <Calculator className="size-4" />,
+          run: () => navigate(`/costing/${encodeURIComponent(order.orderNo)}`),
+        }))
+      : []
     return [...pages, ...orderCommands, ...costingCommands]
-  }, [orders, navigate])
+  }, [orders, navigate, permissions])
 
   const results = useMemo(() => {
     const needle = query.trim().toLowerCase()
@@ -413,6 +504,21 @@ function CommandPalette({ open, onClose }: { open: boolean; onClose: () => void 
         </div>
       </div>
     </div>
+  )
+}
+
+function PresenceChip() {
+  const present = useStore((s) => s.present)
+  const session = useStore((s) => s.session)
+  const others = present.filter((p) => p.userId !== session?.userId)
+  if (others.length === 0) return null
+  return (
+    <Tooltip label={others.map((p) => `${p.userName} (${p.roleName})`).join(', ')}>
+      <span className="hidden sm:flex items-center gap-1.5 h-7 px-2.5 rounded-lg border border-line bg-raised/70 text-2xs text-ink-2">
+        <span className="size-1.5 rounded-full bg-ok" />
+        {others.length} other {others.length === 1 ? 'person' : 'people'} here
+      </span>
+    </Tooltip>
   )
 }
 

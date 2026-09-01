@@ -71,6 +71,53 @@ const WORKBOOK_PROCESS_TYPES: Record<string, 'In-house' | 'Outsourced'> = {
   'Rotary AOP': 'Outsourced', Other: 'Outsourced',
 }
 
+
+/**
+ * Recovers the delivery challan numbers the workbook kept inside its remarks.
+ *
+ * The sheet wrote the number on the first line of a challan — `DC: 152` — and
+ * then a ditto mark, or nothing at all, on the lines that belonged with it. So
+ * a number is carried down until the date, vendor or direction changes, which
+ * is where one challan ends and the next begins. Without that guard one
+ * vendor's number would run on into the following day's despatch.
+ *
+ * Two of them read `DC : FRONT - 166`, where 166 is the challan and FRONT is a
+ * real remark about the panel, so the number is taken as the last token holding
+ * a digit and whatever describes it stays behind as the remark.
+ *
+ * Doing this at import means the eight numbers already written down stay
+ * attached to the right rows, instead of being left in a text field where
+ * nothing can print or group by them.
+ */
+function liftChallanNumbers<T extends Raw>(rows: T[]): T[] {
+  const DITTO = new Set(['"', "''", '\u201d', '\u201c', ''])
+  let carried = ''
+  let group = ''
+
+  return rows.map((row) => {
+    const key = `${row.date}|${row.vendor}|${row.direction}`
+    if (key !== group) { group = key; carried = '' }
+
+    const remark = String(row.remarks ?? '').trim()
+    const match = /^\s*DC\s*[:#-]*\s*(.*)$/i.exec(remark)
+    let remarks = remark
+
+    if (match) {
+      const rest = match[1].trim()
+      const numbered = rest.split(/[\s-]+/).filter((t) => /\d/.test(t))
+      if (numbered.length) {
+        carried = numbered[numbered.length - 1]
+        // Anything in front of the number describes the goods, not the challan.
+        remarks = rest.replace(new RegExp(`[\\s-]*${carried}\\s*$`), '').trim().replace(/^[-,;\s]+|[-,;\s]+$/g, '')
+      }
+    } else if (DITTO.has(remark)) {
+      remarks = ''                               // a ditto mark says nothing on its own
+    }
+
+    return { ...row, challanNo: carried, remarks }
+  })
+}
+
 export function buildSeed(): Database {
   const raw = JSON.parse(fs.readFileSync(SEED_FILE, 'utf8')) as Record<string, any>
 
@@ -189,11 +236,14 @@ export function buildSeed(): Database {
     issuedQty: n(r.issuedQty) ?? 0, blocksPacking: yn(r.blocksPacking), remarks: s(r.remarks) ?? '',
   }))
 
-  db.collections.jobwork = copy(raw.jobwork, 'jw', (r) => ({
-    date: s(r.date) ?? '', orderNo: s(r.orderNo) ?? '', colour: s(r.colour) ?? '',
-    size: s(r.size) ?? '', process: s(r.process) ?? '', vendor: s(r.vendor) ?? '',
-    direction: (s(r.direction) ?? 'OUT').toUpperCase(), qty: n(r.qty) ?? 0, remarks: s(r.remarks) ?? '',
-  }))
+  db.collections.jobwork = liftChallanNumbers(
+    copy(raw.jobwork, 'jw', (r) => ({
+      date: s(r.date) ?? '', orderNo: s(r.orderNo) ?? '', colour: s(r.colour) ?? '',
+      size: s(r.size) ?? '', process: s(r.process) ?? '', vendor: s(r.vendor) ?? '',
+      direction: (s(r.direction) ?? 'OUT').toUpperCase(), qty: n(r.qty) ?? 0,
+      challanNo: '', remarks: s(r.remarks) ?? '',
+    })),
+  )
 
   db.collections.cutting = copy(raw.cutting, 'cut', (r) => ({
     date: s(r.date) ?? '', orderNo: s(r.orderNo) ?? '', colour: s(r.colour) ?? '',
@@ -264,7 +314,12 @@ export function buildSeed(): Database {
 if (process.argv[1] && process.argv[1].endsWith('seed.ts')) {
   const db = buildSeed()
   fs.mkdirSync(DATA_DIR, { recursive: true })
-  fs.writeFileSync(path.join(DATA_DIR, 'huerex.json'), JSON.stringify(db, null, 1))
+  // The same database the server would open, so `HUEREX_DB=… npm run seed`
+  // fills a scratch file instead of flattening the live one.
+  const target = process.env.HUEREX_DB
+    ? path.resolve(process.env.HUEREX_DB)
+    : path.join(DATA_DIR, 'huerex.json')
+  fs.writeFileSync(target, JSON.stringify(db, null, 1))
   const counts = Object.entries(db.collections).map(([k, v]) => `${k}:${(v as any[]).length}`)
-  console.log('Seeded data/huerex.json →', counts.join('  '))
+  console.log(`Seeded ${path.relative(process.cwd(), target)} →`, counts.join('  '))
 }

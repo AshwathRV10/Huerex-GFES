@@ -11,9 +11,16 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
-export const DATA_DIR = path.resolve(__dirname, '..', 'data')
-const DB_FILE = path.join(DATA_DIR, 'huerex.json')
-const TMP_FILE = path.join(DATA_DIR, '.huerex.tmp')
+/**
+ * Where the database lives. HUEREX_DB overrides it, which is how the security
+ * tests get a throwaway file and how a deployment can put the data on a
+ * different disk from the code.
+ */
+const DB_FILE = process.env.HUEREX_DB
+  ? path.resolve(process.env.HUEREX_DB)
+  : path.resolve(__dirname, '..', 'data', 'huerex.json')
+export const DATA_DIR = path.dirname(DB_FILE)
+const TMP_FILE = path.join(DATA_DIR, `.${path.basename(DB_FILE)}.tmp`)
 
 export type Doc = Record<string, any> & { id: string }
 export type Database = {
@@ -30,7 +37,15 @@ export const COLLECTIONS = [
   'cutting', 'fusing', 'jobwork', 'sewing', 'checking', 'packing', 'inspection', 'shipment',
   'approvals', 'waivers',
   'costings', 'rateBook', 'buyers',
+  // Authentication and accountability. These never reach the browser as rows;
+  // they are served by their own endpoints, filtered by permission.
+  'users', 'roles', 'sessions', 'auditLog',
 ] as const
+
+/** Collections that hold business data the app derives its figures from. */
+export const BUSINESS_COLLECTIONS = COLLECTIONS.filter(
+  (c) => !['users', 'roles', 'sessions', 'auditLog'].includes(c),
+)
 export type CollectionName = (typeof COLLECTIONS)[number]
 
 const empty = (): Database => ({

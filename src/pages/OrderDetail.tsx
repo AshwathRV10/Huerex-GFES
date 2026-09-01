@@ -17,6 +17,7 @@ import {
 import { useComboStats } from '../hooks/useComboStats'
 import { useCostSummary } from '../hooks/useCostSummary'
 import { useDerived, useStore } from '../lib/store'
+import { Gate, usePermission } from '../components/Gate'
 import { resolveQuantities } from '../lib/engine/costing'
 import { money, num, pct, shortDate } from '../lib/format'
 import type { MatrixRow, Order, RouteStep } from '../lib/types'
@@ -29,6 +30,7 @@ export default function OrderDetail() {
   const navigate = useNavigate()
   const { derived, alerts } = useDerived()
   const cost = useCostSummary()
+  const showCosting = usePermission('costing.view')
   const [tab, setTab] = useState<Tab>('overview')
 
   const facts = derived.byOrderNo.get(decoded)
@@ -71,32 +73,43 @@ export default function OrderDetail() {
         }
         subtitle={[order.styleCode, order.styleName].filter(Boolean).join(' · ')}
         actions={
-          <Link to={`/costing/${encodeURIComponent(order.orderNo)}`}>
-            <Button variant="primary" icon={<Calculator className="size-4" />}>
-              {costing ? 'Open costing' : 'Cost this order'}
-            </Button>
-          </Link>
+          <Gate permission="costing.view">
+            <Link to={`/costing/${encodeURIComponent(order.orderNo)}`}>
+              <Button variant="primary" icon={<Calculator className="size-4" />}>
+                {costing ? 'Open costing' : 'Cost this order'}
+              </Button>
+            </Link>
+          </Gate>
         }
       />
 
       {/* Headline numbers */}
       <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3 mb-5">
         <StatTile label="Order qty" value={num(order.orderQty)} caption="pcs booked" />
-        <StatTile
-          label="Will ship" value={num(quantities.shipped)}
-          caption={quantities.excessQty > 0 ? `+${num(quantities.excessQty)} excess at ${pct(quantities.excessPct, 1)}` : 'no excess set'}
-          tone={quantities.excessQty > 0 ? 'saffron' : 'neutral'}
-        />
+        {showCosting ? (
+          <StatTile
+            label="Will ship" value={num(quantities.shipped)}
+            caption={quantities.excessQty > 0 ? `+${num(quantities.excessQty)} excess at ${pct(quantities.excessPct, 1)}` : 'no excess set'}
+            tone={quantities.excessQty > 0 ? 'saffron' : 'neutral'}
+          />
+        ) : (
+          <StatTile label="Size rows" value={num(facts.cells.length)} caption="colour and size combinations" />
+        )}
         <StatTile label="Cut" value={num(facts.cumCut)} meter={{ value: facts.cumCut, max: order.orderQty || 1 }} />
         <StatTile label="Shipped" value={num(facts.cumShipped)} tone="ok" meter={{ value: facts.cumShipped, max: order.orderQty || 1 }} />
         <StatTile label="WIP" value={num(facts.totalWip)} tone={facts.agedWip ? 'warn' : 'brand'} caption={facts.agedWip ? `${num(facts.agedWip)} aged` : 'on the floor'} />
-        <StatTile
-          label="Margin"
-          value={result?.marginPct != null ? pct(result.marginPct, 1) : '—'}
-          caption={result && result.totalCost > 0 ? `${money(result.costPerShippedPc, result.currency)} a piece` : 'not costed yet'}
-          tone={!result || result.sellingPrice == null ? 'neutral' : result.margin < 0 ? 'risk' : (result.marginPct ?? 0) < 0.08 ? 'warn' : 'ok'}
-          to={`/costing/${encodeURIComponent(order.orderNo)}`}
-        />
+        {showCosting ? (
+          <StatTile
+            label="Margin"
+            value={result?.marginPct != null ? pct(result.marginPct, 1) : '—'}
+            caption={result && result.totalCost > 0 ? `${money(result.costPerShippedPc, result.currency)} a piece` : 'not costed yet'}
+            tone={!result || result.sellingPrice == null ? 'neutral' : result.margin < 0 ? 'risk' : (result.marginPct ?? 0) < 0.08 ? 'warn' : 'ok'}
+            to={`/costing/${encodeURIComponent(order.orderNo)}`}
+          />
+        ) : (
+          <StatTile label="Rejected" value={num(facts.cumReject)} caption="pcs failed at checking"
+            tone={facts.cumReject ? 'risk' : 'neutral'} />
+        )}
       </div>
 
       {orderAlerts.length > 0 && (
@@ -269,14 +282,20 @@ function Overview({ facts }: { facts: NonNullable<ReturnType<typeof useDerived>[
 /* ── Route ───────────────────────────────────────────────────────────── */
 
 function RouteEditor({ orderNo }: { orderNo: string }) {
-  const steps = useStore((s) => s.data.routeSteps.filter((r) => r.orderNo === orderNo))
+  // Select the collection itself and narrow it here. A selector that filters
+  // hands back a new array on every call, which React reads as the store having
+  // changed again — it re-renders forever and the screen goes white.
+  const routeSteps = useStore((s) => s.data.routeSteps)
   const processTypes = useStore((s) => s.processTypes)
   const add = useStore((s) => s.add)
   const drop = useStore((s) => s.drop)
   const patch = useStore((s) => s.patch)
   const [adding, setAdding] = useState('')
 
-  const sorted = useMemo(() => [...steps].sort((a, b) => a.stepNo - b.stepNo), [steps])
+  const sorted = useMemo(
+    () => routeSteps.filter((r) => r.orderNo === orderNo).sort((a, b) => a.stepNo - b.stepNo),
+    [routeSteps, orderNo],
+  )
 
   const move = (step: RouteStep, direction: -1 | 1) => {
     const index = sorted.findIndex((s) => s.id === step.id)
@@ -369,7 +388,9 @@ function RouteEditor({ orderNo }: { orderNo: string }) {
 /* ── Size matrix ─────────────────────────────────────────────────────── */
 
 function SizeMatrix({ orderNo, order }: { orderNo: string; order: Order }) {
-  const rows = useStore((s) => s.data.matrix.filter((r) => r.orderNo === orderNo))
+  // Narrowed with a memo, not in the selector — see the note in RouteEditor.
+  const matrix = useStore((s) => s.data.matrix)
+  const rows = useMemo(() => matrix.filter((r) => r.orderNo === orderNo), [matrix, orderNo])
   const { derived } = useDerived()
   const facts = derived.byOrderNo.get(orderNo)
 

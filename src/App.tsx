@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
-import { Navigate, Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import { AppShell } from './components/AppShell'
+import { ErrorBoundary } from './components/ErrorBoundary'
 import { useStore } from './lib/store'
 import { Button, Callout } from './components/ui'
 
@@ -29,14 +30,30 @@ import SetControl from './pages/SetControl'
 import Approvals from './pages/Approvals'
 import Masters from './pages/Masters'
 import SettingsPage from './pages/Settings'
+import PrintChallan from './pages/PrintChallan'
+import PrintCosting from './pages/PrintCosting'
+import SignIn, { AuthLoading, ChangePasswordGate } from './pages/SignIn'
+import People from './pages/People'
+import AuditLogPage from './pages/AuditLog'
+import { RequirePermission } from './components/Gate'
 
 export default function App() {
+  const printing = useLocation().pathname.startsWith('/print/')
   const ready = useStore((s) => s.ready)
   const error = useStore((s) => s.error)
+  const authChecked = useStore((s) => s.authChecked)
+  const signedIn = useStore((s) => s.signedIn)
+  const mustChangePassword = useStore((s) => s.mustChangePassword)
+  const checkAuth = useStore((s) => s.checkAuth)
   const load = useStore((s) => s.load)
 
-  useEffect(() => { load() }, [load])
+  useEffect(() => { checkAuth() }, [checkAuth])
 
+  // Until the session is resolved, showing either the app or the login form
+  // would be a guess — so neither is shown.
+  if (!authChecked) return <AuthLoading />
+  if (!signedIn) return <SignIn />
+  if (mustChangePassword) return <ChangePasswordGate />
   if (!ready) return <Splash />
 
   if (error) {
@@ -55,44 +72,82 @@ export default function App() {
     )
   }
 
+  // Documents that get printed sit outside the shell: no rail, no toolbar, so
+  // what the browser puts on paper is the document and nothing else.
+  if (printing) {
+    return (
+      <ScreenBoundary>
+        <Routes>
+          <Route path="/print/challan/:challanNo" element={<PrintChallan />} />
+          <Route path="/print/costing/:orderNo" element={<PrintCosting />} />
+        </Routes>
+      </ScreenBoundary>
+    )
+  }
+
   return (
     <AppShell>
-      <Routes>
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/alerts" element={<Alerts />} />
+      <ScreenBoundary>
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/alerts" element={<Alerts />} />
 
-        <Route path="/orders" element={<Orders />} />
-        <Route path="/orders/:orderNo" element={<OrderDetail />} />
-        <Route path="/costing" element={<Costing />} />
-        <Route path="/costing/:orderNo" element={<CostingDetail />} />
-        <Route path="/rates" element={<RateBook />} />
-        <Route path="/buyers" element={<Buyers />} />
+          <Route path="/orders" element={<Orders />} />
+          <Route path="/orders/:orderNo" element={<OrderDetail />} />
+          <Route
+            path="/costing"
+            element={<RequirePermission permission="costing.view" what="Costing"><Costing /></RequirePermission>}
+          />
+          <Route
+            path="/costing/:orderNo"
+            element={<RequirePermission permission="costing.view" what="Costing"><CostingDetail /></RequirePermission>}
+          />
+          <Route
+            path="/rates"
+            element={<RequirePermission permission="costing.view" what="The rate book"><RateBook /></RequirePermission>}
+          />
+          <Route path="/buyers" element={<Buyers />} />
 
-        <Route path="/fabric" element={<Fabric />} />
-        <Route path="/trims" element={<Trims />} />
+          <Route path="/fabric" element={<Fabric />} />
+          <Route path="/trims" element={<Trims />} />
 
-        <Route path="/cutting" element={<Cutting />} />
-        <Route path="/fusing" element={<Fusing />} />
-        <Route path="/job-work" element={<JobWork />} />
-        <Route path="/sewing" element={<Sewing />} />
-        <Route path="/checking" element={<Checking />} />
-        <Route path="/packing" element={<Packing />} />
-        <Route path="/inspection" element={<Inspection />} />
-        <Route path="/shipment" element={<Shipment />} />
+          <Route path="/cutting" element={<Cutting />} />
+          <Route path="/fusing" element={<Fusing />} />
+          <Route path="/job-work" element={<JobWork />} />
+          <Route path="/sewing" element={<Sewing />} />
+          <Route path="/checking" element={<Checking />} />
+          <Route path="/packing" element={<Packing />} />
+          <Route path="/inspection" element={<Inspection />} />
+          <Route path="/shipment" element={<Shipment />} />
 
-        <Route path="/wip" element={<Wip />} />
-        <Route path="/reconciliation" element={<Reconciliation />} />
-        <Route path="/timeline" element={<Timeline />} />
-        <Route path="/sets" element={<SetControl />} />
+          <Route path="/wip" element={<Wip />} />
+          <Route path="/reconciliation" element={<Reconciliation />} />
+          <Route path="/timeline" element={<Timeline />} />
+          <Route path="/sets" element={<SetControl />} />
 
-        <Route path="/approvals" element={<Approvals />} />
-        <Route path="/masters" element={<Masters />} />
-        <Route path="/settings" element={<SettingsPage />} />
+          <Route path="/approvals" element={<Approvals />} />
+          <Route path="/masters" element={<Masters />} />
+          <Route path="/people" element={<People />} />
+          <Route path="/audit" element={<AuditLogPage />} />
+          <Route
+            path="/settings"
+            element={<RequirePermission permission="admin.settings" what="Settings"><SettingsPage /></RequirePermission>}
+          />
 
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </ScreenBoundary>
     </AppShell>
   )
+}
+
+/**
+ * One boundary around whichever screen is showing, reset by the route — so a
+ * screen that fails does not follow the user to the next one.
+ */
+function ScreenBoundary({ children }: { children: React.ReactNode }) {
+  const { pathname } = useLocation()
+  return <ErrorBoundary resetKey={pathname}>{children}</ErrorBoundary>
 }
 
 function Splash() {
